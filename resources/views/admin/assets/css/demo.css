@@ -1,7 +1,8 @@
 
 
 .menu .app-brand.demo {
-  height: 64px;
+  height: 100%;
+  max-height: 150px;
   margin-top: 12px;
 }
 

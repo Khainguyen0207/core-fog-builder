@@ -19,14 +19,23 @@ import 'datatables.net-bs5';
 
 import 'daterangepicker';
 
+import flatpickr from 'flatpickr';
+import moment from 'moment';
 import PerfectScrollbar from 'perfect-scrollbar';
 window.PerfectScrollbar = PerfectScrollbar;
+
+import Quill from 'quill';
+window.Quill = Quill;
+
+window.flatpickr = flatpickr;
+window.moment = moment;
 
 import Swal from 'sweetalert2';
 window.Swal = Swal;
 
 import ApexCharts from 'apexcharts';
 $.ApexCharts = ApexCharts;
+window.ApexCharts = ApexCharts;
 
 import '../views/admin/assets/vendor/js/helpers.js';
 import '../views/admin/assets/vendor/js/menu.js';
@@ -37,11 +46,6 @@ import '../views/admin/assets/js/dashboards-analytics.js';
 
 $(function () {
     $('.selectpicker').selectpicker?.();
-    $('.date-picker-single').flatpickr({
-        inline: true,
-        allowInput: false,
-        monthSelectorType: "static"
-    });
 });
 
 function initQuillOnce(selector, options) {
@@ -53,4 +57,3 @@ function initQuillOnce(selector, options) {
     el.__quillInstance = new Quill(el, options);
     return el.__quillInstance;
 }
-

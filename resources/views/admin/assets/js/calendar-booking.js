@@ -2,13 +2,13 @@
  * Calendar Booking Logic
  */
 
-import { Calendar, formatDate } from '@fullcalendar/core';
+import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
-import { formatIsoTimeString } from '@fullcalendar/core/internal';
+import flatpickr from 'flatpickr';
 
 document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('calendar');
@@ -132,15 +132,17 @@ document.addEventListener('DOMContentLoaded', function () {
     calendar.render();
 
     const datePickerEl = document.querySelector('.date-picker-single');
-    if (datePickerEl && datePickerEl._flatpickr) {
-        datePickerEl._flatpickr.config.onChange.push(function (selectedDates, dateStr) {
+    if (datePickerEl) {
+        flatpickr(datePickerEl, {
+            inline: true,
+            allowInput: false,
+            monthSelectorType: 'static',
+            defaultDate: calendar.getDate(),
+            onChange(selectedDates) {
             if (selectedDates.length > 0) {
                 calendar.gotoDate(selectedDates[0]);
             }
-        });
-    } else if (datePickerEl) {
-        datePickerEl.addEventListener('change', (e) => {
-            if (e.target.value) calendar.gotoDate(e.target.value);
+            },
         });
     }
 
