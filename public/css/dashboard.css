@@ -1,0 +1,123 @@
+.dashboard-kpi-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-kpi-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-kpi-card .avatar-initial {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.dashboard-kpi-card .kpi-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #566a7f;
+}
+
+.dashboard-kpi-card .kpi-label {
+    font-size: 0.875rem;
+    color: #a1acb8;
+    margin-bottom: 0.25rem;
+}
+
+.dashboard-chart-card .card-header {
+    border-bottom: 1px solid #f1f1f1;
+    padding-bottom: 1rem;
+}
+
+.dashboard-chart-card .chart-container {
+    min-height: 300px;
+}
+
+.activity-timeline .timeline-item {
+    position: relative;
+    padding-left: 2rem;
+    padding-bottom: 1.25rem;
+    border-left: 2px solid #e9ecef;
+}
+
+.activity-timeline .timeline-item:last-child {
+    padding-bottom: 0;
+    border-left: 2px solid transparent;
+}
+
+.activity-timeline .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #696cff;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #696cff;
+}
+
+.activity-timeline .timeline-item.timeline-pending::before {
+    background: #ffab00;
+    box-shadow: 0 0 0 2px #ffab00;
+}
+
+.activity-timeline .timeline-item.timeline-confirmed::before {
+    background: #03c3ec;
+    box-shadow: 0 0 0 2px #03c3ec;
+}
+
+.activity-timeline .timeline-item.timeline-completed::before {
+    background: #71dd37;
+    box-shadow: 0 0 0 2px #71dd37;
+}
+
+.activity-timeline .timeline-item.timeline-cancelled::before {
+    background: #ff3e1d;
+    box-shadow: 0 0 0 2px #ff3e1d;
+}
+
+.activity-timeline .timeline-content {
+    background: #f8f9fa;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+}
+
+.activity-timeline .timeline-title {
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.activity-timeline .timeline-text {
+    font-size: 0.8125rem;
+    color: #697a8d;
+    margin-bottom: 0;
+}
+
+.activity-timeline .timeline-time {
+    font-size: 0.75rem;
+    color: #a1acb8;
+}
+
+.top-list-table .table {
+    margin-bottom: 0;
+}
+
+.top-list-table .table th {
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #a1acb8;
+    border-top: none;
+}
+
+.top-list-table .table td {
+    vertical-align: middle;
+    font-size: 0.875rem;
+}

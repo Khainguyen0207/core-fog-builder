@@ -1,0 +1,13 @@
+@use "../views/admin/assets/vendor/fonts/boxicons";
+@use "../views/admin/assets/vendor/fonts/fontawesome.css";
+@use "../views/admin/assets/vendor/scss/core";
+@use "../views/admin/assets/vendor/scss/theme-default";
+@use "../views/admin/assets/vendor/scss/libs";
+@use "../views/admin/assets/css/demo.css";
+@use "../views/admin/assets/css/iconify-icons.css";
+@use "../views/admin/assets/scss/app";
+@use "../views/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar";
+@use '../views/admin/assets/vendor/libs/apex-charts/apex-charts';
+@use '../views/admin/assets/vendor/scss/pages/page-auth';
+@use 'toast';
+@use 'email-template-preview';

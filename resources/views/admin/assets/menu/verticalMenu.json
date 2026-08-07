@@ -1,0 +1,167 @@
+{
+    "menu": [
+        {
+            "url": "admin/dashboard",
+            "name": "Analytics",
+            "icon": "menu-icon tf-icons bx bx-bar-chart-square",
+            "slug": "dashboard.index"
+        },
+        {
+            "url": "admin/transactions",
+            "name": "Payment",
+            "icon": "menu-icon tf-icons bx bx-wallet lst-none",
+            "slug": "payment",
+            "submenu": [
+                {
+                    "url": "admin/transactions",
+                    "name": "Transactions",
+                    "slug": "transactions.index",
+                    "icon": "menu-icon tf-icons bx bx-money-withdraw me-2"
+                }
+            ]
+        },
+        {
+            "url": "admin/customers",
+            "name": "Customers",
+            "icon": "menu-icon tf-icons bx bx-group",
+            "slug": "customers.index"
+        },
+        {
+            "url": "admin/users",
+            "name": "Users",
+            "icon": "menu-icon tf-icons bx bx-user",
+            "slug": "users.index"
+        },
+        {
+            "url": "admin/calendar",
+            "name": "Calendar",
+            "icon": "menu-icon tf-icons bx bx-calendar",
+            "slug": "calendar.index"
+        },
+        {
+            "url": "admin/services",
+            "name": "Services",
+            "icon": "menu-icon tf-icons bx bx-package",
+            "slug": "services.index"
+        },
+        {
+            "url": "admin/categories",
+            "name": "Categories",
+            "icon": "menu-icon tf-icons bx bx-category",
+            "slug": "categories.index"
+        },
+        {
+            "url": "admin/bookings",
+            "name": "Bookings",
+            "icon": "menu-icon tf-icons bx bx-calendar-check",
+            "slug": "bookings.index"
+        },
+        {
+            "url": "admin/coupons",
+            "name": "Coupons",
+            "icon": "menu-icon tf-icons bx bx-collection",
+            "slug": "coupons.index",
+            "submenu": [
+                {
+                    "url": "admin/coupons",
+                    "name": "Coupons",
+                    "icon": "menu-icon tf-icons bx bx-collection me-2",
+                    "slug": "coupons.index"
+                },
+                {
+                    "url": "admin/coupon-redemptions",
+                    "name": "Coupon Redemptions",
+                    "icon": "menu-icon tf-icons bx bx-purchase-tag me-2",
+                    "slug": "coupon-redemptions.index"
+                }
+            ]
+        },
+        {
+            "url": "admin/staffs",
+            "name": "Staff",
+            "icon": "menu-icon tf-icons bx bx-group",
+            "slug": "staffs.index",
+            "submenu": [
+                {
+                    "url": "admin/staffs",
+                    "name": "Staffs",
+                    "icon": "menu-icon tf-icons bx bx-group me-2",
+                    "slug": "staffs.index"
+                },
+                {
+                    "url": "admin/staff-reviews",
+                    "name": "Staff Reviews",
+                    "icon": "menu-icon tf-icons bx bx-star me-2",
+                    "slug": "staff-reviews.index"
+                }
+            ]
+        },
+        {
+            "url": "admin/posts",
+            "name": "Blog",
+            "icon": "menu-icon tf-icons bx bx-receipt",
+            "slug": "blog",
+            "submenu": [
+                {
+                    "url": "admin/posts",
+                    "name": "Posts",
+                    "slug": "posts"
+                },
+                {
+                    "url": "admin/tags",
+                    "name": "Tags",
+                    "slug": "tags"
+                },
+                {
+                    "url": "admin/blog-categories",
+                    "name": "Categories",
+                    "slug": "blog-categories"
+                }
+            ]
+        },
+        {
+            "url": "admin/email-marketing",
+            "name": "Email Marketing",
+            "icon": "menu-icon tf-icons bx bx-envelope",
+            "slug": "email",
+            "submenu": [
+                {
+                    "url": "admin/email-templates",
+                    "name": "Templates",
+                    "icon": "menu-icon tf-icons bx bx-layout me-2",
+                    "slug": "email-templates.index"
+                },
+                {
+                    "url": "admin/send-email",
+                    "name": "Send Email",
+                    "icon": "menu-icon tf-icons bx bx-send me-2",
+                    "slug": "send-email.index"
+                }
+            ]
+        },
+        {
+            "url": "admin/log-viewer",
+            "name": "Log Viewer",
+            "icon": "menu-icon tf-icons bx bx-bug",
+            "slug": "log-viewer.index"
+        },
+        {
+            "url": "admin/membership-settings",
+            "name": "Membership Settings",
+            "icon": "menu-icon tf-icons bx bx-group",
+            "slug": "membership-settings.index"
+        },
+        {
+            "url": "admin/settings",
+            "name": "System Settings",
+            "icon": "menu-icon tf-icons bx bx-cog",
+            "slug": "settings.index"
+        },
+        {
+            "url": "admin/logout",
+            "name": "Logout",
+            "icon": "menu-icon tf-icons bx bx-power-off",
+            "slug": "logout"
+        }
+    ]
+}

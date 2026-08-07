@@ -1,0 +1,18 @@
+@use 'toggle' as *;
+
+.menu-search-modal .btn-close {
+    transition: transform 160ms ease;
+}
+
+.menu-search-modal .btn-close:hover {
+    transform: translateY(-5px);
+}
+
+.menu-search-modal .menu-search-item {
+    transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.menu-search-modal .menu-search-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}

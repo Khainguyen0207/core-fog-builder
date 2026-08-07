@@ -1,0 +1,511 @@
+{
+    "base_payload": {
+        "customer_name": "Nguyễn Trọng Khải",
+        "customer_phone": "0989060084",
+        "customer_email": "tkhai12386@gmail.com",
+        "bike_type": "manual",
+        "plate_number": "123456",
+        "scheduled_start": "09-02-2026 09:00",
+        "notify_email": "tkhai12386@gmail.com",
+        "note": "",
+        "payment_method": "bank_transfer"
+    },
+    "assumptions": {
+        "valid_service_ids": [
+            6,
+            7,
+            8,
+            9,
+            10
+        ],
+        "valid_staff_ids": [
+            1,
+            2,
+            3,
+            4,
+            5
+        ],
+        "inactive_staff_ids": [
+            1,
+            4
+        ]
+    },
+    "test_cases": [
+        {
+            "id": "TC-01",
+            "description": "Service id ngoài range",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 11,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "INVALID_SERVICE_ID"
+            }
+        },
+        {
+            "id": "TC-02",
+            "description": "Service id dưới range",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 5,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "INVALID_SERVICE_ID"
+            }
+        },
+        {
+            "id": "TC-03",
+            "description": "Staff id không tồn tại",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": 99,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "INVALID_STAFF_ID"
+            }
+        },
+        {
+            "id": "TC-04",
+            "description": "Staff inactive (id = 1)",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": 1,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "STAFF_INACTIVE"
+            }
+        },
+        {
+            "id": "TC-05",
+            "description": "Staff inactive (id = 4)",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 10,
+                        "staff_id": 4,
+                        "start_time": "2026-02-09 09:45",
+                        "end_time": "2026-02-09 10:00"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "STAFF_INACTIVE"
+            }
+        },
+        {
+            "id": "TC-06",
+            "description": "Staff active hợp lệ",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": 2,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 200
+            }
+        },
+        {
+            "id": "TC-07",
+            "description": "scheduled_start sai format",
+            "payload": {
+                "scheduled_start": "2026-02-09 09:00",
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "INVALID_DATETIME_FORMAT"
+            }
+        },
+        {
+            "id": "TC-08",
+            "description": "start_time sai format",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": null,
+                        "start_time": "09-02-2026 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "INVALID_DATETIME_FORMAT"
+            }
+        },
+        {
+            "id": "TC-09",
+            "description": "Có start_time nhưng thiếu end_time",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": null
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "END_TIME_REQUIRED"
+            }
+        },
+        {
+            "id": "TC-10",
+            "description": "start_time bằng end_time",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 10,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:45",
+                        "end_time": "2026-02-09 09:45"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "INVALID_TIME_RANGE"
+            }
+        },
+        {
+            "id": "TC-11",
+            "description": "start_time lớn hơn end_time",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 10,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 10:00",
+                        "end_time": "2026-02-09 09:45"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "INVALID_TIME_RANGE"
+            }
+        },
+        {
+            "id": "TC-12",
+            "description": "Service khác ngày so với scheduled_start",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": null,
+                        "start_time": "2026-02-10 09:00",
+                        "end_time": "2026-02-10 09:45"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "INVALID_SERVICE_DATE"
+            }
+        },
+        {
+            "id": "TC-13",
+            "description": "Chồng chéo thời gian 1 phần",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    },
+                    {
+                        "service_id": 10,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:30",
+                        "end_time": "2026-02-09 10:00"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "TIME_OVERLAP"
+            }
+        },
+        {
+            "id": "TC-14",
+            "description": "Service nằm trọn trong service khác",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 10:00"
+                    },
+                    {
+                        "service_id": 10,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:15",
+                        "end_time": "2026-02-09 09:30"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "TIME_OVERLAP"
+            }
+        },
+        {
+            "id": "TC-15",
+            "description": "Trùng khung giờ hoàn toàn",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    },
+                    {
+                        "service_id": 10,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "TIME_OVERLAP"
+            }
+        },
+        {
+            "id": "TC-16",
+            "description": "Dính biên hợp lệ (end == start)",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    },
+                    {
+                        "service_id": 10,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:45",
+                        "end_time": "2026-02-09 10:00"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 200
+            }
+        },
+        {
+            "id": "TC-17",
+            "description": "Service thiếu time gây auto-fill chồng chéo",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    },
+                    {
+                        "service_id": 9,
+                        "staff_id": null,
+                        "start_time": null,
+                        "end_time": null
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "AUTO_SCHEDULE_CONFLICT"
+            }
+        },
+        {
+            "id": "TC-18",
+            "description": "Gap thời gian bất hợp lý",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    },
+                    {
+                        "service_id": 10,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 12:00",
+                        "end_time": "2026-02-09 12:15"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "INVALID_TIME_GAP"
+            }
+        },
+        {
+            "id": "TC-19",
+            "description": "Cùng staff, thời gian chồng chéo",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": 2,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    },
+                    {
+                        "service_id": 10,
+                        "staff_id": 2,
+                        "start_time": "2026-02-09 09:30",
+                        "end_time": "2026-02-09 10:00"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "STAFF_DOUBLE_BOOKED"
+            }
+        },
+        {
+            "id": "TC-20",
+            "description": "Khác staff, thời gian chồng chéo",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": 2,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    },
+                    {
+                        "service_id": 10,
+                        "staff_id": 3,
+                        "start_time": "2026-02-09 09:30",
+                        "end_time": "2026-02-09 10:00"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 200
+            }
+        },
+        {
+            "id": "TC-21",
+            "description": "Staff inactive nhưng time hợp lệ",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": 1,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "STAFF_INACTIVE"
+            }
+        },
+        {
+            "id": "TC-22",
+            "description": "Trùng service_id trong cùng booking",
+            "payload": {
+                "services": [
+                    {
+                        "service_id": 8,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    },
+                    {
+                        "service_id": 8,
+                        "staff_id": null,
+                        "start_time": "2026-02-09 10:00",
+                        "end_time": "2026-02-09 10:30"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "DUPLICATE_SERVICE"
+            }
+        },
+        {
+            "id": "TC-23",
+            "description": "Services rỗng",
+            "payload": {
+                "services": []
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "SERVICES_REQUIRED"
+            }
+        },
+        {
+            "id": "TC-24",
+            "description": "Service thiếu service_id",
+            "payload": {
+                "services": [
+                    {
+                        "staff_id": null,
+                        "start_time": "2026-02-09 09:00",
+                        "end_time": "2026-02-09 09:45"
+                    }
+                ]
+            },
+            "expected": {
+                "status": 422,
+                "error_code": "SERVICE_ID_REQUIRED"
+            }
+        }
+    ]
+}

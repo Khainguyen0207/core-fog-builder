@@ -1,0 +1,202 @@
+/* TOAST STYLES */
+/* Namespaced under #toast-section as requested */
+#toast-section {
+
+    /* Reset for toast section elements */
+    &,
+    & * {
+        box-sizing: border-box;
+    }
+
+    .toast-container {
+        position: fixed;
+        z-index: 10000;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-width: 400px;
+        width: 100%;
+
+        &.top-left {
+            top: 20px;
+            left: 20px;
+        }
+
+        &.top-center {
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        &.top-right {
+            top: 20px;
+            right: 1rem;
+        }
+
+        &.bottom-left {
+            bottom: 20px;
+            left: 20px;
+        }
+
+        &.bottom-center {
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        &.bottom-right {
+            bottom: 20px;
+            right: 0;
+        }
+    }
+
+    /* TOAST BASE */
+    .toast {
+        pointer-events: auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateY(100px);
+        opacity: 0;
+        max-width: 100%;
+        min-width: 300px;
+        position: relative;
+        overflow: visible;
+        /* Changed from hidden to visible for shadows/effects if needed, but usually hidden is safer. User had hidden. */
+        overflow: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        margin: 0;
+        background: rgba(255, 255, 255, 0.95);
+        /* Default Light */
+        color: #374151;
+
+        &.show {
+            transform: translateY(0) !important;
+            opacity: 1 !important;
+        }
+
+        &.hide {
+            transform: translateY(-100px) !important;
+            opacity: 0 !important;
+            margin-top: -80px !important;
+        }
+
+        /* THEMES */
+        &.light {
+            background: rgba(255, 255, 255, 0.95) !important;
+            color: #374151 !important;
+        }
+
+        &.dark {
+            background: rgba(31, 41, 55, 0.95) !important;
+            color: #f9fafb !important;
+        }
+
+        &.success {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.9), rgba(5, 150, 105, 0.9)) !important;
+            color: #fff !important;
+        }
+
+        &.error {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.9), rgba(220, 38, 38, 0.9)) !important;
+            color: #fff !important;
+        }
+
+        &.warning {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.9), rgba(217, 119, 6, 0.9)) !important;
+            color: #fff !important;
+        }
+
+        &.info {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(37, 99, 235, 0.9)) !important;
+            color: #fff !important;
+        }
+
+        /* ICON */
+        .toast-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        /* CONTENT */
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            line-height: 1.2;
+            color: inherit;
+        }
+
+        .toast-message {
+            opacity: 0.9;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: inherit;
+        }
+
+        /* CLOSE BUTTON */
+        .toast-close {
+            background: none;
+            border: none;
+            color: currentColor;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+            flex-shrink: 0;
+            margin: -4px -4px 0 0;
+
+            &:hover {
+                opacity: 1;
+                background: rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        /* PROGRESS BAR */
+        .toast-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 0 0 12px 12px;
+            transition: width linear;
+            width: 0;
+        }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .toast-container {
+            max-width: calc(100vw - 40px);
+            left: 20px !important;
+            right: 10px !important;
+            transform: none !important;
+        }
+
+        .toast {
+            min-width: auto;
+            width: 100%;
+        }
+    }
+}
