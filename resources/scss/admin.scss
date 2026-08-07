@@ -1,5 +1,3 @@
-@use "../views/admin/assets/vendor/fonts/boxicons";
-@use "../views/admin/assets/vendor/fonts/fontawesome.css";
 @use "../views/admin/assets/vendor/scss/core";
 @use "../views/admin/assets/vendor/scss/theme-default";
 @use "../views/admin/assets/vendor/scss/libs";
@@ -11,3 +9,4 @@
 @use '../views/admin/assets/vendor/scss/pages/page-auth';
 @use 'toast';
 @use 'email-template-preview';
+@use 'calendar';

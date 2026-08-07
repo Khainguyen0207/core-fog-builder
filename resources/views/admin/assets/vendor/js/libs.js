@@ -1,0 +1,12 @@
+import '../libs/jquery/jquery.js';
+import '../libs/popper/popper.js';
+import '../libs/perfect-scrollbar/perfect-scrollbar.js';
+import '../libs/dataTable/dataTables.js';
+import '../libs/dataTable/dataTables.bootstrap5.js';
+import '../libs/select2/select2.js';
+import '../libs/bootstrap-select/bootstrap-select.js';
+import '../libs/daterangepicker/moment.js';
+import '../libs/daterangepicker/bootstrap-daterangepicker.js';
+import '../libs/editor/katex.js'
+import '../libs/editor/quill.js'
+import '../libs/editor/highlight.js'

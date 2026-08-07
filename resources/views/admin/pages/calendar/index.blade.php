@@ -1,9 +1,5 @@
 @extends('admin.layouts.contentLayout')
 
-@section('styles')
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/fullcalendar/app-calendar.scss') }}" />
-@endsection
-
 @section('title', 'Calendar')
 
 @section('page-script')
