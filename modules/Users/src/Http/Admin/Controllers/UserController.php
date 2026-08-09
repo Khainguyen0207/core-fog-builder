@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Users\Http\Admin\Controllers;
 
-use App\Admin\Tables\UserTable;
-use App\Forms\UserForm;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Modules\Users\Admin\Forms\UserForm;
+use Modules\Users\Admin\Tables\UserTable;
+use Modules\Users\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {

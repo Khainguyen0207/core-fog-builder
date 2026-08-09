@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Admin\Tables;
+namespace Modules\Users\Admin\Tables;
 
 use App\Enums\UserGroupRoleEnum;
 use App\Forms\Fields\InputField;
 use App\Forms\Fields\SelectField;
 use App\Models\User;
-use App\Table\BaseTable;
 use App\Table\Columns\Column;
 use App\Table\Columns\FormatColumn;
 use App\Table\Operations\DeleteOperation;
 use App\Table\Operations\EditOperation;
+use Modules\AdminUi\Tables\ModuleTable;
 
-class UserTable extends BaseTable
+class UserTable extends ModuleTable
 {
+    protected string $moduleView = 'users::tables.index';
+
     public function setup(): static
     {
         parent::setup();

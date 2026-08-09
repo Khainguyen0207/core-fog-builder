@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Forms;
+namespace Modules\Users\Admin\Forms;
 
 use App\Enums\UserGroupRoleEnum;
+use App\Forms\BaseForm;
 use App\Forms\Fields\InputField;
 use App\Forms\Fields\SelectField;
 use App\Models\User;
@@ -15,6 +16,7 @@ class UserForm extends BaseForm
 
         return $this
             ->model(User::class)
+            ->setTemplate('users::forms.base')
             ->setTitle('User')
             ->add(
                 'email',

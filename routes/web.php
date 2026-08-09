@@ -25,7 +25,6 @@ Route::group([
 
     Route::resource('booking-services', 'BookingServiceController');
     Route::resource('staffs', 'StaffController');
-    Route::resource('users', 'UserController');
     Route::get('staff-reviews', 'StaffReviewController@index')->name('staff-reviews.index');
     Route::get('staff-reviews/{staffReview}', 'StaffReviewController@show')->name('staff-reviews.show');
 
