@@ -19,7 +19,8 @@
                     "figure-admin/admin-ui": "dev-main",
                     "figure-admin/catalog": "dev-main",
                     "figure-admin/customers": "dev-main",
-                    "figure-admin/users": "dev-main"
+                    "figure-admin/users": "dev-main",
+                    "figure-admin/workforce": "dev-main"
                 }
             }
         }
@@ -32,6 +33,7 @@
         "figure-admin/catalog": "dev-main",
         "figure-admin/customers": "dev-main",
         "figure-admin/users": "dev-main",
+        "figure-admin/workforce": "dev-main",
         "google/apiclient": "^2.19",
         "irazasyed/telegram-bot-sdk": "^3.15",
         "laravel/framework": "^12.0",
@@ -67,7 +69,6 @@
             "Modules\\Payments\\": "modules/Payments/src/",
             "Modules\\Promotions\\": "modules/Promotions/src/",
             "Modules\\Settings\\": "modules/Settings/src/",
-            "Modules\\Workforce\\": "modules/Workforce/src/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8037430b9dba5c90a94548f2bed36156",
+    "content-hash": "df15db1ab583e086f2e18b31eb99e529",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -809,7 +809,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/AdminUi",
-                "reference": "889b1c5f362c5305552705b877e1efbf2987b02a"
+                "reference": "fb0689d77df2a171be43c2f22a7d21ef4d25231a"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -844,7 +844,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Catalog",
-                "reference": "22e13920b201cac1e84b72ed617d42f1da8f8292"
+                "reference": "a60c1b83d2452dc35d41b81c93d788e2201a8740"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -880,7 +880,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Customers",
-                "reference": "d3cf3b0a317e19ef7fcd1d28dd9d7f0f9840f06d"
+                "reference": "fd2b5371d101faa3eab4aa8df8d6e402ea0804d3"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -916,7 +916,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Users",
-                "reference": "aedb81143c8a421f0cd889a2ead8defb1268743f"
+                "reference": "863aaeabb0841b8446008e36dd4d953bf5acac37"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -941,6 +941,42 @@
                 "MIT"
             ],
             "description": "User administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "figure-admin/workforce",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Workforce",
+                "reference": "13c48266a7d4a5d4c6db59e6955550b9bbd86d34"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Workforce\\Providers\\WorkforceServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Workforce\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Workforce administration package for the Figure admin application.",
             "transport-options": {
                 "symlink": true,
                 "relative": true
@@ -10651,7 +10687,8 @@
         "figure-admin/admin-ui": 20,
         "figure-admin/catalog": 20,
         "figure-admin/customers": 20,
-        "figure-admin/users": 20
+        "figure-admin/users": 20,
+        "figure-admin/workforce": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
