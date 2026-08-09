@@ -22,6 +22,7 @@
                     "figure-admin/cms": "dev-main",
                     "figure-admin/communications": "dev-main",
                     "figure-admin/customers": "dev-main",
+                    "figure-admin/dashboard": "dev-main",
                     "figure-admin/payments": "dev-main",
                     "figure-admin/promotions": "dev-main",
                     "figure-admin/settings": "dev-main",
@@ -41,6 +42,7 @@
         "figure-admin/cms": "dev-main",
         "figure-admin/communications": "dev-main",
         "figure-admin/customers": "dev-main",
+        "figure-admin/dashboard": "dev-main",
         "figure-admin/payments": "dev-main",
         "figure-admin/promotions": "dev-main",
         "figure-admin/settings": "dev-main",
@@ -74,7 +76,6 @@
         "psr-4": {
             "App\\": "app/",
             "Modules\\Auth\\": "modules/Auth/src/",
-            "Modules\\Dashboard\\": "modules/Dashboard/src/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },
