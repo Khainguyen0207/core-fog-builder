@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Cms\Http\Admin\Controllers;
 
-use App\Admin\Forms\CommentForm;
-use App\Admin\Tables\CommentTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CommentRequest;
 use App\Models\Comment;
+use Modules\Cms\Admin\Forms\CommentForm;
+use Modules\Cms\Admin\Tables\CommentTable;
+use Modules\Cms\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
@@ -18,7 +18,7 @@ class CommentController extends Controller
     public function create()
     {
         return CommentForm::make()->renderForm();
-    }   
+    }
 
     public function store(CommentRequest $request)
     {

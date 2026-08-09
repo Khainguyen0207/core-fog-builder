@@ -22,11 +22,6 @@ Route::group([
 
     Route::get('email-templates/{emailTemplate}/preview', 'EmailTemplateController@preview')->name('email-templates.preview');
     Route::resource('email-templates', 'EmailTemplateController')->except(['create', 'store']);
-    Route::resource('posts', 'PostController');
-    Route::resource('blog-categories', 'BlogCategoryController');
-    Route::resource('tags', 'TagController');
-    Route::resource('comments', 'CommentController');
-
     Route::group([
         'prefix' => 'settings',
         'as' => 'settings.',

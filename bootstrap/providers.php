@@ -5,6 +5,7 @@ use App\Providers\RouteServiceProvider;
 use App\Providers\TableServiceProvider;
 use Modules\AdminUi\Providers\AdminUiServiceProvider;
 use Modules\Catalog\Providers\CatalogServiceProvider;
+use Modules\Cms\Providers\CmsServiceProvider;
 use Modules\Customers\Providers\CustomersServiceProvider;
 use Modules\Payments\Providers\PaymentsServiceProvider;
 use Modules\Promotions\Providers\PromotionsServiceProvider;
@@ -20,6 +21,7 @@ return [
     TableServiceProvider::class,
     AdminUiServiceProvider::class,
     CatalogServiceProvider::class,
+    CmsServiceProvider::class,
     CustomersServiceProvider::class,
     PaymentsServiceProvider::class,
     PromotionsServiceProvider::class,

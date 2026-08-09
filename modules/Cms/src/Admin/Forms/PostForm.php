@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Forms;
+namespace Modules\Cms\Admin\Forms;
 
 use App\Enums\PostPriorityLevelEnum;
 use App\Enums\PostTypeEnum;
@@ -21,6 +21,7 @@ class PostForm extends BaseForm
 
         return $this
             ->model(Post::class)
+            ->setTemplate('cms::forms.base')
             ->setTitle('Post')
             ->add(
                 'user_id',

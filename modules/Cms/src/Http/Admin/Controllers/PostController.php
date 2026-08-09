@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Cms\Http\Admin\Controllers;
 
-use App\Admin\Forms\PostForm;
-use App\Admin\Tables\PostTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PostRequest;
 use App\Models\Post;
 use App\Models\PostView;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Modules\Cms\Admin\Forms\PostForm;
+use Modules\Cms\Admin\Tables\PostTable;
+use Modules\Cms\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -30,7 +30,7 @@ class PostController extends Controller
 
         $file = $request->file('image');
 
-        $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+        $filename = Str::uuid().'.'.$file->getClientOriginalExtension();
 
         $path = $file->storeAs(
             'images',
@@ -89,7 +89,7 @@ class PostController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
 
-            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $filename = Str::uuid().'.'.$file->getClientOriginalExtension();
 
             $path = $file->storeAs(
                 'images',
@@ -129,10 +129,10 @@ class PostController extends Controller
         $baseSlug = Str::slug($text);
 
         do {
-            $count = Post::query()->where('slug', 'LIKE', $baseSlug . '%')->count();
+            $count = Post::query()->where('slug', 'LIKE', $baseSlug.'%')->count();
 
             $baseSlug = $count
-                ? $baseSlug . '-' . $count
+                ? $baseSlug.'-'.$count
                 : $baseSlug;
 
             $exists = Post::query()->where('slug', $baseSlug)->exists();

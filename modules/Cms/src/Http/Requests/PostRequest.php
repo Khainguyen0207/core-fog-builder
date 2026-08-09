@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace Modules\Cms\Http\Requests;
 
 use App\Enums\PostPriorityLevelEnum;
 use App\Enums\PostTypeEnum;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Tables;
+namespace Modules\Cms\Admin\Tables;
 
 use App\Enums\BasicStatusEnum;
 use App\Enums\PostTypeEnum;
@@ -8,15 +8,17 @@ use App\Enums\UserGroupRoleEnum;
 use App\Forms\Fields\InputField;
 use App\Forms\Fields\SelectField;
 use App\Models\Post;
-use App\Table\BaseTable;
 use App\Table\Columns\Column;
 use App\Table\Columns\FormatColumn;
 use App\Table\Columns\IDColumn;
 use App\Table\Operations\DeleteOperation;
 use App\Table\Operations\EditOperation;
+use Modules\AdminUi\Tables\ModuleTable;
 
-class PostTable extends BaseTable
+class PostTable extends ModuleTable
 {
+    protected string $moduleView = 'cms::tables.index';
+
     public function setup(): static
     {
         parent::setup();

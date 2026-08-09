@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Forms;
+namespace Modules\Cms\Admin\Forms;
 
 use App\Forms\BaseForm;
 use App\Forms\Fields\InputField;
@@ -14,6 +14,7 @@ class TagForm extends BaseForm
 
         return $this
             ->model(Tag::class)
+            ->setTemplate('cms::forms.base')
             ->setTitle('Tag')
             ->add(
                 'name',

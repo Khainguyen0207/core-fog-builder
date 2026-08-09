@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Cms\Http\Admin\Controllers;
 
-use App\Admin\Forms\TagForm;
-use App\Admin\Tables\TagTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\TagRequest;
 use App\Models\Tag;
 use Illuminate\Support\Str;
+use Modules\Cms\Admin\Forms\TagForm;
+use Modules\Cms\Admin\Tables\TagTable;
+use Modules\Cms\Http\Requests\TagRequest;
 
 class TagController extends Controller
 {

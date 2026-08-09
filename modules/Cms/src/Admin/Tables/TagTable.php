@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Admin\Tables;
+namespace Modules\Cms\Admin\Tables;
 
 use App\Forms\Fields\InputField;
 use App\Models\Tag;
-use App\Table\BaseTable;
 use App\Table\Columns\Column;
 use App\Table\Columns\IDColumn;
 use App\Table\Operations\DeleteOperation;
 use App\Table\Operations\EditOperation;
+use Modules\AdminUi\Tables\ModuleTable;
 
-class TagTable extends BaseTable
+class TagTable extends ModuleTable
 {
+    protected string $moduleView = 'cms::tables.index';
+
     public function setup(): static
     {
         parent::setup();

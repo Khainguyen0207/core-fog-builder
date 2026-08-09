@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Forms;
+namespace Modules\Cms\Admin\Forms;
 
 use App\Forms\BaseForm;
 use App\Forms\Fields\EditorField;
@@ -8,6 +8,7 @@ use App\Forms\Fields\SelectField;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class CommentForm extends BaseForm
 {
@@ -17,6 +18,7 @@ class CommentForm extends BaseForm
 
         return $this
             ->model(Comment::class)
+            ->setTemplate('cms::forms.base')
             ->setTitle('Comment')
             ->add(
                 'post_id',
@@ -51,7 +53,7 @@ class CommentForm extends BaseForm
                     ->setAttributes(['class' => 'form-control select2'])
                     ->setOptions(
                         Comment::with('post')->get()->mapWithKeys(function ($comment) {
-                            $label = $comment->comment_id.' - '.\Illuminate\Support\Str::limit($comment->comment_body, 30);
+                            $label = $comment->comment_id.' - '.Str::limit($comment->comment_body, 30);
                             if ($comment->post) {
                                 $label = '['.$comment->post->title.'] '.$label;
                             }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Cms\Http\Admin\Controllers;
 
-use App\Admin\Forms\BlogCategoryForm;
-use App\Admin\Tables\BlogCategoryTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\BlogCategoryRequest;
 use App\Models\BlogCategory;
 use Illuminate\Support\Str;
+use Modules\Cms\Admin\Forms\BlogCategoryForm;
+use Modules\Cms\Admin\Tables\BlogCategoryTable;
+use Modules\Cms\Http\Requests\BlogCategoryRequest;
 
 class BlogCategoryController extends Controller
 {
