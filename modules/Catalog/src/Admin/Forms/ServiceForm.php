@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Forms;
+namespace Modules\Catalog\Admin\Forms;
 
 use App\Enums\BaseStatusEnum;
 use App\Enums\TimeUnitEnum;
+use App\Forms\BaseForm;
 use App\Forms\Fields\EditorField;
 use App\Forms\Fields\InputField;
 use App\Forms\Fields\SelectField;

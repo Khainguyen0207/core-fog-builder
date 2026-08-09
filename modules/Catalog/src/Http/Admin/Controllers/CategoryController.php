@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Catalog\Http\Admin\Controllers;
 
-use App\Admin\Forms\CategoryForm;
-use App\Admin\Tables\CategoryTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CategoryRequest;
 use App\Models\Category;
+use Modules\Catalog\Admin\Forms\CategoryForm;
+use Modules\Catalog\Admin\Tables\CategoryTable;
+use Modules\Catalog\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {

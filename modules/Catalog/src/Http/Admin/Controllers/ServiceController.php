@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Catalog\Http\Admin\Controllers;
 
-use App\Admin\Tables\ServiceTable;
-use App\Forms\ServiceForm;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ServiceRequest;
 use App\Models\Service;
+use Modules\Catalog\Admin\Forms\ServiceForm;
+use Modules\Catalog\Admin\Tables\ServiceTable;
+use Modules\Catalog\Http\Requests\ServiceRequest;
 
 class ServiceController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Forms;
+namespace Modules\Catalog\Admin\Forms;
 
 use App\Forms\BaseForm;
 use App\Forms\Fields\InputField;

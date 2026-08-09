@@ -37,6 +37,7 @@
         "psr-4": {
             "App\\": "app/",
             "Modules\\AdminUi\\": "modules/AdminUi/src/",
+            "Modules\\Catalog\\": "modules/Catalog/src/",
             "Modules\\Users\\": "modules/Users/src/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"

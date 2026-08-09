@@ -1,21 +1,23 @@
 <?php
 
-namespace App\Admin\Tables;
+namespace Modules\Catalog\Admin\Tables;
 
 use App\Enums\BaseStatusEnum;
 use App\Forms\Fields\InputField;
 use App\Forms\Fields\SelectField;
 use App\Models\Category;
 use App\Models\Service;
-use App\Table\BaseTable;
 use App\Table\Columns\Column;
 use App\Table\Columns\FormatColumn;
 use App\Table\Columns\IDColumn;
 use App\Table\Operations\DeleteOperation;
 use App\Table\Operations\EditOperation;
+use Modules\AdminUi\Tables\ModuleTable;
 
-class ServiceTable extends BaseTable
+class ServiceTable extends ModuleTable
 {
+    protected string $moduleView = 'catalog::tables.index';
+
     public function setup(): static
     {
         parent::setup();

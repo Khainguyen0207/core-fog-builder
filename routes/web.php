@@ -13,11 +13,9 @@ Route::group([
     Route::resource('dashboard', 'DashboardController');
     Route::resource('customers', 'CustomerController');
 
-    Route::resource('services', 'ServiceController');
     Route::resource('coupons', 'CouponController');
     Route::resource('coupon-applicables', 'CouponApplicableController');
     Route::get('coupon-redemptions', [\App\Http\Controllers\Admin\CouponRedemptionController::class, 'index'])->name('coupon-redemptions.index');
-    Route::resource('categories', 'CategoryController');
     Route::resource('membership-settings', 'MembershipSettingController');
     Route::resource('bookings', 'BookingController');
 
