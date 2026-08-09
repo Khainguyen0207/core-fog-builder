@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Forms;
+namespace Modules\Booking\Admin\Forms;
 
 use App\Enums\BookingStatusEnum;
 use App\Forms\BaseForm;
@@ -8,6 +8,7 @@ use App\Forms\Fields\EditorField;
 use App\Forms\Fields\InputField;
 use App\Forms\Fields\SelectField;
 use App\Models\Booking;
+use App\Models\Customer;
 
 class BookingForm extends BaseForm
 {
@@ -17,8 +18,9 @@ class BookingForm extends BaseForm
 
         return $this
             ->model(Booking::class)
+            ->setTemplate('booking::forms.base')
             ->setTitle('Booking')
-            ->setView('admin.forms.booking.details')
+            ->setView('booking::admin.forms.booking.details')
             ->add(
                 'booking_code',
                 InputField::class,
@@ -33,11 +35,11 @@ class BookingForm extends BaseForm
                     ->setLabel('Customer')
                     ->setAttributes(['class' => 'form-control select2'])
                     ->setOptions(
-                        \App\Models\Customer::query()
+                        Customer::query()
                             ->select(['id', 'name', 'phone'])
                             ->get()
                             ->map(function ($c) {
-                                return $c->name . ' - ' . $c->phone;
+                                return $c->name.' - '.$c->phone;
                             })
                             ->toArray()
                     )
@@ -69,11 +71,11 @@ class BookingForm extends BaseForm
                 SelectField::make('bike_type')
                     ->setLabel('Bike Type')
                     ->setOptions([
-                        "manual" => "Xe số",
-                        "scooter" => "Xe tay ga",
-                        "sport" => "Xe côn tay",
-                        "bigbike" => "Xe phân khối lớn",
-                        "electric" => "Xe điện"
+                        'manual' => 'Xe số',
+                        'scooter' => 'Xe tay ga',
+                        'sport' => 'Xe côn tay',
+                        'bigbike' => 'Xe phân khối lớn',
+                        'electric' => 'Xe điện',
                     ])
             )
             ->add(

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Booking\Http\Admin\Controllers;
 
-use App\Admin\Forms\BookingForm;
-use App\Admin\Tables\BookingTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\BookingRequest;
 use App\Models\Booking;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Modules\Booking\Admin\Forms\BookingForm;
+use Modules\Booking\Admin\Tables\BookingTable;
+use Modules\Booking\Http\Requests\BookingRequest;
 
 class BookingController extends Controller
 {
@@ -38,7 +38,7 @@ class BookingController extends Controller
             ->with('bookingServices.staff.user')
             ->findOrFail($request->input('id'));
 
-        $pdf = PDF::loadView('admin.templates.invoice', compact('booking'));
+        $pdf = Pdf::loadView('booking::admin.templates.invoice', compact('booking'));
 
         $fileName = sprintf(
             'hoa-don-%s-%s-%s.pdf',

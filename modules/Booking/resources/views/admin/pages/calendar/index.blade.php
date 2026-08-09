@@ -3,7 +3,7 @@
 @section('title', 'Calendar')
 
 @section('page-script')
-    @vite(['resources/views/admin/assets/js/calendar-booking.js'])
+    @vite(['modules/Booking/resources/views/admin/assets/js/calendar-booking.js'])
 @endsection
 
 @section('content')

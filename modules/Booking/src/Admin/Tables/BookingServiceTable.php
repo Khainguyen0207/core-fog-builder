@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Tables;
+namespace Modules\Booking\Admin\Tables;
 
 use App\Enums\BookingStatusEnum;
 use App\Forms\Fields\InputField;
@@ -9,15 +9,17 @@ use App\Models\Booking;
 use App\Models\BookingService;
 use App\Models\Service;
 use App\Models\Staff;
-use App\Table\BaseTable;
 use App\Table\Columns\Column;
 use App\Table\Columns\FormatColumn;
 use App\Table\Columns\IDColumn;
 use App\Table\Operations\DeleteOperation;
 use App\Table\Operations\EditOperation;
+use Modules\AdminUi\Tables\ModuleTable;
 
-class BookingServiceTable extends BaseTable
+class BookingServiceTable extends ModuleTable
 {
+    protected string $moduleView = 'booking::tables.index';
+
     public function setup(): static
     {
         parent::setup();

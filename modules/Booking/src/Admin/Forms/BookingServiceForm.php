@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Forms;
+namespace Modules\Booking\Admin\Forms;
 
 use App\Enums\BookingStatusEnum;
 use App\Forms\BaseForm;
@@ -20,6 +20,7 @@ class BookingServiceForm extends BaseForm
 
         return $this
             ->model(BookingService::class)
+            ->setTemplate('booking::forms.base')
             ->setTitle('Booking Service')
             ->add(
                 'booking_id',

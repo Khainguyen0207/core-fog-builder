@@ -12,14 +12,6 @@ Route::group([
 
     Route::resource('dashboard', 'DashboardController');
 
-    Route::resource('bookings', 'BookingController');
-
-    Route::post('bookings/export', 'BookingController@export')->name('bookings.export');
-
-    Route::resource('booking-services', 'BookingServiceController');
-    Route::get('calendar', 'CalendarController@index')->name('calendar.index');
-    Route::get('calendar/events', 'CalendarController@events')->name('calendar.events');
-
     Route::get('email-templates/{emailTemplate}/preview', 'EmailTemplateController@preview')->name('email-templates.preview');
     Route::resource('email-templates', 'EmailTemplateController')->except(['create', 'store']);
     Route::group([

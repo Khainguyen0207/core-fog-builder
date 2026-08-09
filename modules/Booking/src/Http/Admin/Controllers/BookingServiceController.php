@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Booking\Http\Admin\Controllers;
 
-use App\Admin\Forms\BookingServiceForm;
-use App\Admin\Tables\BookingServiceTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\BookingServiceRequest;
 use App\Models\BookingService;
+use Modules\Booking\Admin\Forms\BookingServiceForm;
+use Modules\Booking\Admin\Tables\BookingServiceTable;
+use Modules\Booking\Http\Requests\BookingServiceRequest;
 
 class BookingServiceController extends Controller
 {

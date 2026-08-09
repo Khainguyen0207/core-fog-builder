@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Admin\Tables;
+namespace Modules\Booking\Admin\Tables;
 
 use App\Enums\BookingStatusEnum;
 use App\Forms\Fields\InputField;
 use App\Forms\Fields\SelectField;
 use App\Models\Booking;
-use App\Table\BaseTable;
 use App\Table\Columns\Column;
 use App\Table\Columns\FormatColumn;
 use App\Table\Columns\IDColumn;
 use App\Table\Operations\BasicOperation;
+use Modules\AdminUi\Tables\ModuleTable;
 
-class BookingTable extends BaseTable
+class BookingTable extends ModuleTable
 {
+    protected string $moduleView = 'booking::tables.index';
+
     public function setup(): static
     {
         parent::setup();

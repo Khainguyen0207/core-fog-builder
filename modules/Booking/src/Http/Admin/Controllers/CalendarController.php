@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Booking\Http\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Booking;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
     public function index()
     {
-        return view('admin.pages.calendar.index');
+        return view('booking::admin.pages.calendar.index');
     }
 
     public function events(Request $request)
