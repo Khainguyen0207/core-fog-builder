@@ -5,7 +5,6 @@ use App\Providers\RouteServiceProvider;
 use App\Providers\TableServiceProvider;
 use Modules\Auth\Providers\AuthServiceProvider;
 use Modules\Booking\Providers\BookingServiceProvider;
-use Modules\Catalog\Providers\CatalogServiceProvider;
 use Modules\Cms\Providers\CmsServiceProvider;
 use Modules\Communications\Providers\CommunicationsServiceProvider;
 use Modules\Customers\Providers\CustomersServiceProvider;
@@ -24,7 +23,6 @@ return [
     TableServiceProvider::class,
     AuthServiceProvider::class,
     BookingServiceProvider::class,
-    CatalogServiceProvider::class,
     CmsServiceProvider::class,
     CommunicationsServiceProvider::class,
     CustomersServiceProvider::class,

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "152109ccccfa31d225401118ecf97835",
+    "content-hash": "f932d7b2d1ad612f7a5f4a85f4ed9707",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -809,7 +809,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/AdminUi",
-                "reference": "01b437cc4b3305867808cd35ea9a0c7f18df607b"
+                "reference": "0ee7e2a7d300d22cdf1c00b450922ff43cbfdd2a"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -839,12 +839,48 @@
             }
         },
         {
+            "name": "figure-admin/catalog",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Catalog",
+                "reference": "b31a1d583fa5849f10b1c07a9d9118aa11a44040"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Catalog\\Providers\\CatalogServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Catalog\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Catalog administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "figure-admin/users",
             "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "modules/Users",
-                "reference": "0b8d039b0b6a6bc54110decdd17c94d8cee84b2a"
+                "reference": "ff05974b2d23c9b38ceb1f820bb32270e1d64ea8"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -10577,6 +10613,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "figure-admin/admin-ui": 20,
+        "figure-admin/catalog": 20,
         "figure-admin/users": 20
     },
     "prefer-stable": true,
