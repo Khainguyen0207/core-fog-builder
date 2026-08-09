@@ -12,19 +12,6 @@ Route::group([
 
     Route::resource('dashboard', 'DashboardController');
 
-    Route::group([
-        'prefix' => 'settings',
-        'as' => 'settings.',
-    ], function () {
-        Route::get('/', 'SettingController@index')->name('index');
-        Route::post('/', 'SettingController@update')->name('store');
-
-        Route::get('/sepay', 'SettingController@sePay')->name('sepay');
-        Route::get('/work-time', 'SettingController@workTime')->name('work-time');
-        Route::get('/information-system', 'SettingController@informationSystem')->name('information-system');
-        Route::get('/telegram', 'SettingController@telegram')->name('telegram');
-    });
-
     Route::post('bulk-delete', 'BulkDeleteController@bulkDelete')->name('bulk-delete');
 
     Route::get('log-viewer', function () {

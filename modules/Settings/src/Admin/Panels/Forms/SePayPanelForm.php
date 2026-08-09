@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Panels\Forms;
+namespace Modules\Settings\Admin\Panels\Forms;
 
 use App\Facades\SettingHelper;
 use App\Forms\BaseForm;
@@ -16,6 +16,7 @@ class SePayPanelForm extends BaseForm
 
         return $this
             ->model(Setting::class)
+            ->setTemplate('settings::forms.base')
             ->setTitle('Customer')
             ->add(
                 'receiver_name',

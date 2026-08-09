@@ -1,24 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Settings\Http\Admin\Controllers;
 
-use App\Admin\Panels\Forms\InformationSystemForm;
-use App\Admin\Panels\Forms\SePayPanelForm;
-use App\Admin\Panels\Forms\TelegramPanelForm;
-use App\Admin\Panels\Forms\WorkTimeForm;
-use App\Http\Controllers\Abstract\SettingController as Controller;
-use Modules\Workforce\Admin\Panels\Forms\ActiveStaffForm;
+use Modules\Settings\Admin\Panels\Forms\InformationSystemForm;
+use Modules\Settings\Admin\Panels\Forms\SePayPanelForm;
+use Modules\Settings\Admin\Panels\Forms\TelegramPanelForm;
+use Modules\Settings\Admin\Panels\Forms\WorkTimeForm;
+use Modules\Settings\Http\Controllers\Abstract\SettingController as Controller;
 
 class SettingController extends Controller
 {
     public function sePay()
     {
         return SePayPanelForm::make()->renderForm();
-    }
-
-    public function activeStaff()
-    {
-        return ActiveStaffForm::make()->renderForm();
     }
 
     public function workTime()

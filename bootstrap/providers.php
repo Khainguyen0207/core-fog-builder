@@ -11,6 +11,7 @@ use Modules\Communications\Providers\CommunicationsServiceProvider;
 use Modules\Customers\Providers\CustomersServiceProvider;
 use Modules\Payments\Providers\PaymentsServiceProvider;
 use Modules\Promotions\Providers\PromotionsServiceProvider;
+use Modules\Settings\Providers\SettingsServiceProvider;
 use Modules\Users\Providers\UsersServiceProvider;
 use Modules\Workforce\Providers\WorkforceServiceProvider;
 use Telegram\Bot\Laravel\TelegramServiceProvider;
@@ -29,6 +30,7 @@ return [
     CustomersServiceProvider::class,
     PaymentsServiceProvider::class,
     PromotionsServiceProvider::class,
+    SettingsServiceProvider::class,
     UsersServiceProvider::class,
     WorkforceServiceProvider::class,
     TelegramServiceProvider::class,

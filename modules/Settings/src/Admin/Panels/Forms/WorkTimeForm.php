@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Panels\Forms;
+namespace Modules\Settings\Admin\Panels\Forms;
 
 use App\Facades\SettingHelper;
 use App\Forms\BaseForm;
@@ -22,21 +22,22 @@ class WorkTimeForm extends BaseForm
             $keyDay = Str::lower($value);
 
             $fields[] = [
-                'name' => $key . $keyDay,
+                'name' => $key.$keyDay,
                 'type' => InputField::class,
-                'field' => InputField::make($key . $keyDay)
+                'field' => InputField::make($key.$keyDay)
                     ->setLabel($value)
-                    ->setDefaultValue(SettingHelper::get($key . $keyDay) ?? '')
+                    ->setDefaultValue(SettingHelper::get($key.$keyDay) ?? '')
                     ->setAttributes([
-                        'class' => 'form-control daterangepicker-range'
+                        'class' => 'form-control daterangepicker-range',
                     ])
                     ->helperText('If it\'s a holiday, set 00:00 - 00:00.')
-                    ->setPlaceholder('Enter ' . $value),
+                    ->setPlaceholder('Enter '.$value),
             ];
         }
 
         return $this
             ->model(Setting::class)
+            ->setTemplate('settings::forms.base')
             ->setTitle('Work Time')
             ->addMore($fields);
     }

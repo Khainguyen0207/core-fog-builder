@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Panels;
+namespace Modules\Settings\Admin\Panels;
 
 use App\Panel\AbstractPanelSection;
 use App\Panel\BasePanel;

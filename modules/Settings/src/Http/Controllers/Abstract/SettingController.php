@@ -1,17 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Abstract;
+namespace Modules\Settings\Http\Controllers\Abstract;
 
-use App\Admin\Panels\SettingPanel;
 use App\Facades\SettingHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Modules\Settings\Admin\Panels\SettingPanel;
 
 class SettingController extends Controller
 {
     public function index(SettingPanel $panel)
     {
-        return $panel->renderPanel();
+        $panel->setup();
+
+        return view('settings::admin.pages.settings.index', [
+            'panelSection' => $panel,
+            'title' => $panel->getNameTable() ?? 'Example App',
+        ]);
     }
 
     public function update(Request $request)

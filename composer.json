@@ -44,6 +44,7 @@
             "Modules\\Customers\\": "modules/Customers/src/",
             "Modules\\Payments\\": "modules/Payments/src/",
             "Modules\\Promotions\\": "modules/Promotions/src/",
+            "Modules\\Settings\\": "modules/Settings/src/",
             "Modules\\Users\\": "modules/Users/src/",
             "Modules\\Workforce\\": "modules/Workforce/src/",
             "Database\\Factories\\": "database/factories/",

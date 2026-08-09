@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Panels\Forms;
+namespace Modules\Settings\Admin\Panels\Forms;
 
 use App\Facades\SettingHelper;
 use App\Forms\BaseForm;
@@ -15,6 +15,7 @@ class InformationSystemForm extends BaseForm
 
         return $this
             ->model(Setting::class)
+            ->setTemplate('settings::forms.base')
             ->setTitle('Information System Settings')
             ->add(
                 'system_email',
