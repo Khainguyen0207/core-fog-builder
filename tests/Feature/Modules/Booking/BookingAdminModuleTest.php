@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Modules\Booking;
 
-use App\Table\Configs\TableConfig;
 use Illuminate\Support\Facades\Route;
 use Modules\Booking\Admin\Tables\BookingServiceTable;
 use Modules\Booking\Admin\Tables\BookingTable;
 use Modules\Booking\Http\Admin\Controllers\BookingController;
 use Modules\Booking\Http\Admin\Controllers\BookingServiceController;
 use Modules\Booking\Http\Admin\Controllers\CalendarController;
+use Modules\Shared\Tables\Registry\TableRegistry;
 use Tests\TestCase;
 
 class BookingAdminModuleTest extends TestCase
@@ -66,12 +66,12 @@ class BookingAdminModuleTest extends TestCase
 
     public function test_booking_tables_and_views_are_registered(): void
     {
-        $tables = app(TableConfig::class);
+        $tables = app(TableRegistry::class);
 
         $this->assertSame(BookingTable::class, $tables->resolve('bookings'));
         $this->assertSame(BookingServiceTable::class, $tables->resolve('booking-services'));
         $this->assertTrue(view()->exists('booking::forms.base'));
-        $this->assertTrue(view()->exists('booking::tables.index'));
+        $this->assertTrue(view()->exists('shared::tables.page'));
         $this->assertTrue(view()->exists('booking::admin.forms.booking.details'));
         $this->assertTrue(view()->exists('booking::admin.templates.invoice'));
         $this->assertTrue(view()->exists('booking::admin.pages.calendar.index'));

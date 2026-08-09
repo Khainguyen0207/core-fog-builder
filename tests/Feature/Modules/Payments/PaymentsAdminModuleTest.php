@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Modules\Payments;
 
-use App\Table\Configs\TableConfig;
 use Illuminate\Support\Facades\Route;
 use Modules\Payments\Admin\Tables\TransactionTable;
 use Modules\Payments\Http\Admin\Controllers\TransactionController;
+use Modules\Shared\Tables\Registry\TableRegistry;
 use Tests\TestCase;
 
 class PaymentsAdminModuleTest extends TestCase
@@ -31,8 +31,8 @@ class PaymentsAdminModuleTest extends TestCase
 
     public function test_payments_table_and_views_are_registered(): void
     {
-        $this->assertSame(TransactionTable::class, app(TableConfig::class)->resolve('transactions'));
+        $this->assertSame(TransactionTable::class, app(TableRegistry::class)->resolve('transactions'));
         $this->assertTrue(view()->exists('payments::forms.transaction.details'));
-        $this->assertTrue(view()->exists('payments::tables.index'));
+        $this->assertTrue(view()->exists('shared::tables.page'));
     }
 }

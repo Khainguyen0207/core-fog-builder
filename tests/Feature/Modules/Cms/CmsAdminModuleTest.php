@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Modules\Cms;
 
-use App\Table\Configs\TableConfig;
 use Illuminate\Support\Facades\Route;
 use Modules\Cms\Admin\Tables\BlogCategoryTable;
 use Modules\Cms\Admin\Tables\CommentTable;
@@ -12,6 +11,7 @@ use Modules\Cms\Http\Admin\Controllers\BlogCategoryController;
 use Modules\Cms\Http\Admin\Controllers\CommentController;
 use Modules\Cms\Http\Admin\Controllers\PostController;
 use Modules\Cms\Http\Admin\Controllers\TagController;
+use Modules\Shared\Tables\Registry\TableRegistry;
 use Tests\TestCase;
 
 class CmsAdminModuleTest extends TestCase
@@ -49,13 +49,13 @@ class CmsAdminModuleTest extends TestCase
 
     public function test_cms_tables_and_views_are_registered(): void
     {
-        $tables = app(TableConfig::class);
+        $tables = app(TableRegistry::class);
 
         $this->assertSame(PostTable::class, $tables->resolve('posts'));
         $this->assertSame(BlogCategoryTable::class, $tables->resolve('blog_categories'));
         $this->assertSame(TagTable::class, $tables->resolve('tags'));
         $this->assertSame(CommentTable::class, $tables->resolve('comments'));
         $this->assertTrue(view()->exists('cms::forms.base'));
-        $this->assertTrue(view()->exists('cms::tables.index'));
+        $this->assertTrue(view()->exists('shared::tables.page'));
     }
 }

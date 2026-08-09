@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Modules\Communications;
 
-use App\Table\Configs\TableConfig;
 use Illuminate\Support\Facades\Route;
 use Modules\Communications\Admin\Tables\EmailTemplateTable;
 use Modules\Communications\Admin\Tables\SendEmailUserTable;
 use Modules\Communications\Http\Admin\Controllers\EmailTemplateController;
 use Modules\Communications\Http\Admin\Controllers\SendEmailController;
 use Modules\Communications\Http\Admin\Controllers\TelegramBotController;
+use Modules\Shared\Tables\Registry\TableRegistry;
 use Tests\TestCase;
 
 class CommunicationsAdminModuleTest extends TestCase
@@ -50,12 +50,12 @@ class CommunicationsAdminModuleTest extends TestCase
 
     public function test_communications_tables_and_views_are_registered(): void
     {
-        $tables = app(TableConfig::class);
+        $tables = app(TableRegistry::class);
 
         $this->assertSame(EmailTemplateTable::class, $tables->resolve('email_templates'));
         $this->assertSame(SendEmailUserTable::class, $tables->resolve('send_email_users'));
         $this->assertTrue(view()->exists('communications::forms.base'));
-        $this->assertTrue(view()->exists('communications::tables.index'));
+        $this->assertTrue(view()->exists('shared::tables.page'));
         $this->assertTrue(view()->exists('communications::admin.pages.email.send'));
         $this->assertTrue(view()->exists('communications::admin.pages.email.preview'));
         $this->assertTrue(view()->exists('communications::admin.templates.email-templates.booking-notification'));

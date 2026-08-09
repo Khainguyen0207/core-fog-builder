@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Modules\Workforce;
 
-use App\Table\Configs\TableConfig;
 use Illuminate\Support\Facades\Route;
+use Modules\Shared\Tables\Registry\TableRegistry;
 use Modules\Workforce\Admin\Tables\StaffReviewTable;
 use Modules\Workforce\Admin\Tables\StaffTable;
 use Modules\Workforce\Http\Admin\Controllers\StaffController;
@@ -42,12 +42,12 @@ class WorkforceAdminModuleTest extends TestCase
 
     public function test_workforce_tables_and_views_are_registered(): void
     {
-        $tables = app(TableConfig::class);
+        $tables = app(TableRegistry::class);
 
         $this->assertSame(StaffTable::class, $tables->resolve('staffs'));
         $this->assertSame(StaffReviewTable::class, $tables->resolve('staff-reviews'));
         $this->assertTrue(view()->exists('workforce::forms.base'));
         $this->assertTrue(view()->exists('workforce::forms.staff-review.details'));
-        $this->assertTrue(view()->exists('workforce::tables.index'));
+        $this->assertTrue(view()->exists('shared::tables.page'));
     }
 }
