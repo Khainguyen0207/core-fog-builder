@@ -12,8 +12,6 @@ Route::group([
 
     Route::resource('dashboard', 'DashboardController');
 
-    Route::get('email-templates/{emailTemplate}/preview', 'EmailTemplateController@preview')->name('email-templates.preview');
-    Route::resource('email-templates', 'EmailTemplateController')->except(['create', 'store']);
     Route::group([
         'prefix' => 'settings',
         'as' => 'settings.',
@@ -26,10 +24,6 @@ Route::group([
         Route::get('/information-system', 'SettingController@informationSystem')->name('information-system');
         Route::get('/telegram', 'SettingController@telegram')->name('telegram');
     });
-
-    Route::get('send-email', 'SendEmailController@index')->name('send-email.index');
-    Route::get('send-email/preview/{id}', 'SendEmailController@getTemplatePreview')->name('send-email.preview');
-    Route::post('send-email/send', 'SendEmailController@send')->name('send-email.send');
 
     Route::post('bulk-delete', 'BulkDeleteController@bulkDelete')->name('bulk-delete');
 
@@ -44,8 +38,6 @@ Route::group([
     'middleware' => ['guest'],
     'namespace' => 'App\Http\Controllers\Admin',
 ], function () {
-
-    Route::get('updated-activity', 'TelegramBotController@updatedActivity');
 
     Route::get('login', 'AuthenticationController@login')->name('login');
     Route::post('login', 'AuthenticationController@authenticate')->name('login.authenticate');

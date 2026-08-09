@@ -40,6 +40,7 @@
             "Modules\\Booking\\": "modules/Booking/src/",
             "Modules\\Catalog\\": "modules/Catalog/src/",
             "Modules\\Cms\\": "modules/Cms/src/",
+            "Modules\\Communications\\": "modules/Communications/src/",
             "Modules\\Customers\\": "modules/Customers/src/",
             "Modules\\Payments\\": "modules/Payments/src/",
             "Modules\\Promotions\\": "modules/Promotions/src/",

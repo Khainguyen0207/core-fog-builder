@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Admin\Tables;
+namespace Modules\Communications\Admin\Tables;
 
 use App\Forms\Fields\InputField;
 use App\Models\EmailTemplate;
-use App\Table\BaseTable;
 use App\Table\Columns\Column;
 use App\Table\Columns\FormatColumn;
 use App\Table\Columns\IDColumn;
@@ -12,9 +11,12 @@ use App\Table\Operations\DeleteOperation;
 use App\Table\Operations\EditOperation;
 use App\Table\Operations\PreviewOperation;
 use Illuminate\Support\Str;
+use Modules\AdminUi\Tables\ModuleTable;
 
-class EmailTemplateTable extends BaseTable
+class EmailTemplateTable extends ModuleTable
 {
+    protected string $moduleView = 'communications::tables.index';
+
     public function setup(): static
     {
         parent::setup();

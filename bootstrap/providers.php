@@ -7,6 +7,7 @@ use Modules\AdminUi\Providers\AdminUiServiceProvider;
 use Modules\Booking\Providers\BookingServiceProvider;
 use Modules\Catalog\Providers\CatalogServiceProvider;
 use Modules\Cms\Providers\CmsServiceProvider;
+use Modules\Communications\Providers\CommunicationsServiceProvider;
 use Modules\Customers\Providers\CustomersServiceProvider;
 use Modules\Payments\Providers\PaymentsServiceProvider;
 use Modules\Promotions\Providers\PromotionsServiceProvider;
@@ -24,6 +25,7 @@ return [
     BookingServiceProvider::class,
     CatalogServiceProvider::class,
     CmsServiceProvider::class,
+    CommunicationsServiceProvider::class,
     CustomersServiceProvider::class,
     PaymentsServiceProvider::class,
     PromotionsServiceProvider::class,

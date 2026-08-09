@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Communications\Http\Admin\Controllers;
 
-use App\Admin\Forms\EmailTemplateForm;
-use App\Admin\Tables\EmailTemplateTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\EmailTemplateRequest;
 use App\Models\EmailTemplate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Modules\Communications\Admin\Forms\EmailTemplateForm;
+use Modules\Communications\Admin\Tables\EmailTemplateTable;
+use Modules\Communications\Http\Requests\EmailTemplateRequest;
 
 class EmailTemplateController extends Controller
 {
@@ -29,7 +29,7 @@ class EmailTemplateController extends Controller
 
         if ($file = $request->file('file_html')) {
             $userId = Auth::id();
-            $fileName = Str::uuid() . '.blade.php';
+            $fileName = Str::uuid().'.blade.php';
             $storagePath = "email-templates/{$userId}/{$fileName}";
 
             // Xóa file cũ nếu có
@@ -76,7 +76,7 @@ class EmailTemplateController extends Controller
         $rawHtml = $this->resolveHtmlContent($emailTemplate);
         $html = $this->replaceTemplateVariables($rawHtml, $variables);
 
-        return view('admin.pages.email.preview', [
+        return view('communications::admin.pages.email.preview', [
             'emailTemplate' => $emailTemplate,
             'html' => $html,
             'variables' => $variables,
@@ -95,7 +95,7 @@ class EmailTemplateController extends Controller
     private function replaceTemplateVariables(string $content, array $variables): string
     {
         foreach ($variables as $name => $value) {
-            $pattern = '/{{\s*' . preg_quote((string) $name, '/') . '\s*}}/';
+            $pattern = '/{{\s*'.preg_quote((string) $name, '/').'\s*}}/';
             $content = preg_replace($pattern, (string) $value, $content) ?? $content;
         }
 

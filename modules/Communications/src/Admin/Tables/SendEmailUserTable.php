@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Admin\Tables;
+namespace Modules\Communications\Admin\Tables;
 
 use App\Forms\Fields\InputField;
 use App\Models\Customer;
-use App\Table\BaseTable;
 use App\Table\Columns\Column;
+use Modules\AdminUi\Tables\ModuleTable;
 
-class SendEmailUserTable extends BaseTable
+class SendEmailUserTable extends ModuleTable
 {
+    protected string $moduleView = 'communications::tables.index';
+
     public function setup(): static
     {
         parent::setup();

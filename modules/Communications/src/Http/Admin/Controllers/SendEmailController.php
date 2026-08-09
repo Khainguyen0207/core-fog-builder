@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Communications\Http\Admin\Controllers;
 
-use App\Admin\Tables\SendEmailUserTable;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendTemplateEmailJob;
 use App\Models\EmailTemplate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Modules\Communications\Admin\Tables\SendEmailUserTable;
 
 class SendEmailController extends Controller
 {
@@ -17,7 +17,7 @@ class SendEmailController extends Controller
 
         $table->setup();
 
-        return view('admin.pages.email.send', [
+        return view('communications::admin.pages.email.send', [
             'table' => $table,
             'name' => $table->getName(),
             'templates' => $templates,
@@ -64,7 +64,7 @@ class SendEmailController extends Controller
                 'message' => 'Emails are being processed in the background.',
             ]);
         } catch (\Exception $e) {
-            Log::error('Dispatch SendTemplateEmailJob failed: ' . $e->getMessage());
+            Log::error('Dispatch SendTemplateEmailJob failed: '.$e->getMessage());
 
             return response()->json([
                 'error' => true,

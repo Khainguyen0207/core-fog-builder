@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Forms;
+namespace Modules\Communications\Admin\Forms;
 
 use App\Forms\BaseForm;
 use App\Forms\Fields\EditorField;
@@ -15,6 +15,7 @@ class EmailTemplateForm extends BaseForm
 
         return $this
             ->model(EmailTemplate::class)
+            ->setTemplate('communications::forms.base')
             ->setTitle('Email Template')
             ->hasFile(true)
             ->add(

@@ -70,7 +70,7 @@ return [
 
     'templates' => [
         'default' => 'default',
-        'otp-template' => 'admin.templates.email-templates.otp-template',
-        'booking-notification' => 'admin.templates.email-templates.booking-notification',
+        'otp-template' => 'communications::admin.templates.email-templates.otp-template',
+        'booking-notification' => 'communications::admin.templates.email-templates.booking-notification',
     ],
 ];

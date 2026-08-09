@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Communications\Http\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use Telegram\Bot\Laravel\Facades\Telegram;

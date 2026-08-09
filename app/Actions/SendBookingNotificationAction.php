@@ -44,7 +44,7 @@ class SendBookingNotificationAction
                 $booking->customer_name,
             );
 
-            $html = view('admin.templates.email-templates.booking-notification', [
+            $html = view('communications::admin.templates.email-templates.booking-notification', [
                 'booking' => $booking,
                 'appName' => config('app.name'),
                 'support' => self::SUPPORT_HOTLINE,
