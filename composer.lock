@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f932c4ce029294e4655ad14bd22a1106",
+    "content-hash": "2f9fa2df7127dc705859c0db94d76596",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -809,7 +809,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/AdminUi",
-                "reference": "30bc98834061becf06b22070dfb1d919b5c5cb1d"
+                "reference": "23a4896c3e0aece0b63329234ab433c911e6124b"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -844,7 +844,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Catalog",
-                "reference": "4cb94725b2f3bb07f1782d04156a23eb5b5e9d60"
+                "reference": "79858aee446a9fd9d95a85db115bd8a8c56bb9a6"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -875,12 +875,48 @@
             }
         },
         {
+            "name": "figure-admin/cms",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Cms",
+                "reference": "12af3328adcd22bc32ff6aecdbaf5696de7053d0"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Cms\\Providers\\CmsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Cms\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Content administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "figure-admin/customers",
             "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "modules/Customers",
-                "reference": "30768cc2e2fe7e60dcc51916652c4f5f14bc7ed6"
+                "reference": "0b639478eca9cd26627af9b73e37e414fa9a7638"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -916,7 +952,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Payments",
-                "reference": "485e8accd9676c0f6c04c76fdc184a11a83b38f1"
+                "reference": "562e4f84b1dce76965aeb2e4555ee64615dc626c"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -952,7 +988,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Promotions",
-                "reference": "1a4bef7a2f9483a0c75ce3444a1bcda4b58372a4"
+                "reference": "9963a4cf8e3b6d74d4d682df39d0f77cb3faa71f"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -988,7 +1024,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Users",
-                "reference": "3e7ff6c07b511e484bce51a70b375773ed6c9b38"
+                "reference": "78af0e2f8ac8c2dfa44bd3df26a87d49980ad50f"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1024,7 +1060,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Workforce",
-                "reference": "64c4cb785724f8865d90e5bfdb974b34eee95467"
+                "reference": "1ece3cccdddf9456eeea09ce02377c79f386a4ae"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -10758,6 +10794,7 @@
     "stability-flags": {
         "figure-admin/admin-ui": 20,
         "figure-admin/catalog": 20,
+        "figure-admin/cms": 20,
         "figure-admin/customers": 20,
         "figure-admin/payments": 20,
         "figure-admin/promotions": 20,

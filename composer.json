@@ -18,6 +18,7 @@
                 "versions": {
                     "figure-admin/admin-ui": "dev-main",
                     "figure-admin/catalog": "dev-main",
+                    "figure-admin/cms": "dev-main",
                     "figure-admin/customers": "dev-main",
                     "figure-admin/payments": "dev-main",
                     "figure-admin/promotions": "dev-main",
@@ -33,6 +34,7 @@
         "fakerphp/faker": "^1.23",
         "figure-admin/admin-ui": "dev-main",
         "figure-admin/catalog": "dev-main",
+        "figure-admin/cms": "dev-main",
         "figure-admin/customers": "dev-main",
         "figure-admin/payments": "dev-main",
         "figure-admin/promotions": "dev-main",
@@ -67,7 +69,6 @@
             "App\\": "app/",
             "Modules\\Auth\\": "modules/Auth/src/",
             "Modules\\Booking\\": "modules/Booking/src/",
-            "Modules\\Cms\\": "modules/Cms/src/",
             "Modules\\Communications\\": "modules/Communications/src/",
             "Modules\\Dashboard\\": "modules/Dashboard/src/",
             "Modules\\Settings\\": "modules/Settings/src/",
