@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f9fa2df7127dc705859c0db94d76596",
+    "content-hash": "f3c879d5fdcad8dd11bdfd88f5bee219",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -809,7 +809,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/AdminUi",
-                "reference": "23a4896c3e0aece0b63329234ab433c911e6124b"
+                "reference": "e1be753d6830b2a52ac84af08557cc9ab5fdd1cd"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -839,12 +839,49 @@
             }
         },
         {
+            "name": "figure-admin/booking",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Booking",
+                "reference": "4e3926eaf442ee9c309e2ae0a71076dcba268681"
+            },
+            "require": {
+                "barryvdh/laravel-dompdf": "^3.1",
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Booking\\Providers\\BookingServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Booking\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Booking administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "figure-admin/catalog",
             "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "modules/Catalog",
-                "reference": "79858aee446a9fd9d95a85db115bd8a8c56bb9a6"
+                "reference": "5aa3bc51892ca27661a2999348686abaa0bb1538"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -880,7 +917,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Cms",
-                "reference": "12af3328adcd22bc32ff6aecdbaf5696de7053d0"
+                "reference": "bd36eecd985a30d319da103dfc90929c2d36ddd3"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -916,7 +953,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Customers",
-                "reference": "0b639478eca9cd26627af9b73e37e414fa9a7638"
+                "reference": "b5f21d488a41c6809547f52ec03889efb781f13c"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -952,7 +989,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Payments",
-                "reference": "562e4f84b1dce76965aeb2e4555ee64615dc626c"
+                "reference": "5156fe2bbfde0bf5fadc7b88714bbde0db8e4675"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -988,7 +1025,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Promotions",
-                "reference": "9963a4cf8e3b6d74d4d682df39d0f77cb3faa71f"
+                "reference": "53bfa6dc3104f293616a87504fa8ec6f7fa09f3c"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1024,7 +1061,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Users",
-                "reference": "78af0e2f8ac8c2dfa44bd3df26a87d49980ad50f"
+                "reference": "ab8b40740956cb9fd7c0f7b75bb31b5acf96e0d3"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1060,7 +1097,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Workforce",
-                "reference": "1ece3cccdddf9456eeea09ce02377c79f386a4ae"
+                "reference": "7e067e7023c5862b60279ef289f09ad7ae38a3fe"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -10793,6 +10830,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "figure-admin/admin-ui": 20,
+        "figure-admin/booking": 20,
         "figure-admin/catalog": 20,
         "figure-admin/cms": 20,
         "figure-admin/customers": 20,
