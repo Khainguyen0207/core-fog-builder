@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ec949d897ced5009b0a0f79d3dd75d8",
+    "content-hash": "a55791533b2e49791c4da22404e85eb3",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -809,7 +809,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/AdminUi",
-                "reference": "509049925f8bc920d7bb2bf493acc99f87fee54f"
+                "reference": "2478e0efe246aec9fbeca8db525814cc25de7cf0"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -839,12 +839,47 @@
             }
         },
         {
+            "name": "figure-admin/auth",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Auth",
+                "reference": "60a2c190bd32310cee1929c657ca2c230b9fc933"
+            },
+            "require": {
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Auth\\Providers\\AuthServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Auth\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Authentication administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "figure-admin/booking",
             "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "modules/Booking",
-                "reference": "6534e0705fdcc924bd394688148d37bb4dbd91e2"
+                "reference": "a3e6fe2dadda7ce3ec4d68a03ce0ec99abde5d25"
             },
             "require": {
                 "barryvdh/laravel-dompdf": "^3.1",
@@ -881,7 +916,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Catalog",
-                "reference": "8801569ccbd78eaa829c4a2811ff8620eeab326b"
+                "reference": "d5082f81b43a9f8274a542807ba1b9462a2f6401"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -917,7 +952,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Cms",
-                "reference": "4b43a18369b567f6f55e087cf0b90f891fe46df0"
+                "reference": "b510602d86527b0590230035d4338f313b08de17"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -953,7 +988,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Communications",
-                "reference": "c42d0de6342ab04729e6111fc0addcb06c86a8bf"
+                "reference": "a19ef0d567edff12bfcc86b569e86c77c5aac2a6"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -990,7 +1025,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Customers",
-                "reference": "3469633c65062f0e91c70f060cb71276a9cb494b"
+                "reference": "c7f64b0d0af625d0db0877d7550f0c6bbb994cdc"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1026,7 +1061,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Dashboard",
-                "reference": "3f07a995038ed314af045d9a6b48a6cf8c869b04"
+                "reference": "cd780a77c202ad23ecb6d0a26da2ef82219c3bb6"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -1062,7 +1097,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Payments",
-                "reference": "7a4da5587739a6b7d29781153f206b469b1a1182"
+                "reference": "59fce2baafbc2372561a7645eb290aaa709e5c32"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1098,7 +1133,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Promotions",
-                "reference": "8340ea89743d84e88497ea13abd36cf9b9619111"
+                "reference": "bfc377bf3be37bb512631601cca960f1032fe097"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1134,7 +1169,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Settings",
-                "reference": "d04dbbc1c65f1c31967f04f4e0100a44e8b16558"
+                "reference": "50e1eedc2c5b97e7976394c5259e6baf583245f0"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1171,7 +1206,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Users",
-                "reference": "4828229f926cd6cf6bff8cf334f5a50233ec24ca"
+                "reference": "e5d511b7729c3282535befaf9ddc17d82848f93b"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1207,7 +1242,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Workforce",
-                "reference": "4a9cd536466091b84d3f8deedf29a083b459d294"
+                "reference": "007d17a646e1b0583164ebb2eb01b7c42a06642c"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -10940,6 +10975,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "figure-admin/admin-ui": 20,
+        "figure-admin/auth": 20,
         "figure-admin/booking": 20,
         "figure-admin/catalog": 20,
         "figure-admin/cms": 20,

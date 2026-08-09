@@ -17,6 +17,7 @@
                 "reference": "config",
                 "versions": {
                     "figure-admin/admin-ui": "dev-main",
+                    "figure-admin/auth": "dev-main",
                     "figure-admin/booking": "dev-main",
                     "figure-admin/catalog": "dev-main",
                     "figure-admin/cms": "dev-main",
@@ -37,6 +38,7 @@
         "barryvdh/laravel-dompdf": "^3.1",
         "fakerphp/faker": "^1.23",
         "figure-admin/admin-ui": "dev-main",
+        "figure-admin/auth": "dev-main",
         "figure-admin/booking": "dev-main",
         "figure-admin/catalog": "dev-main",
         "figure-admin/cms": "dev-main",
@@ -75,7 +77,6 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Modules\\Auth\\": "modules/Auth/src/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },
