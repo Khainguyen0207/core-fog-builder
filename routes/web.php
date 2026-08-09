@@ -26,7 +26,6 @@ Route::group([
     Route::resource('booking-services', 'BookingServiceController');
     Route::resource('staffs', 'StaffController');
     Route::resource('users', 'UserController');
-
     Route::get('staff-reviews', 'StaffReviewController@index')->name('staff-reviews.index');
     Route::get('staff-reviews/{staffReview}', 'StaffReviewController@show')->name('staff-reviews.show');
 
@@ -65,7 +64,6 @@ Route::group([
     Route::get('send-email/preview/{id}', 'SendEmailController@getTemplatePreview')->name('send-email.preview');
     Route::post('send-email/send', 'SendEmailController@send')->name('send-email.send');
 
-    Route::post('get-data/{table}', 'UserController@getDataTable')->name('get-data');
     Route::post('bulk-delete', 'BulkDeleteController@bulkDelete')->name('bulk-delete');
 
     Route::get('log-viewer', function () {
