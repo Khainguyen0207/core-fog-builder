@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53d512a574046fa0707e4f1d96c9f171",
+    "content-hash": "31da8d67ca2816b6c5d660de70a73834",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -802,6 +802,41 @@
                 "source": "https://github.com/FakerPHP/Faker/tree/v1.24.1"
             },
             "time": "2024-11-21T13:46:39+00:00"
+        },
+        {
+            "name": "figure-admin/admin-ui",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/AdminUi",
+                "reference": "3c3a8e8c339e180a7960789b57ddb8cf21afdfd6"
+            },
+            "require": {
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\AdminUi\\Providers\\AdminUiServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\AdminUi\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Shared admin UI integration for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "firebase/php-jwt",
@@ -10504,12 +10539,14 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "figure-admin/admin-ui": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
 }
