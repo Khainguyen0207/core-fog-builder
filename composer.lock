@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8bca022b851d8320a733af535b5cb81",
+    "content-hash": "81622caa3cf960f6da107485a058d128",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -809,7 +809,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/AdminUi",
-                "reference": "f6e3a3c94edd9dda8da558436d147ed8bf26e707"
+                "reference": "48be49868ecb2c9b5d325c23511d5d0a15c1f3d5"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -844,7 +844,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Booking",
-                "reference": "f271244ee3da6d77f8fc45804cc7b26f0be7cda7"
+                "reference": "232da47da81df600d393397f8791d41fcb8e6d0a"
             },
             "require": {
                 "barryvdh/laravel-dompdf": "^3.1",
@@ -881,7 +881,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Catalog",
-                "reference": "0eff61abd491870eca5acfc58831e5cd49d11169"
+                "reference": "595690671993287830ba095375344b64840a37aa"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -917,7 +917,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Cms",
-                "reference": "716db61c5ef1294535ae7edc53d31c9336973901"
+                "reference": "3b607e440c87ad7097ae41591e42cb4fb97fdee3"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -953,7 +953,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Communications",
-                "reference": "864d7e8be25157227d37f46c029bbf82839e4fdb"
+                "reference": "6ed3bae270d008d630fece964fb389b560ab612e"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -990,7 +990,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Customers",
-                "reference": "384ad2216dbb4629470ac55ccbbb065c68829497"
+                "reference": "dd522fc2128ec93c3c485868bf4146892fdd3e7e"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1026,7 +1026,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Payments",
-                "reference": "b13169babadb38b2a1c3f7a3b3969667adf767fd"
+                "reference": "0496509da8e1b92a97c01e27ad5d2bd92596e11a"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1062,7 +1062,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Promotions",
-                "reference": "312da4781bf304168de83916795f0da352c5713d"
+                "reference": "6f76fb6d8c631da79ec24b974ee2ff7ea8ada731"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1093,12 +1093,49 @@
             }
         },
         {
+            "name": "figure-admin/settings",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Settings",
+                "reference": "ec103b0ead64b6252678bf8c33d9075df768881a"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "nesbot/carbon": "^3.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Settings\\Providers\\SettingsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Settings\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Settings administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "figure-admin/users",
             "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "modules/Users",
-                "reference": "bcf0a1841a8ba4efd4b597f9c3b13320962226a1"
+                "reference": "e43cd511a45075a147035e01577a7a3305fca2eb"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1134,7 +1171,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Workforce",
-                "reference": "36825dfe03f31e8d7fce1e8bef0fa79cb05d3ab7"
+                "reference": "d7fde41c723f08cdd953af2e4924b2b52e084240"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -10874,6 +10911,7 @@
         "figure-admin/customers": 20,
         "figure-admin/payments": 20,
         "figure-admin/promotions": 20,
+        "figure-admin/settings": 20,
         "figure-admin/users": 20,
         "figure-admin/workforce": 20
     },
