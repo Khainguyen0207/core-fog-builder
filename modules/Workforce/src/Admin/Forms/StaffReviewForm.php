@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Forms;
+namespace Modules\Workforce\Admin\Forms;
 
 use App\Forms\BaseForm;
 use App\Forms\Fields\EditorField;
@@ -18,8 +18,9 @@ class StaffReviewForm extends BaseForm
 
         return $this
             ->model(StaffReview::class)
+            ->setTemplate('workforce::forms.base')
             ->setTitle('Staff Review')
-            ->setView('admin.forms.staff-review.details')
+            ->setView('workforce::forms.staff-review.details')
             ->add(
                 'customer_id',
                 SelectField::class,
@@ -31,7 +32,7 @@ class StaffReviewForm extends BaseForm
                             ->select(['id', 'name', 'phone'])
                             ->get()
                             ->mapWithKeys(function ($c) {
-                                return [$c->id => $c->name . ' - ' . $c->phone];
+                                return [$c->id => $c->name.' - '.$c->phone];
                             })
                             ->toArray()
                     )
@@ -47,7 +48,7 @@ class StaffReviewForm extends BaseForm
                             ->select(['id', 'name', 'staff_code'])
                             ->get()
                             ->mapWithKeys(function ($s) {
-                                return [$s->id => $s->staff_code . ' - ' . $s->name];
+                                return [$s->id => $s->staff_code.' - '.$s->name];
                             })
                             ->toArray()
                     )

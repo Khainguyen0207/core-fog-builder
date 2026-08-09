@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Admin\Panels\Forms\ActiveStaffForm;
 use App\Admin\Panels\Forms\InformationSystemForm;
 use App\Admin\Panels\Forms\SePayPanelForm;
 use App\Admin\Panels\Forms\TelegramPanelForm;
 use App\Admin\Panels\Forms\WorkTimeForm;
 use App\Http\Controllers\Abstract\SettingController as Controller;
+use Modules\Workforce\Admin\Panels\Forms\ActiveStaffForm;
 
 class SettingController extends Controller
 {

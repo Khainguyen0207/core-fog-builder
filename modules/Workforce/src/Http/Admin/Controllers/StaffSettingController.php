@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Workforce\Http\Admin\Controllers;
 
-use App\Admin\Panels\Forms\ActiveStaffForm;
 use App\Facades\SettingHelper;
 use App\Http\Controllers\Controller;
-use App\Models\Setting;
 use App\Models\Staff;
 use Illuminate\Http\Request;
+use Modules\Workforce\Admin\Panels\Forms\ActiveStaffForm;
 
 class StaffSettingController extends Controller
 {
@@ -28,7 +27,7 @@ class StaffSettingController extends Controller
 
         if ($countActiveStaff < (int) $request->max_active_staff) {
             return redirect()->route('admin.settings.active-staff.index')
-                ->with('error', 'Số lượng nhân viên active hiện tại là ' . $countActiveStaff . ', không thể cập nhật với số lượng lớn hơn.');
+                ->with('error', 'Số lượng nhân viên active hiện tại là '.$countActiveStaff.', không thể cập nhật với số lượng lớn hơn.');
         }
 
         SettingHelper::set('max_active_staff', $request->max_active_staff);

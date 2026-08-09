@@ -1,17 +1,14 @@
 <?php
 
-namespace App\Admin\Forms;
+namespace Modules\Workforce\Admin\Forms;
 
 use App\Enums\StaffLevelEnum;
-use App\Enums\UserGroupRoleEnum;
 use App\Forms\BaseForm;
 use App\Forms\Fields\EditorField;
 use App\Forms\Fields\InputField;
 use App\Forms\Fields\SelectField;
 use App\Models\Service;
 use App\Models\Staff;
-use App\Models\User;
-use App\Table\HeaderActions\CreateHeaderAction;
 
 class StaffForm extends BaseForm
 {
@@ -21,6 +18,7 @@ class StaffForm extends BaseForm
 
         $this
             ->model(Staff::class)
+            ->setTemplate('workforce::forms.base')
             ->setTitle('Staff')
 
             ->add(
@@ -46,8 +44,7 @@ class StaffForm extends BaseForm
                     ->setLabel('Phone')
                     ->setPlaceholder('Enter phone number...')
                     ->isRequired()
-            )
-        ;
+            );
 
         if (request()->routeIs('admin.staffs.create')) {
             $this->add(
@@ -73,8 +70,7 @@ class StaffForm extends BaseForm
                         ->setLabel('Password Confirmation')
                         ->setPlaceholder('Enter password confirmation...')
                         ->isRequired()
-                )
-            ;
+                );
         }
 
         return $this

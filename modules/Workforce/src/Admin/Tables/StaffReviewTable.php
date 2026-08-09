@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Admin\Tables;
+namespace Modules\Workforce\Admin\Tables;
 
 use App\Forms\Fields\InputField;
 use App\Forms\Fields\SelectField;
 use App\Models\Staff;
 use App\Models\StaffReview;
-use App\Table\BaseTable;
 use App\Table\Columns\Column;
 use App\Table\Columns\FormatColumn;
 use App\Table\Columns\IDColumn;
 use App\Table\Operations\BasicOperation;
+use Modules\AdminUi\Tables\ModuleTable;
 
-class StaffReviewTable extends BaseTable
+class StaffReviewTable extends ModuleTable
 {
+    protected string $moduleView = 'workforce::tables.index';
+
     public function setup(): static
     {
         parent::setup();
@@ -67,7 +69,7 @@ class StaffReviewTable extends BaseTable
                             }
                         }
 
-                        return $stars . ' <span class="text-muted">(' . $item->rating . '/5)</span>';
+                        return $stars.' <span class="text-muted">('.$item->rating.'/5)</span>';
                     }),
                 Column::make('note')->setLabel('Note'),
                 FormatColumn::make('created_at')

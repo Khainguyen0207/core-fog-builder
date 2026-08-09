@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace Modules\Workforce\Http\Requests;
 
+use App\Enums\StaffLevelEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -18,7 +19,7 @@ class StaffRequest extends FormRequest
             ],
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'regex:/^0\d{9}$/'],
-            'level' => ['required', Rule::in(\App\Enums\StaffLevelEnum::cases())],
+            'level' => ['required', Rule::in(StaffLevelEnum::cases())],
             'is_active' => ['boolean'],
             'salary' => ['required', 'numeric', 'min:0'],
             'joined_at' => ['required', 'date'],
@@ -29,7 +30,7 @@ class StaffRequest extends FormRequest
             'service_ids.*' => ['exists:services,id'],
         ];
 
-        if ($this->method() === "POST") {
+        if ($this->method() === 'POST') {
             $rules['email'] = 'required|email|unique:users,email';
             $rules['password'] = 'required|min:6|confirmed';
         }

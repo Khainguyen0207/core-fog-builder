@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Workforce\Http\Admin\Controllers;
 
-use App\Admin\Forms\StaffForm;
-use App\Admin\Tables\StaffTable;
 use App\Enums\UserGroupRoleEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StaffRequest;
 use App\Models\Staff;
 use App\Models\User;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Modules\Workforce\Admin\Forms\StaffForm;
+use Modules\Workforce\Admin\Tables\StaffTable;
+use Modules\Workforce\Http\Requests\StaffRequest;
 
 class StaffController extends Controller
 {
@@ -30,7 +29,7 @@ class StaffController extends Controller
         $data = $request->validated();
 
         if ($file = $request->file('avatar')) {
-            $fileName = Str::random(20) . '.' . $file->getClientOriginalExtension();
+            $fileName = Str::random(20).'.'.$file->getClientOriginalExtension();
 
             $fileName = $file->storeAs('avatars', $fileName, 'public');
 
@@ -41,7 +40,7 @@ class StaffController extends Controller
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             'group_role' => UserGroupRoleEnum::STAFF,
-            'status' => $request->input('is_active')
+            'status' => $request->input('is_active'),
         ]);
 
         $data['user_id'] = $user->id;
@@ -77,7 +76,7 @@ class StaffController extends Controller
         $data = $request->validated();
 
         if ($file = $request->file('avatar')) {
-            $fileName = Str::random(20) . '.' . $file->getClientOriginalExtension();
+            $fileName = Str::random(20).'.'.$file->getClientOriginalExtension();
             $fileName = $file->storeAs('avatars', $fileName, 'public');
 
             if ($staff->avatar && Storage::disk('public')->exists($staff->avatar)) {

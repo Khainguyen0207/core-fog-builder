@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Workforce\Http\Admin\Controllers;
 
-use App\Admin\Forms\StaffReviewForm;
-use App\Admin\Tables\StaffReviewTable;
 use App\Http\Controllers\Controller;
 use App\Models\StaffReview;
+use Modules\Workforce\Admin\Forms\StaffReviewForm;
+use Modules\Workforce\Admin\Tables\StaffReviewTable;
 
 class StaffReviewController extends Controller
 {

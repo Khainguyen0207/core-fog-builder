@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Admin\Tables;
+namespace Modules\Workforce\Admin\Tables;
 
 use App\Enums\StaffLevelEnum;
 use App\Forms\Fields\InputField;
 use App\Forms\Fields\SelectField;
 use App\Models\Staff;
-use App\Table\BaseTable;
 use App\Table\Columns\Column;
 use App\Table\Columns\FormatColumn;
 use App\Table\Columns\IDColumn;
-use App\Table\HeaderActions\CreateHeaderAction;
 use App\Table\Operations\DeleteOperation;
 use App\Table\Operations\EditOperation;
 use Illuminate\Support\Facades\Storage;
+use Modules\AdminUi\Tables\ModuleTable;
 
-class StaffTable extends BaseTable
+class StaffTable extends ModuleTable
 {
+    protected string $moduleView = 'workforce::tables.index';
+
     public function setup(): static
     {
         parent::setup();
@@ -40,7 +41,7 @@ class StaffTable extends BaseTable
                     return view('admin.layouts.partials.ui-avatar-name', [
                         'image' => Storage::url($item->avatar),
                         'name' => $item->name,
-                        'subname' => 'Hi! I\'m ' . $item->name,
+                        'subname' => 'Hi! I\'m '.$item->name,
                     ]);
                 }),
                 Column::make('phone')->setLabel('Phone'),

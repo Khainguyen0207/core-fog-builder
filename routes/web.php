@@ -20,10 +20,6 @@ Route::group([
     Route::post('bookings/export', 'BookingController@export')->name('bookings.export');
 
     Route::resource('booking-services', 'BookingServiceController');
-    Route::resource('staffs', 'StaffController');
-    Route::get('staff-reviews', 'StaffReviewController@index')->name('staff-reviews.index');
-    Route::get('staff-reviews/{staffReview}', 'StaffReviewController@show')->name('staff-reviews.show');
-
     Route::get('calendar', 'CalendarController@index')->name('calendar.index');
     Route::get('calendar/events', 'CalendarController@events')->name('calendar.events');
 
@@ -46,10 +42,6 @@ Route::group([
         Route::post('/', 'SettingController@update')->name('store');
 
         Route::get('/sepay', 'SettingController@sePay')->name('sepay');
-        Route::get('/max-active-staff', 'StaffSettingController@activeStaff')
-            ->name('active-staff.index');
-        Route::put('/max-active-staff', 'StaffSettingController@updateActiveStaff')
-            ->name('active-staff.update');
         Route::get('/work-time', 'SettingController@workTime')->name('work-time');
         Route::get('/information-system', 'SettingController@informationSystem')->name('information-system');
         Route::get('/telegram', 'SettingController@telegram')->name('telegram');
