@@ -2,15 +2,15 @@
 
 namespace Modules\Cms\Admin\Forms;
 
-use App\Forms\BaseForm;
-use App\Forms\Fields\EditorField;
-use App\Forms\Fields\SelectField;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Modules\Shared\Forms\Fields\EditorField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Forms\Form;
 
-class CommentForm extends BaseForm
+class CommentForm extends Form
 {
     public function setup(): static
     {

@@ -2,11 +2,11 @@
 
 namespace Modules\Catalog\Admin\Forms;
 
-use App\Forms\BaseForm;
-use App\Forms\Fields\InputField;
 use App\Models\Category;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Form;
 
-class CategoryForm extends BaseForm
+class CategoryForm extends Form
 {
     public function setup(): static
     {

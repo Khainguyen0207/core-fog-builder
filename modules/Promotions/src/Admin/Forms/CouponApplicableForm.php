@@ -3,12 +3,12 @@
 namespace Modules\Promotions\Admin\Forms;
 
 use App\Enums\CouponApplicableTypeEnum;
-use App\Forms\BaseForm;
-use App\Forms\Fields\SelectField;
 use App\Models\Coupon;
 use App\Models\CouponApplicable;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Forms\Form;
 
-class CouponApplicableForm extends BaseForm
+class CouponApplicableForm extends Form
 {
     public function setup(): static
     {

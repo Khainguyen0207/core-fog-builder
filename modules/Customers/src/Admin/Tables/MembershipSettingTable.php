@@ -3,25 +3,23 @@
 namespace Modules\Customers\Admin\Tables;
 
 use App\Enums\BasicStatusEnum;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\MembershipSetting;
-use App\Table\Columns\Column;
-use App\Table\Columns\FormatColumn;
-use App\Table\Operations\EditOperation;
-use Modules\AdminUi\Tables\ModuleTable;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Tables\Columns\Column;
+use Modules\Shared\Tables\Columns\FormatColumn;
+use Modules\Shared\Tables\Operations\EditOperation;
+use Modules\Shared\Tables\Table;
 
-class MembershipSettingTable extends ModuleTable
+class MembershipSettingTable extends Table
 {
-    protected string $moduleView = 'customers::tables.index';
-
     public function setup(): static
     {
         parent::setup();
 
         return $this
             ->setModel(MembershipSetting::class)->setName('membership-settings')->setNameTable('Membership Settings')
-            ->setRoute('admin.membership-settings.index')->hasFilter()->notHeaderAction()
+            ->setRoute('admin.membership-settings.index')->hasFilter()
             ->addColumns([
                 Column::make('membership_code')->setLabel('Code'),
                 Column::make('name')->setLabel('Name'),

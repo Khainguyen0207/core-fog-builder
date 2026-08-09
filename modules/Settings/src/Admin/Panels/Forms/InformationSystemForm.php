@@ -3,11 +3,11 @@
 namespace Modules\Settings\Admin\Panels\Forms;
 
 use App\Facades\SettingHelper;
-use App\Forms\BaseForm;
-use App\Forms\Fields\InputField;
 use App\Models\Setting;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Form;
 
-class InformationSystemForm extends BaseForm
+class InformationSystemForm extends Form
 {
     public function setup(): static
     {

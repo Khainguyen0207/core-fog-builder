@@ -3,13 +3,13 @@
 namespace Modules\Settings\Admin\Panels\Forms;
 
 use App\Facades\SettingHelper;
-use App\Forms\BaseForm;
-use App\Forms\Fields\InputField;
 use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Form;
 
-class WorkTimeForm extends BaseForm
+class WorkTimeForm extends Form
 {
     public function setup(): static
     {

@@ -15,6 +15,19 @@ class MembershipSettingController extends Controller
         return $table->renderTable();
     }
 
+    public function create()
+    {
+        return MembershipSettingForm::make()->renderForm();
+    }
+
+    public function store(MembershipSettingRequest $request)
+    {
+        MembershipSetting::query()->create($request->validated());
+
+        return redirect()->route('admin.membership-settings.index')
+            ->with('success', 'Membership setting created successfully.');
+    }
+
     public function show(MembershipSetting $membershipSetting)
     {
         return MembershipSettingForm::make()->createWithModel($membershipSetting)->renderForm();
@@ -27,7 +40,7 @@ class MembershipSettingController extends Controller
 
     public function update(MembershipSettingRequest $request, MembershipSetting $membershipSetting)
     {
-        $membershipSetting->update($request->validated());
+        $membershipSetting->update($request->safe()->except('membership_code'));
 
         return redirect()->back()
             ->with('success', 'Membership setting updated successfully.');

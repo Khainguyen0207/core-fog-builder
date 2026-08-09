@@ -10,8 +10,6 @@ Route::group([
 ], function () {
     Route::get('/', fn () => redirect()->route('admin.dashboard.index'));
 
-    Route::post('bulk-delete', 'BulkDeleteController@bulkDelete')->name('bulk-delete');
-
     Route::get('log-viewer', function () {
         return view('log-viewer::log-viewer.index');
     })->name('log-viewer.index');

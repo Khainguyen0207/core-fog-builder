@@ -3,12 +3,12 @@
 namespace Modules\Workforce\Admin\Panels\Forms;
 
 use App\Facades\SettingHelper;
-use App\Forms\BaseForm;
-use App\Forms\Fields\InputField;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Form;
 
-class ActiveStaffForm extends BaseForm
+class ActiveStaffForm extends Form
 {
     public function setup(): static
     {

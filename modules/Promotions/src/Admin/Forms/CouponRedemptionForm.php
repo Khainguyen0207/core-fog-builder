@@ -3,14 +3,14 @@
 namespace Modules\Promotions\Admin\Forms;
 
 use App\Enums\CouponRedemptionStatusEnum;
-use App\Forms\BaseForm;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\Coupon;
 use App\Models\CouponRedemption;
 use App\Models\Customer;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Forms\Form;
 
-class CouponRedemptionForm extends BaseForm
+class CouponRedemptionForm extends Form
 {
     public function setup(): static
     {

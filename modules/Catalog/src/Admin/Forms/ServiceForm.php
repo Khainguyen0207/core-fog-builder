@@ -4,14 +4,14 @@ namespace Modules\Catalog\Admin\Forms;
 
 use App\Enums\BaseStatusEnum;
 use App\Enums\TimeUnitEnum;
-use App\Forms\BaseForm;
-use App\Forms\Fields\EditorField;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\Category;
 use App\Models\Service;
+use Modules\Shared\Forms\Fields\EditorField;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Forms\Form;
 
-class ServiceForm extends BaseForm
+class ServiceForm extends Form
 {
     public function setup(): static
     {

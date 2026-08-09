@@ -3,12 +3,12 @@
 namespace Modules\Users\Admin\Forms;
 
 use App\Enums\UserGroupRoleEnum;
-use App\Forms\BaseForm;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\User;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Forms\Form;
 
-class UserForm extends BaseForm
+class UserForm extends Form
 {
     public function setup(): static
     {

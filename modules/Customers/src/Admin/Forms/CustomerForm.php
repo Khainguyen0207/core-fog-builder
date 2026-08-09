@@ -2,13 +2,13 @@
 
 namespace Modules\Customers\Admin\Forms;
 
-use App\Forms\BaseForm;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\Customer;
 use App\Models\MembershipSetting;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Forms\Form;
 
-class CustomerForm extends BaseForm
+class CustomerForm extends Form
 {
     public function setup(): static
     {

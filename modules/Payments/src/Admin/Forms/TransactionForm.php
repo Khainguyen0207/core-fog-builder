@@ -3,13 +3,13 @@
 namespace Modules\Payments\Admin\Forms;
 
 use App\Enums\TransactionStatusEnum;
-use App\Forms\BaseForm;
-use App\Forms\Fields\EditorField;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\Transaction;
+use Modules\Shared\Forms\Fields\EditorField;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Forms\Form;
 
-class TransactionForm extends BaseForm
+class TransactionForm extends Form
 {
     public function setup(): static
     {

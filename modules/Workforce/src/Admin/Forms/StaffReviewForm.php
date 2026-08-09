@@ -2,15 +2,15 @@
 
 namespace Modules\Workforce\Admin\Forms;
 
-use App\Forms\BaseForm;
-use App\Forms\Fields\EditorField;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\Customer;
 use App\Models\Staff;
 use App\Models\StaffReview;
+use Modules\Shared\Forms\Fields\EditorField;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Forms\Form;
 
-class StaffReviewForm extends BaseForm
+class StaffReviewForm extends Form
 {
     public function setup(): static
     {

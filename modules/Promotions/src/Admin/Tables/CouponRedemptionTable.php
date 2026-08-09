@@ -3,17 +3,15 @@
 namespace Modules\Promotions\Admin\Tables;
 
 use App\Enums\CouponRedemptionStatusEnum;
-use App\Forms\Fields\SelectField;
 use App\Models\CouponRedemption;
-use App\Table\Columns\Column;
-use App\Table\Columns\FormatColumn;
-use App\Table\Columns\IDColumn;
-use Modules\AdminUi\Tables\ModuleTable;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Tables\Columns\Column;
+use Modules\Shared\Tables\Columns\FormatColumn;
+use Modules\Shared\Tables\Columns\IDColumn;
+use Modules\Shared\Tables\Table;
 
-class CouponRedemptionTable extends ModuleTable
+class CouponRedemptionTable extends Table
 {
-    protected string $moduleView = 'promotions::tables.index';
-
     public function setup(): static
     {
         parent::setup();

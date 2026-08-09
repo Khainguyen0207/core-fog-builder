@@ -3,16 +3,16 @@
 namespace Modules\Booking\Admin\Forms;
 
 use App\Enums\BookingStatusEnum;
-use App\Forms\BaseForm;
-use App\Forms\Fields\EditorField;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\Booking;
 use App\Models\BookingService;
 use App\Models\Service;
 use App\Models\Staff;
+use Modules\Shared\Forms\Fields\EditorField;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Forms\Form;
 
-class BookingServiceForm extends BaseForm
+class BookingServiceForm extends Form
 {
     public function setup(): static
     {

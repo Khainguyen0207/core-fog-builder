@@ -2,11 +2,11 @@
 
 namespace Modules\Cms\Admin\Forms;
 
-use App\Forms\BaseForm;
-use App\Forms\Fields\InputField;
 use App\Models\BlogCategory;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Form;
 
-class BlogCategoryForm extends BaseForm
+class BlogCategoryForm extends Form
 {
     public function setup(): static
     {

@@ -2,11 +2,11 @@
 
 namespace Modules\Cms\Admin\Forms;
 
-use App\Forms\BaseForm;
-use App\Forms\Fields\InputField;
 use App\Models\Tag;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Form;
 
-class TagForm extends BaseForm
+class TagForm extends Form
 {
     public function setup(): static
     {

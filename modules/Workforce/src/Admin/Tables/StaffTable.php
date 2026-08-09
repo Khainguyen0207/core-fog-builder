@@ -3,21 +3,19 @@
 namespace Modules\Workforce\Admin\Tables;
 
 use App\Enums\StaffLevelEnum;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\Staff;
-use App\Table\Columns\Column;
-use App\Table\Columns\FormatColumn;
-use App\Table\Columns\IDColumn;
-use App\Table\Operations\DeleteOperation;
-use App\Table\Operations\EditOperation;
 use Illuminate\Support\Facades\Storage;
-use Modules\AdminUi\Tables\ModuleTable;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Tables\Columns\Column;
+use Modules\Shared\Tables\Columns\FormatColumn;
+use Modules\Shared\Tables\Columns\IDColumn;
+use Modules\Shared\Tables\Operations\DeleteOperation;
+use Modules\Shared\Tables\Operations\EditOperation;
+use Modules\Shared\Tables\Table;
 
-class StaffTable extends ModuleTable
+class StaffTable extends Table
 {
-    protected string $moduleView = 'workforce::tables.index';
-
     public function setup(): static
     {
         parent::setup();
@@ -38,7 +36,7 @@ class StaffTable extends ModuleTable
                 FormatColumn::make('name')->setLabel('Name')->getValueUsing(function (FormatColumn $column) {
                     $item = $column->getItem();
 
-                    return view('admin.layouts.partials.ui-avatar-name', [
+                    return view('shared::layouts.partials.ui-avatar-name', [
                         'image' => Storage::url($item->avatar),
                         'name' => $item->name,
                         'subname' => 'Hi! I\'m '.$item->name,

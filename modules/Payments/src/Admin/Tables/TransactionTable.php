@@ -3,19 +3,17 @@
 namespace Modules\Payments\Admin\Tables;
 
 use App\Enums\TransactionStatusEnum;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\Transaction;
-use App\Table\Columns\Column;
-use App\Table\Columns\FormatColumn;
-use App\Table\Columns\IDColumn;
-use App\Table\Operations\BasicOperation;
-use Modules\AdminUi\Tables\ModuleTable;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Tables\Columns\Column;
+use Modules\Shared\Tables\Columns\FormatColumn;
+use Modules\Shared\Tables\Columns\IDColumn;
+use Modules\Shared\Tables\Operations\BasicOperation;
+use Modules\Shared\Tables\Table;
 
-class TransactionTable extends ModuleTable
+class TransactionTable extends Table
 {
-    protected string $moduleView = 'payments::tables.index';
-
     public function setup(): static
     {
         parent::setup();

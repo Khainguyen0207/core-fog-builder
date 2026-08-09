@@ -3,12 +3,10 @@
 namespace Modules\Settings\Admin\Tables;
 
 use App\Models\Setting;
-use Modules\AdminUi\Tables\ModuleTable;
+use Modules\Shared\Tables\Table;
 
-class SettingTable extends ModuleTable
+class SettingTable extends Table
 {
-    protected string $moduleView = 'settings::admin.pages.settings.index';
-
     public function setup(): static
     {
         parent::setup();
@@ -16,7 +14,6 @@ class SettingTable extends ModuleTable
         return $this
             ->setNameTable('Settings')
             ->setModel(Setting::class)
-            ->setTemplate('settings::admin.pages.settings.index')
             ->addColumns([
 
             ]);

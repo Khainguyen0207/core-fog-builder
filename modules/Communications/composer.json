@@ -6,8 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "figure-admin/admin-ui": "dev-main",
         "figure-admin/host": "^1.0",
+        "figure-admin/shared": "dev-main",
         "irazasyed/telegram-bot-sdk": "^3.15",
         "laravel/framework": "^12.0"
     },
