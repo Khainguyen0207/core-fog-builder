@@ -1,5 +1,4 @@
 @php
-    use App\Enums\BaseEnum;
     use Illuminate\Support\Arr;
     use Illuminate\Support\Str;
 
@@ -69,7 +68,7 @@
 
                                     <h5 class="mb-1">{{ $field->getLabel() }}</h5>
 
-                                    @if ($value instanceof BaseEnum)
+                                    @if (is_object($value) && method_exists($value, 'toHtml'))
                                         {!! $value->toHtml() !!}
                                     @else
                                         <p class="text-black">{!! $value ?? '_' !!}</p>

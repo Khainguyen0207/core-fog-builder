@@ -1,9 +1,12 @@
-@extends('admin.layouts.contentLayout')
+@extends('shared::layouts.content')
 
 @section('title', 'Calendar')
 
 @section('page-script')
-    @vite(['modules/Booking/resources/views/admin/assets/js/calendar-booking.js'])
+    @vite([
+        'modules/Booking/resources/views/admin/assets/js/calendar-booking.js',
+        'modules/Booking/resources/scss/calendar.scss',
+    ])
 @endsection
 
 @section('content')

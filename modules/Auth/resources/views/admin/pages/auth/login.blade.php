@@ -1,4 +1,4 @@
-@extends('admin.layouts.blankLayout')
+@extends('shared::layouts.blank')
 
 @section('title', 'Login Basic - Pages')
 

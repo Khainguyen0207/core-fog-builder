@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const eventsUrl = calendarEl.dataset.eventsUrl || '/admin/calendar/events';
 
+    const mobileCalendar = window.matchMedia('(max-width: 767.98px)');
     let calendar = new Calendar(calendarEl, {
         plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin, bootstrap5Plugin],
-        initialView: 'dayGridMonth',
+        initialView: mobileCalendar.matches ? 'listWeek' : 'dayGridMonth',
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
@@ -130,6 +131,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     calendar.render();
+
+    mobileCalendar.addEventListener('change', event => {
+        calendar.changeView(event.matches ? 'listWeek' : 'dayGridMonth');
+    });
 
     const datePickerEl = document.querySelector('.date-picker-single');
     if (datePickerEl) {

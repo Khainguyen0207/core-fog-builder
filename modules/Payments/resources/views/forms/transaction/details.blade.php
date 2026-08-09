@@ -1,5 +1,4 @@
 @php
-    use App\Enums\BaseEnum;
     use Illuminate\Support\Str;
 
     $currentRoute = $form->getRoute();
@@ -69,7 +68,7 @@
 
                                     <h5 class="mb-1">{{ $field->getLabel() }}</h5>
 
-                                    @if ($value instanceof BaseEnum)
+                                    @if (is_object($value) && method_exists($value, 'toHtml'))
                                         {!! $value->toHtml() !!}
                                     @elseif($field->getName() === 'response')
                                         <pre class="bg-light p-2 rounded small" style="max-height: 200px; overflow: auto;">{{ $value ?? '_' }}</pre>

@@ -5,10 +5,14 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/js/app.js',
-                'resources/scss/admin.scss',
-                // 'resources/views/admin/assets/vendor/libs/fullcalendar/app-calendar.scss',
-                // 'resources/views/admin/assets/js/calendar-booking.js'
+                'modules/Shared/resources/js/app.js',
+                'modules/Shared/resources/scss/admin.scss',
+                'modules/Booking/resources/views/admin/assets/js/calendar-booking.js',
+                'modules/Booking/resources/scss/calendar.scss',
+                'modules/Communications/resources/js/email-template-preview.js',
+                'modules/Communications/resources/scss/email-template-preview.scss',
+                'modules/Dashboard/resources/js/dashboard.js',
+                'modules/Dashboard/resources/scss/dashboard.scss',
             ],
             refresh: true,
         }),

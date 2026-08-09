@@ -1,4 +1,3 @@
-@php use App\Enums\BaseEnum; @endphp
 <!doctype html>
 <html lang="vi">
 
@@ -265,7 +264,7 @@
                     <tr>
                         <th>Trạng thái</th>
                         <td>
-                            @if ($booking->status instanceof BaseEnum)
+                            @if (is_object($booking->status) && method_exists($booking->status, 'toHtml'))
                                 {!! $booking->status->toHtml() !!}
                             @else
                                 {{ $booking->status ?? '_' }}
@@ -327,7 +326,7 @@
                         <td>{{ $staffText }}</td>
 
                         <td>
-                            @if ($bookingService->status instanceof BaseEnum)
+                            @if (is_object($bookingService->status) && method_exists($bookingService->status, 'toHtml'))
                                 {!! $bookingService->status->toHtml() !!}
                             @else
                                 {{ $bookingService->status ?? '_' }}

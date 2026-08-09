@@ -1,0 +1,59 @@
+@use 'flatpickr/dist/flatpickr';
+
+.app-calendar-wrapper {
+    overflow: hidden;
+}
+
+.app-calendar-sidebar {
+    flex: 0 0 22rem;
+    width: 22rem;
+}
+
+.app-calendar-content {
+    min-width: 0;
+}
+
+.app-calendar-sidebar .flatpickr-calendar.inline {
+    margin: 0 auto;
+    box-shadow: none;
+}
+
+@media (max-width: 991.98px) {
+    .app-calendar-sidebar {
+        flex-basis: 100%;
+        width: 100%;
+        border-right: 0 !important;
+        border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+    }
+
+    .app-calendar-content {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .app-calendar-content .fc-header-toolbar {
+        align-items: stretch;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .app-calendar-content .fc-toolbar-chunk {
+        display: flex;
+        justify-content: center;
+    }
+
+    .app-calendar-content .fc-toolbar-chunk:nth-child(2) {
+        order: -1;
+        flex-basis: 100%;
+    }
+
+    .app-calendar-content .fc-toolbar-title {
+        font-size: 1.25rem;
+    }
+
+    .app-calendar-content .fc-list-event-title a {
+        white-space: normal;
+    }
+}
