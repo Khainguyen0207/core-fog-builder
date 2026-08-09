@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Dashboard\Http\Admin\Controllers;
 
 use App\Enums\BookingStatusEnum;
 use App\Enums\PaymentMethodEnum;
@@ -35,7 +35,7 @@ class DashboardController extends Controller
         $paymentStats = $this->getPaymentStats($weekStart, $weekEnd);
         $topCountries = $this->getTopCountries();
 
-        return view('admin.pages.dashboard.index', compact(
+        return view('dashboard::admin.pages.dashboard.index', compact(
             'kpis',
             'charts',
             'topServices',
@@ -87,7 +87,6 @@ class DashboardController extends Controller
         $expectedRevenueThisWeek = Booking::whereNotIn('status', [BookingStatusEnum::PENDING, BookingStatusEnum::CANCELLED])
             ->whereBetween('scheduled_start', [$weekStart, $weekEnd])
             ->sum('total_price');
-
 
         $pendingBookingsLastWeek = Booking::whereNotIn('status', [BookingStatusEnum::PENDING, BookingStatusEnum::CANCELLED])
             ->whereBetween('scheduled_start', [$lastWeekStart, $lastWeekEnd])
@@ -244,7 +243,7 @@ class DashboardController extends Controller
             ->get();
 
         $labels = ['Pay Later'];
-        $series = [number_format(floatval($payLaterRevenue), 0, ',', '.') . ' VND'];
+        $series = [number_format(floatval($payLaterRevenue), 0, ',', '.').' VND'];
         $icons = ['wallet.png'];
 
         foreach ($transactions as $transaction) {
@@ -272,7 +271,7 @@ class DashboardController extends Controller
 
             $icons[] = $icon;
             $labels[] = $label;
-            $series[] = number_format(floatval($bankTransferRevenue), 0, ',', '.') . ' VND';
+            $series[] = number_format(floatval($bankTransferRevenue), 0, ',', '.').' VND';
         }
 
         return [

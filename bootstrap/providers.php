@@ -9,6 +9,7 @@ use Modules\Catalog\Providers\CatalogServiceProvider;
 use Modules\Cms\Providers\CmsServiceProvider;
 use Modules\Communications\Providers\CommunicationsServiceProvider;
 use Modules\Customers\Providers\CustomersServiceProvider;
+use Modules\Dashboard\Providers\DashboardServiceProvider;
 use Modules\Payments\Providers\PaymentsServiceProvider;
 use Modules\Promotions\Providers\PromotionsServiceProvider;
 use Modules\Settings\Providers\SettingsServiceProvider;
@@ -28,6 +29,7 @@ return [
     CmsServiceProvider::class,
     CommunicationsServiceProvider::class,
     CustomersServiceProvider::class,
+    DashboardServiceProvider::class,
     PaymentsServiceProvider::class,
     PromotionsServiceProvider::class,
     SettingsServiceProvider::class,

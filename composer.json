@@ -42,6 +42,7 @@
             "Modules\\Cms\\": "modules/Cms/src/",
             "Modules\\Communications\\": "modules/Communications/src/",
             "Modules\\Customers\\": "modules/Customers/src/",
+            "Modules\\Dashboard\\": "modules/Dashboard/src/",
             "Modules\\Payments\\": "modules/Payments/src/",
             "Modules\\Promotions\\": "modules/Promotions/src/",
             "Modules\\Settings\\": "modules/Settings/src/",

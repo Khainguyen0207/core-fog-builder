@@ -3,11 +3,11 @@
 @section('title', 'Analytics')
 
 @section('content')
-    @include('admin.pages.dashboard.components.kpi-row')
+    @include('dashboard::admin.pages.dashboard.components.kpi-row')
 
-    @include('admin.pages.dashboard.components.revenue-services-row')
+    @include('dashboard::admin.pages.dashboard.components.revenue-services-row')
 
-    @include('admin.pages.dashboard.components.activities-payments-row')
+    @include('dashboard::admin.pages.dashboard.components.activities-payments-row')
 @endsection
 
 @push('scripts')
