@@ -25,7 +25,7 @@ class UserTable extends Table
             ->setNameTable('Users')
             ->setRoute('admin.users.index')
             ->hasFilter()
-            ->usingQuery(User::query()->with('customer')->whereNot('id', Auth::id()))
+            ->usingQuery(User::query()->with('customer')->whereNot('users.id', Auth::id()))
             ->addColumns([
                 Column::make('id')->setLabel('#'),
                 Column::make('email')->setLabel('Email'),
