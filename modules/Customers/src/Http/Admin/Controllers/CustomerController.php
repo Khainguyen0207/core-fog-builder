@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Customers\Http\Admin\Controllers;
 
 use App\Actions\CreateCustomerAction;
-use App\Admin\Forms\CustomerForm;
-use App\Admin\Tables\CustomerTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CustomerRequest;
 use App\Models\Customer;
+use Modules\Customers\Admin\Forms\CustomerForm;
+use Modules\Customers\Admin\Tables\CustomerTable;
+use Modules\Customers\Http\Requests\CustomerRequest;
 
 class CustomerController extends Controller
 {

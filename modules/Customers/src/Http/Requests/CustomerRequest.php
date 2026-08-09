@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace Modules\Customers\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -11,7 +11,7 @@ class CustomerRequest extends FormRequest
     {
         $userId = $this->route('customer');
 
-        $rules =  [
+        $rules = [
             'user_id' => ['nullable', 'exists:users,id'],
             'name' => ['required', 'string', 'max:255'],
             'phone' => [
@@ -28,12 +28,12 @@ class CustomerRequest extends FormRequest
             'total_spent' => [
                 'required',
                 'min:0',
-                'regex:/^\d{1,16}(\.\d+)?$/'
+                'regex:/^\d{1,16}(\.\d+)?$/',
             ],
             'note' => ['nullable', 'string'],
         ];
 
-        if ($this->method() === "POST") {
+        if ($this->method() === 'POST') {
             $rules['email'] = 'required|email|unique:users,email';
             $rules['password'] = 'required|min:6|confirmed';
         }

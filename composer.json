@@ -38,6 +38,7 @@
             "App\\": "app/",
             "Modules\\AdminUi\\": "modules/AdminUi/src/",
             "Modules\\Catalog\\": "modules/Catalog/src/",
+            "Modules\\Customers\\": "modules/Customers/src/",
             "Modules\\Users\\": "modules/Users/src/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"

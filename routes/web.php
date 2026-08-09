@@ -11,12 +11,10 @@ Route::group([
     Route::get('/', fn() => redirect()->route('admin.dashboard.index'));
 
     Route::resource('dashboard', 'DashboardController');
-    Route::resource('customers', 'CustomerController');
 
     Route::resource('coupons', 'CouponController');
     Route::resource('coupon-applicables', 'CouponApplicableController');
     Route::get('coupon-redemptions', [\App\Http\Controllers\Admin\CouponRedemptionController::class, 'index'])->name('coupon-redemptions.index');
-    Route::resource('membership-settings', 'MembershipSettingController');
     Route::resource('bookings', 'BookingController');
 
     Route::post('bookings/export', 'BookingController@export')->name('bookings.export');

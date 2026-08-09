@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace Modules\Customers\Http\Requests;
 
 use App\Enums\BasicStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;

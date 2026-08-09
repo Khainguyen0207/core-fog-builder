@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Modules\Users;
 
-use App\Admin\Tables\CustomerTable;
 use App\Enums\UserGroupRoleEnum;
 use App\Http\Middleware\IpManagerMiddleware;
 use App\Models\User;
@@ -11,6 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Modules\AdminUi\Http\Controllers\DataTableController;
+use Modules\Customers\Admin\Tables\CustomerTable;
 use Modules\Users\Admin\Tables\UserTable;
 use Modules\Users\Http\Admin\Controllers\UserController;
 use Tests\TestCase;

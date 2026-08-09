@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Customers\Http\Admin\Controllers;
 
-use App\Admin\Forms\MembershipSettingForm;
-use App\Admin\Tables\MembershipSettingTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\MembershipSettingRequest;
 use App\Models\MembershipSetting;
+use Modules\Customers\Admin\Forms\MembershipSettingForm;
+use Modules\Customers\Admin\Tables\MembershipSettingTable;
+use Modules\Customers\Http\Requests\MembershipSettingRequest;
 
 class MembershipSettingController extends Controller
 {
