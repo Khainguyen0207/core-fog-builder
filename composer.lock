@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8dff08148bf3a565c2acd040c20a2ebf",
+    "content-hash": "f932c4ce029294e4655ad14bd22a1106",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -809,7 +809,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/AdminUi",
-                "reference": "7aaa388412824ca909a206001da67e3d980af1ff"
+                "reference": "30bc98834061becf06b22070dfb1d919b5c5cb1d"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -844,7 +844,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Catalog",
-                "reference": "a1e5dc67ee74f1637a306312035712d8b9330b14"
+                "reference": "4cb94725b2f3bb07f1782d04156a23eb5b5e9d60"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -880,7 +880,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Customers",
-                "reference": "19d8f7a8a6ce57545907643822f253958ba79151"
+                "reference": "30768cc2e2fe7e60dcc51916652c4f5f14bc7ed6"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -911,12 +911,48 @@
             }
         },
         {
+            "name": "figure-admin/payments",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Payments",
+                "reference": "485e8accd9676c0f6c04c76fdc184a11a83b38f1"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Payments\\Providers\\PaymentsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Payments\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Payments administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "figure-admin/promotions",
             "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "modules/Promotions",
-                "reference": "5e29d5f488dc2a28b872af64c75544cf57285182"
+                "reference": "1a4bef7a2f9483a0c75ce3444a1bcda4b58372a4"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -952,7 +988,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Users",
-                "reference": "501e694d0e27eeaec658b80786e9fc6fd4cdd3c0"
+                "reference": "3e7ff6c07b511e484bce51a70b375773ed6c9b38"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -988,7 +1024,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Workforce",
-                "reference": "5f7bb061497458a920587fda257c3794fa4d5679"
+                "reference": "64c4cb785724f8865d90e5bfdb974b34eee95467"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -10723,6 +10759,7 @@
         "figure-admin/admin-ui": 20,
         "figure-admin/catalog": 20,
         "figure-admin/customers": 20,
+        "figure-admin/payments": 20,
         "figure-admin/promotions": 20,
         "figure-admin/users": 20,
         "figure-admin/workforce": 20
