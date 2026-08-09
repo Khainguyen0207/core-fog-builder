@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a55791533b2e49791c4da22404e85eb3",
+    "content-hash": "2d77c22a12afb7a84001971f3baaee84",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -804,50 +804,16 @@
             "time": "2024-11-21T13:46:39+00:00"
         },
         {
-            "name": "figure-admin/admin-ui",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "modules/AdminUi",
-                "reference": "2478e0efe246aec9fbeca8db525814cc25de7cf0"
-            },
-            "require": {
-                "figure-admin/host": "^1.0",
-                "laravel/framework": "^12.0",
-                "php": "^8.2"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Modules\\AdminUi\\Providers\\AdminUiServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Modules\\AdminUi\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Shared admin UI integration for the Figure admin application.",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
             "name": "figure-admin/auth",
             "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "modules/Auth",
-                "reference": "60a2c190bd32310cee1929c657ca2c230b9fc933"
+                "reference": "a583e4f008a20b750851de02038ad72815b4f328"
             },
             "require": {
                 "figure-admin/host": "^1.0",
+                "figure-admin/shared": "dev-main",
                 "laravel/framework": "^12.0",
                 "php": "^8.2"
             },
@@ -879,12 +845,12 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Booking",
-                "reference": "a3e6fe2dadda7ce3ec4d68a03ce0ec99abde5d25"
+                "reference": "a8052fc78bd7cc8dd2caa646c97734be6fa38b96"
             },
             "require": {
                 "barryvdh/laravel-dompdf": "^3.1",
-                "figure-admin/admin-ui": "dev-main",
                 "figure-admin/host": "^1.0",
+                "figure-admin/shared": "dev-main",
                 "laravel/framework": "^12.0",
                 "php": "^8.2"
             },
@@ -916,11 +882,11 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Catalog",
-                "reference": "d5082f81b43a9f8274a542807ba1b9462a2f6401"
+                "reference": "4e6d6c9466b2eec04f1e317eaa0802aa1361e58d"
             },
             "require": {
-                "figure-admin/admin-ui": "dev-main",
                 "figure-admin/host": "^1.0",
+                "figure-admin/shared": "dev-main",
                 "laravel/framework": "^12.0",
                 "php": "^8.2"
             },
@@ -952,11 +918,11 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Cms",
-                "reference": "b510602d86527b0590230035d4338f313b08de17"
+                "reference": "e1fe2742862851891e04c014eb68a43a84c5575c"
             },
             "require": {
-                "figure-admin/admin-ui": "dev-main",
                 "figure-admin/host": "^1.0",
+                "figure-admin/shared": "dev-main",
                 "laravel/framework": "^12.0",
                 "php": "^8.2"
             },
@@ -988,11 +954,11 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Communications",
-                "reference": "a19ef0d567edff12bfcc86b569e86c77c5aac2a6"
+                "reference": "10e29d7461106c60284b3ca65bb004997d6910a1"
             },
             "require": {
-                "figure-admin/admin-ui": "dev-main",
                 "figure-admin/host": "^1.0",
+                "figure-admin/shared": "dev-main",
                 "irazasyed/telegram-bot-sdk": "^3.15",
                 "laravel/framework": "^12.0",
                 "php": "^8.2"
@@ -1025,11 +991,11 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Customers",
-                "reference": "c7f64b0d0af625d0db0877d7550f0c6bbb994cdc"
+                "reference": "f5f485fb8565440f5790560c2bd955857a78f5ae"
             },
             "require": {
-                "figure-admin/admin-ui": "dev-main",
                 "figure-admin/host": "^1.0",
+                "figure-admin/shared": "dev-main",
                 "laravel/framework": "^12.0",
                 "php": "^8.2"
             },
@@ -1061,10 +1027,11 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Dashboard",
-                "reference": "cd780a77c202ad23ecb6d0a26da2ef82219c3bb6"
+                "reference": "982a4a815f0df1dcb3689486b8101f09a33780bf"
             },
             "require": {
                 "figure-admin/host": "^1.0",
+                "figure-admin/shared": "dev-main",
                 "laravel/framework": "^12.0",
                 "nesbot/carbon": "^3.0",
                 "php": "^8.2"
@@ -1097,11 +1064,11 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Payments",
-                "reference": "59fce2baafbc2372561a7645eb290aaa709e5c32"
+                "reference": "6aea8c39959dfd50af2a538e546ecd0817ef1365"
             },
             "require": {
-                "figure-admin/admin-ui": "dev-main",
                 "figure-admin/host": "^1.0",
+                "figure-admin/shared": "dev-main",
                 "laravel/framework": "^12.0",
                 "php": "^8.2"
             },
@@ -1133,11 +1100,11 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Promotions",
-                "reference": "bfc377bf3be37bb512631601cca960f1032fe097"
+                "reference": "4820d5dc922fc722ad41b8aa4a59273374f1cf46"
             },
             "require": {
-                "figure-admin/admin-ui": "dev-main",
                 "figure-admin/host": "^1.0",
+                "figure-admin/shared": "dev-main",
                 "laravel/framework": "^12.0",
                 "php": "^8.2"
             },
@@ -1169,11 +1136,11 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Settings",
-                "reference": "50e1eedc2c5b97e7976394c5259e6baf583245f0"
+                "reference": "2d9fda476e0e40db30cc5beb0ea7772ea02b6019"
             },
             "require": {
-                "figure-admin/admin-ui": "dev-main",
                 "figure-admin/host": "^1.0",
+                "figure-admin/shared": "dev-main",
                 "laravel/framework": "^12.0",
                 "nesbot/carbon": "^3.0",
                 "php": "^8.2"
@@ -1201,16 +1168,51 @@
             }
         },
         {
+            "name": "figure-admin/shared",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Shared",
+                "reference": "c7b6136391fda4cb9b53f5e2ce2695033f4a0127"
+            },
+            "require": {
+                "laravel/framework": "^12.0",
+                "php": "^8.2",
+                "yajra/laravel-datatables-oracle": "^12.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Shared\\Providers\\SharedServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Shared\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Canonical shared form and table core for Figure Admin packages.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "figure-admin/users",
             "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "modules/Users",
-                "reference": "e5d511b7729c3282535befaf9ddc17d82848f93b"
+                "reference": "b781af9a3e6820b95b3bfa6ca358a0a119f48854"
             },
             "require": {
-                "figure-admin/admin-ui": "dev-main",
                 "figure-admin/host": "^1.0",
+                "figure-admin/shared": "dev-main",
                 "laravel/framework": "^12.0",
                 "php": "^8.2"
             },
@@ -1242,11 +1244,11 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Workforce",
-                "reference": "007d17a646e1b0583164ebb2eb01b7c42a06642c"
+                "reference": "812c53e8a35970381f98ca66f3dc294e0f881ebe"
             },
             "require": {
-                "figure-admin/admin-ui": "dev-main",
                 "figure-admin/host": "^1.0",
+                "figure-admin/shared": "dev-main",
                 "laravel/framework": "^12.0",
                 "php": "^8.2"
             },
@@ -10974,7 +10976,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "figure-admin/admin-ui": 20,
         "figure-admin/auth": 20,
         "figure-admin/booking": 20,
         "figure-admin/catalog": 20,
@@ -10985,6 +10986,7 @@
         "figure-admin/payments": 20,
         "figure-admin/promotions": 20,
         "figure-admin/settings": 20,
+        "figure-admin/shared": 20,
         "figure-admin/users": 20,
         "figure-admin/workforce": 20
     },
