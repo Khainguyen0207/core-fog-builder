@@ -27,10 +27,6 @@ Route::group([
     Route::resource('tags', 'TagController');
     Route::resource('comments', 'CommentController');
 
-    Route::get('transactions', 'TransactionController@index')->name('transactions.index');
-    Route::get('transactions/{transaction}', 'TransactionController@show')->name('transactions.show');
-    Route::put('transactions/{transaction}', 'TransactionController@update')->name('transactions.update');
-
     Route::group([
         'prefix' => 'settings',
         'as' => 'settings.',

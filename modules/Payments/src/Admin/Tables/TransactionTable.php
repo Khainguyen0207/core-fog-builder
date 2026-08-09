@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Admin\Tables;
+namespace Modules\Payments\Admin\Tables;
 
 use App\Enums\TransactionStatusEnum;
 use App\Forms\Fields\InputField;
 use App\Forms\Fields\SelectField;
 use App\Models\Transaction;
-use App\Table\BaseTable;
 use App\Table\Columns\Column;
 use App\Table\Columns\FormatColumn;
 use App\Table\Columns\IDColumn;
 use App\Table\Operations\BasicOperation;
+use Modules\AdminUi\Tables\ModuleTable;
 
-class TransactionTable extends BaseTable
+class TransactionTable extends ModuleTable
 {
+    protected string $moduleView = 'payments::tables.index';
+
     public function setup(): static
     {
         parent::setup();
@@ -36,7 +38,7 @@ class TransactionTable extends BaseTable
                     ->getValueUsing(function (FormatColumn $column) {
                         $item = $column->getItem();
 
-                        return number_format($item->amount) . ' ' . $item->currency;
+                        return number_format($item->amount).' '.$item->currency;
                     }),
                 FormatColumn::make('status')
                     ->setLabel('Status')

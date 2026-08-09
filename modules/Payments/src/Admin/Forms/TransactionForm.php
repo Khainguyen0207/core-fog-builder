@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Forms;
+namespace Modules\Payments\Admin\Forms;
 
 use App\Enums\TransactionStatusEnum;
 use App\Forms\BaseForm;
@@ -18,7 +18,7 @@ class TransactionForm extends BaseForm
         return $this
             ->model(Transaction::class)
             ->setTitle('Transaction')
-            ->setView('admin.forms.transaction.details')
+            ->setView('payments::forms.transaction.details')
             ->add(
                 'id',
                 InputField::class,

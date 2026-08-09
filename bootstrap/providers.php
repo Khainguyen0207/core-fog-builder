@@ -6,6 +6,7 @@ use App\Providers\TableServiceProvider;
 use Modules\AdminUi\Providers\AdminUiServiceProvider;
 use Modules\Catalog\Providers\CatalogServiceProvider;
 use Modules\Customers\Providers\CustomersServiceProvider;
+use Modules\Payments\Providers\PaymentsServiceProvider;
 use Modules\Promotions\Providers\PromotionsServiceProvider;
 use Modules\Users\Providers\UsersServiceProvider;
 use Modules\Workforce\Providers\WorkforceServiceProvider;
@@ -20,6 +21,7 @@ return [
     AdminUiServiceProvider::class,
     CatalogServiceProvider::class,
     CustomersServiceProvider::class,
+    PaymentsServiceProvider::class,
     PromotionsServiceProvider::class,
     UsersServiceProvider::class,
     WorkforceServiceProvider::class,

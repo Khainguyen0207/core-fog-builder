@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Payments\Http\Admin\Controllers;
 
-use App\Admin\Forms\TransactionForm;
-use App\Admin\Tables\TransactionTable;
 use App\Enums\TransactionStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Modules\Payments\Admin\Forms\TransactionForm;
+use Modules\Payments\Admin\Tables\TransactionTable;
 
 class TransactionController extends Controller
 {
