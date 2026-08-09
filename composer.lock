@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3c879d5fdcad8dd11bdfd88f5bee219",
+    "content-hash": "d8bca022b851d8320a733af535b5cb81",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -809,7 +809,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/AdminUi",
-                "reference": "e1be753d6830b2a52ac84af08557cc9ab5fdd1cd"
+                "reference": "f6e3a3c94edd9dda8da558436d147ed8bf26e707"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -844,7 +844,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Booking",
-                "reference": "4e3926eaf442ee9c309e2ae0a71076dcba268681"
+                "reference": "f271244ee3da6d77f8fc45804cc7b26f0be7cda7"
             },
             "require": {
                 "barryvdh/laravel-dompdf": "^3.1",
@@ -881,7 +881,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Catalog",
-                "reference": "5aa3bc51892ca27661a2999348686abaa0bb1538"
+                "reference": "0eff61abd491870eca5acfc58831e5cd49d11169"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -917,7 +917,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Cms",
-                "reference": "bd36eecd985a30d319da103dfc90929c2d36ddd3"
+                "reference": "716db61c5ef1294535ae7edc53d31c9336973901"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -948,12 +948,49 @@
             }
         },
         {
+            "name": "figure-admin/communications",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Communications",
+                "reference": "864d7e8be25157227d37f46c029bbf82839e4fdb"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "irazasyed/telegram-bot-sdk": "^3.15",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Communications\\Providers\\CommunicationsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Communications\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Communications administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "figure-admin/customers",
             "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "modules/Customers",
-                "reference": "b5f21d488a41c6809547f52ec03889efb781f13c"
+                "reference": "384ad2216dbb4629470ac55ccbbb065c68829497"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -989,7 +1026,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Payments",
-                "reference": "5156fe2bbfde0bf5fadc7b88714bbde0db8e4675"
+                "reference": "b13169babadb38b2a1c3f7a3b3969667adf767fd"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1025,7 +1062,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Promotions",
-                "reference": "53bfa6dc3104f293616a87504fa8ec6f7fa09f3c"
+                "reference": "312da4781bf304168de83916795f0da352c5713d"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1061,7 +1098,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Users",
-                "reference": "ab8b40740956cb9fd7c0f7b75bb31b5acf96e0d3"
+                "reference": "bcf0a1841a8ba4efd4b597f9c3b13320962226a1"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -1097,7 +1134,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Workforce",
-                "reference": "7e067e7023c5862b60279ef289f09ad7ae38a3fe"
+                "reference": "36825dfe03f31e8d7fce1e8bef0fa79cb05d3ab7"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -10833,6 +10870,7 @@
         "figure-admin/booking": 20,
         "figure-admin/catalog": 20,
         "figure-admin/cms": 20,
+        "figure-admin/communications": 20,
         "figure-admin/customers": 20,
         "figure-admin/payments": 20,
         "figure-admin/promotions": 20,
