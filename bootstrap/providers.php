@@ -7,7 +7,6 @@ use Modules\Auth\Providers\AuthServiceProvider;
 use Modules\Booking\Providers\BookingServiceProvider;
 use Modules\Cms\Providers\CmsServiceProvider;
 use Modules\Communications\Providers\CommunicationsServiceProvider;
-use Modules\Customers\Providers\CustomersServiceProvider;
 use Modules\Dashboard\Providers\DashboardServiceProvider;
 use Modules\Payments\Providers\PaymentsServiceProvider;
 use Modules\Promotions\Providers\PromotionsServiceProvider;
@@ -25,7 +24,6 @@ return [
     BookingServiceProvider::class,
     CmsServiceProvider::class,
     CommunicationsServiceProvider::class,
-    CustomersServiceProvider::class,
     DashboardServiceProvider::class,
     PaymentsServiceProvider::class,
     PromotionsServiceProvider::class,
