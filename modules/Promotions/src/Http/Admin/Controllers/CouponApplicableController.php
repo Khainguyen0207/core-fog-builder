@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Promotions\Http\Admin\Controllers;
 
-use App\Admin\Forms\CouponApplicableForm;
-use App\Admin\Tables\CouponApplicableTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CouponApplicableRequest;
 use App\Models\CouponApplicable;
+use Modules\Promotions\Admin\Forms\CouponApplicableForm;
+use Modules\Promotions\Admin\Tables\CouponApplicableTable;
+use Modules\Promotions\Http\Requests\CouponApplicableRequest;
 
 class CouponApplicableController extends Controller
 {

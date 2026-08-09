@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Admin\Forms;
+namespace Modules\Promotions\Admin\Forms;
 
 use App\Enums\BasicStatusEnum;
-use App\Enums\CouponStatusEnum;
 use App\Enums\CouponTypeEnum;
 use App\Forms\BaseForm;
 use App\Forms\Fields\InputField;
@@ -18,6 +17,7 @@ class CouponForm extends BaseForm
 
         return $this
             ->model(Coupon::class)
+            ->setTemplate('promotions::forms.base')
             ->setTitle('Coupon')
             ->add(
                 'code',

@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Admin\Tables;
+namespace Modules\Promotions\Admin\Tables;
 
 use App\Enums\CouponRedemptionStatusEnum;
-use App\Forms\Fields\InputField;
 use App\Forms\Fields\SelectField;
-use App\Models\Coupon;
 use App\Models\CouponRedemption;
-use App\Table\BaseTable;
 use App\Table\Columns\Column;
 use App\Table\Columns\FormatColumn;
 use App\Table\Columns\IDColumn;
+use Modules\AdminUi\Tables\ModuleTable;
 
-class CouponRedemptionTable extends BaseTable
+class CouponRedemptionTable extends ModuleTable
 {
+    protected string $moduleView = 'promotions::tables.index';
+
     public function setup(): static
     {
         parent::setup();

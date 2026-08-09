@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Forms;
+namespace Modules\Promotions\Admin\Forms;
 
 use App\Enums\CouponRedemptionStatusEnum;
 use App\Forms\BaseForm;
@@ -18,6 +18,7 @@ class CouponRedemptionForm extends BaseForm
 
         return $this
             ->model(CouponRedemption::class)
+            ->setTemplate('promotions::forms.base')
             ->setTitle('Coupon Redemption')
             ->add(
                 'coupon_id',

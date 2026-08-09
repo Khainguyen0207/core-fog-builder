@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace Modules\Promotions\Http\Requests;
 
 use App\Enums\CouponApplicableTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;

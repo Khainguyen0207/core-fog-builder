@@ -39,6 +39,7 @@
             "Modules\\AdminUi\\": "modules/AdminUi/src/",
             "Modules\\Catalog\\": "modules/Catalog/src/",
             "Modules\\Customers\\": "modules/Customers/src/",
+            "Modules\\Promotions\\": "modules/Promotions/src/",
             "Modules\\Users\\": "modules/Users/src/",
             "Modules\\Workforce\\": "modules/Workforce/src/",
             "Database\\Factories\\": "database/factories/",

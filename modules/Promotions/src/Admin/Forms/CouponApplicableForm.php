@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Admin\Forms;
+namespace Modules\Promotions\Admin\Forms;
 
 use App\Enums\CouponApplicableTypeEnum;
 use App\Forms\BaseForm;
-use App\Forms\Fields\InputField;
 use App\Forms\Fields\SelectField;
 use App\Models\Coupon;
 use App\Models\CouponApplicable;
@@ -17,6 +16,7 @@ class CouponApplicableForm extends BaseForm
 
         return $this
             ->model(CouponApplicable::class)
+            ->setTemplate('promotions::forms.base')
             ->setTitle('Coupon Applicable')
             ->add(
                 'coupon_id',

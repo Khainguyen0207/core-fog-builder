@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Admin\Tables;
+namespace Modules\Promotions\Admin\Tables;
 
 use App\Enums\CouponApplicableTypeEnum;
-use App\Forms\Fields\InputField;
 use App\Forms\Fields\SelectField;
 use App\Models\Coupon;
 use App\Models\CouponApplicable;
-use App\Table\BaseTable;
-use App\Table\Columns\Column;
 use App\Table\Columns\FormatColumn;
 use App\Table\Columns\IDColumn;
 use App\Table\Operations\DeleteOperation;
 use App\Table\Operations\EditOperation;
+use Modules\AdminUi\Tables\ModuleTable;
 
-class CouponApplicableTable extends BaseTable
+class CouponApplicableTable extends ModuleTable
 {
+    protected string $moduleView = 'promotions::tables.index';
+
     public function setup(): static
     {
         parent::setup();
@@ -39,6 +39,7 @@ class CouponApplicableTable extends BaseTable
                     ->setLabel('Applicable Type')
                     ->getValueUsing(function (FormatColumn $column) {
                         $item = $column->getItem();
+
                         return $item->applicable_type->toHtml();
                     }),
                 FormatColumn::make('updated_at')

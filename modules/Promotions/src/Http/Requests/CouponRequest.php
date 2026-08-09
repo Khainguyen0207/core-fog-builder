@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace Modules\Promotions\Http\Requests;
 
 use App\Enums\BasicStatusEnum;
 use App\Enums\CouponTypeEnum;

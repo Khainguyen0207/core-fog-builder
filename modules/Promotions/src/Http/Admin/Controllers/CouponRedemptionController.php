@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Promotions\Http\Admin\Controllers;
 
-use App\Admin\Tables\CouponRedemptionTable;
 use App\Http\Controllers\Controller;
+use Modules\Promotions\Admin\Tables\CouponRedemptionTable;
 
 class CouponRedemptionController extends Controller
 {

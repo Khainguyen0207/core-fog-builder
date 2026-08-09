@@ -8,13 +8,10 @@ Route::group([
     'namespace' => 'App\Http\Controllers\Admin',
     'middleware' => ['auth', 'ip.manager'],
 ], function () {
-    Route::get('/', fn() => redirect()->route('admin.dashboard.index'));
+    Route::get('/', fn () => redirect()->route('admin.dashboard.index'));
 
     Route::resource('dashboard', 'DashboardController');
 
-    Route::resource('coupons', 'CouponController');
-    Route::resource('coupon-applicables', 'CouponApplicableController');
-    Route::get('coupon-redemptions', [\App\Http\Controllers\Admin\CouponRedemptionController::class, 'index'])->name('coupon-redemptions.index');
     Route::resource('bookings', 'BookingController');
 
     Route::post('bookings/export', 'BookingController@export')->name('bookings.export');
