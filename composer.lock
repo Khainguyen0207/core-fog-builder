@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53d512a574046fa0707e4f1d96c9f171",
+    "content-hash": "a55791533b2e49791c4da22404e85eb3",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -802,6 +802,475 @@
                 "source": "https://github.com/FakerPHP/Faker/tree/v1.24.1"
             },
             "time": "2024-11-21T13:46:39+00:00"
+        },
+        {
+            "name": "figure-admin/admin-ui",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/AdminUi",
+                "reference": "2478e0efe246aec9fbeca8db525814cc25de7cf0"
+            },
+            "require": {
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\AdminUi\\Providers\\AdminUiServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\AdminUi\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Shared admin UI integration for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "figure-admin/auth",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Auth",
+                "reference": "60a2c190bd32310cee1929c657ca2c230b9fc933"
+            },
+            "require": {
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Auth\\Providers\\AuthServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Auth\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Authentication administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "figure-admin/booking",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Booking",
+                "reference": "a3e6fe2dadda7ce3ec4d68a03ce0ec99abde5d25"
+            },
+            "require": {
+                "barryvdh/laravel-dompdf": "^3.1",
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Booking\\Providers\\BookingServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Booking\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Booking administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "figure-admin/catalog",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Catalog",
+                "reference": "d5082f81b43a9f8274a542807ba1b9462a2f6401"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Catalog\\Providers\\CatalogServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Catalog\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Catalog administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "figure-admin/cms",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Cms",
+                "reference": "b510602d86527b0590230035d4338f313b08de17"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Cms\\Providers\\CmsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Cms\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Content administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "figure-admin/communications",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Communications",
+                "reference": "a19ef0d567edff12bfcc86b569e86c77c5aac2a6"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "irazasyed/telegram-bot-sdk": "^3.15",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Communications\\Providers\\CommunicationsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Communications\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Communications administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "figure-admin/customers",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Customers",
+                "reference": "c7f64b0d0af625d0db0877d7550f0c6bbb994cdc"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Customers\\Providers\\CustomersServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Customers\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Customer administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "figure-admin/dashboard",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Dashboard",
+                "reference": "cd780a77c202ad23ecb6d0a26da2ef82219c3bb6"
+            },
+            "require": {
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "nesbot/carbon": "^3.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Dashboard\\Providers\\DashboardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Dashboard\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Dashboard administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "figure-admin/payments",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Payments",
+                "reference": "59fce2baafbc2372561a7645eb290aaa709e5c32"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Payments\\Providers\\PaymentsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Payments\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Payments administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "figure-admin/promotions",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Promotions",
+                "reference": "bfc377bf3be37bb512631601cca960f1032fe097"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Promotions\\Providers\\PromotionsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Promotions\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Promotions administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "figure-admin/settings",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Settings",
+                "reference": "50e1eedc2c5b97e7976394c5259e6baf583245f0"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "nesbot/carbon": "^3.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Settings\\Providers\\SettingsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Settings\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Settings administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "figure-admin/users",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Users",
+                "reference": "e5d511b7729c3282535befaf9ddc17d82848f93b"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Users\\Providers\\UsersServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Users\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "User administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "figure-admin/workforce",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Workforce",
+                "reference": "007d17a646e1b0583164ebb2eb01b7c42a06642c"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Workforce\\Providers\\WorkforceServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Workforce\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Workforce administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "firebase/php-jwt",
@@ -10504,12 +10973,26 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "figure-admin/admin-ui": 20,
+        "figure-admin/auth": 20,
+        "figure-admin/booking": 20,
+        "figure-admin/catalog": 20,
+        "figure-admin/cms": 20,
+        "figure-admin/communications": 20,
+        "figure-admin/customers": 20,
+        "figure-admin/dashboard": 20,
+        "figure-admin/payments": 20,
+        "figure-admin/promotions": 20,
+        "figure-admin/settings": 20,
+        "figure-admin/users": 20,
+        "figure-admin/workforce": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
 }

@@ -1,0 +1,25 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "figure-admin/dashboard",
+    "description": "Dashboard administration package for the Figure admin application.",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "figure-admin/host": "^1.0",
+        "laravel/framework": "^12.0",
+        "nesbot/carbon": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Dashboard\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Dashboard\\Providers\\DashboardServiceProvider"
+            ]
+        }
+    }
+}

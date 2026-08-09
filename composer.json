@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "figure-admin/application",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
     "keywords": [
@@ -8,10 +8,48 @@
         "framework"
     ],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "modules/*",
+            "options": {
+                "symlink": true,
+                "reference": "config",
+                "versions": {
+                    "figure-admin/admin-ui": "dev-main",
+                    "figure-admin/auth": "dev-main",
+                    "figure-admin/booking": "dev-main",
+                    "figure-admin/catalog": "dev-main",
+                    "figure-admin/cms": "dev-main",
+                    "figure-admin/communications": "dev-main",
+                    "figure-admin/customers": "dev-main",
+                    "figure-admin/dashboard": "dev-main",
+                    "figure-admin/payments": "dev-main",
+                    "figure-admin/promotions": "dev-main",
+                    "figure-admin/settings": "dev-main",
+                    "figure-admin/users": "dev-main",
+                    "figure-admin/workforce": "dev-main"
+                }
+            }
+        }
+    ],
     "require": {
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1",
         "fakerphp/faker": "^1.23",
+        "figure-admin/admin-ui": "dev-main",
+        "figure-admin/auth": "dev-main",
+        "figure-admin/booking": "dev-main",
+        "figure-admin/catalog": "dev-main",
+        "figure-admin/cms": "dev-main",
+        "figure-admin/communications": "dev-main",
+        "figure-admin/customers": "dev-main",
+        "figure-admin/dashboard": "dev-main",
+        "figure-admin/payments": "dev-main",
+        "figure-admin/promotions": "dev-main",
+        "figure-admin/settings": "dev-main",
+        "figure-admin/users": "dev-main",
+        "figure-admin/workforce": "dev-main",
         "google/apiclient": "^2.19",
         "irazasyed/telegram-bot-sdk": "^3.15",
         "laravel/framework": "^12.0",
@@ -22,6 +60,9 @@
         "sepay/sepay-pg": "^1.0",
         "torann/geoip": "^3.0",
         "yajra/laravel-datatables-oracle": "^12.0"
+    },
+    "provide": {
+        "figure-admin/host": "1.0.0"
     },
     "require-dev": {
         "fruitcake/laravel-debugbar": "^3.16",
