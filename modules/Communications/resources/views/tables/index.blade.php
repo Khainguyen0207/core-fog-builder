@@ -1,1 +1,1 @@
-@include('admin.components.tables.base-table')
+@include('shared::tables.page')

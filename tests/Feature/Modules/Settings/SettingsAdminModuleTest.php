@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Modules\Settings;
 
-use App\Table\Configs\TableConfig;
 use Illuminate\Support\Facades\Route;
 use Modules\Settings\Admin\Tables\SettingTable;
 use Modules\Settings\Http\Admin\Controllers\SettingController;
+use Modules\Shared\Tables\Registry\TableRegistry;
 use Modules\Workforce\Http\Admin\Controllers\StaffSettingController;
 use Tests\TestCase;
 
@@ -35,9 +35,9 @@ class SettingsAdminModuleTest extends TestCase
 
     public function test_setting_table_and_views_are_registered(): void
     {
-        $this->assertSame(SettingTable::class, app(TableConfig::class)->resolve('base table'));
+        $this->assertSame(SettingTable::class, app(TableRegistry::class)->resolve('base table'));
         $this->assertTrue(view()->exists('settings::forms.base'));
-        $this->assertTrue(view()->exists('settings::admin.pages.settings.index'));
+        $this->assertTrue(view()->exists('shared::tables.page'));
         $this->assertTrue(view()->exists('settings::admin.pages.settings.card'));
     }
 

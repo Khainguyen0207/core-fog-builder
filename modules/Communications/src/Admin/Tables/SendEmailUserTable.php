@@ -2,15 +2,13 @@
 
 namespace Modules\Communications\Admin\Tables;
 
-use App\Forms\Fields\InputField;
 use App\Models\Customer;
-use App\Table\Columns\Column;
-use Modules\AdminUi\Tables\ModuleTable;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Tables\Columns\Column;
+use Modules\Shared\Tables\Table;
 
-class SendEmailUserTable extends ModuleTable
+class SendEmailUserTable extends Table
 {
-    protected string $moduleView = 'communications::tables.index';
-
     public function setup(): static
     {
         parent::setup();

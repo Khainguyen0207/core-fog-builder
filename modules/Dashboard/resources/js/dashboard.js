@@ -1,7 +1,15 @@
-document.addEventListener('DOMContentLoaded', function () {
+import ApexCharts from 'apexcharts';
+
+function initializeDashboard() {
     initBookingsWeeklyChart();
     initRevenueWeeklyChart();
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeDashboard, { once: true });
+} else {
+    initializeDashboard();
+}
 
 function initBookingsWeeklyChart() {
     const chartEl = document.getElementById('bookingsWeeklyChart');

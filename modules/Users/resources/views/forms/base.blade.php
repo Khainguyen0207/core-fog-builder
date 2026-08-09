@@ -1,1 +1,1 @@
-@include('admin.components.forms.base')
+@include('shared::forms.page')

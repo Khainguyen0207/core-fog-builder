@@ -3,19 +3,17 @@
 namespace Modules\Booking\Admin\Tables;
 
 use App\Enums\BookingStatusEnum;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\Booking;
-use App\Table\Columns\Column;
-use App\Table\Columns\FormatColumn;
-use App\Table\Columns\IDColumn;
-use App\Table\Operations\BasicOperation;
-use Modules\AdminUi\Tables\ModuleTable;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Tables\Columns\Column;
+use Modules\Shared\Tables\Columns\FormatColumn;
+use Modules\Shared\Tables\Columns\IDColumn;
+use Modules\Shared\Tables\Operations\BasicOperation;
+use Modules\Shared\Tables\Table;
 
-class BookingTable extends ModuleTable
+class BookingTable extends Table
 {
-    protected string $moduleView = 'booking::tables.index';
-
     public function setup(): static
     {
         parent::setup();

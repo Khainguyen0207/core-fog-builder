@@ -5,15 +5,15 @@ namespace Modules\Cms\Admin\Forms;
 use App\Enums\PostPriorityLevelEnum;
 use App\Enums\PostTypeEnum;
 use App\Enums\UserGroupRoleEnum;
-use App\Forms\BaseForm;
-use App\Forms\Fields\EditorField;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\BlogCategory;
 use App\Models\Post;
 use App\Models\User;
+use Modules\Shared\Forms\Fields\EditorField;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Forms\Form;
 
-class PostForm extends BaseForm
+class PostForm extends Form
 {
     public function setup(): static
     {

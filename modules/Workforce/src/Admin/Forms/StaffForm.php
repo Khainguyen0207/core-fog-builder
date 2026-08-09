@@ -3,14 +3,14 @@
 namespace Modules\Workforce\Admin\Forms;
 
 use App\Enums\StaffLevelEnum;
-use App\Forms\BaseForm;
-use App\Forms\Fields\EditorField;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\Service;
 use App\Models\Staff;
+use Modules\Shared\Forms\Fields\EditorField;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Forms\Form;
 
-class StaffForm extends BaseForm
+class StaffForm extends Form
 {
     public function setup(): static
     {

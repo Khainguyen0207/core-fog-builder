@@ -16,7 +16,6 @@
                 "symlink": true,
                 "reference": "config",
                 "versions": {
-                    "figure-admin/admin-ui": "dev-main",
                     "figure-admin/auth": "dev-main",
                     "figure-admin/booking": "dev-main",
                     "figure-admin/catalog": "dev-main",
@@ -27,6 +26,7 @@
                     "figure-admin/payments": "dev-main",
                     "figure-admin/promotions": "dev-main",
                     "figure-admin/settings": "dev-main",
+                    "figure-admin/shared": "dev-main",
                     "figure-admin/users": "dev-main",
                     "figure-admin/workforce": "dev-main"
                 }
@@ -37,7 +37,6 @@
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1",
         "fakerphp/faker": "^1.23",
-        "figure-admin/admin-ui": "dev-main",
         "figure-admin/auth": "dev-main",
         "figure-admin/booking": "dev-main",
         "figure-admin/catalog": "dev-main",
@@ -48,6 +47,7 @@
         "figure-admin/payments": "dev-main",
         "figure-admin/promotions": "dev-main",
         "figure-admin/settings": "dev-main",
+        "figure-admin/shared": "dev-main",
         "figure-admin/users": "dev-main",
         "figure-admin/workforce": "dev-main",
         "google/apiclient": "^2.19",

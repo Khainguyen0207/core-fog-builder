@@ -3,12 +3,12 @@
 namespace Modules\Settings\Admin\Panels\Forms;
 
 use App\Facades\SettingHelper;
-use App\Forms\BaseForm;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SwitchField;
 use App\Models\Setting;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SwitchField;
+use Modules\Shared\Forms\Form;
 
-class TelegramPanelForm extends BaseForm
+class TelegramPanelForm extends Form
 {
     public function setup(): static
     {

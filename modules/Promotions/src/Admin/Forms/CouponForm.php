@@ -4,12 +4,12 @@ namespace Modules\Promotions\Admin\Forms;
 
 use App\Enums\BasicStatusEnum;
 use App\Enums\CouponTypeEnum;
-use App\Forms\BaseForm;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\Coupon;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Forms\Form;
 
-class CouponForm extends BaseForm
+class CouponForm extends Form
 {
     public function setup(): static
     {

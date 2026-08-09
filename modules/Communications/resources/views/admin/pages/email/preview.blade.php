@@ -1,9 +1,9 @@
-@extends('admin.layouts.contentLayout')
+@extends('shared::layouts.content')
 
 @section('title', 'Template Preview')
 
 @section('content')
-    <div class="email-preview-page">
+    <div class="email-preview-page" data-communications-email-preview>
         <div class="card border-0 shadow-sm preview-hero-card mb-4">
             <div class="card-body d-flex flex-column flex-lg-row justify-content-between gap-3">
                 <div>
@@ -78,51 +78,10 @@
     </div>
 @endsection
 
-@push('pricing-script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const htmlData = document.getElementById('preview-html-data');
-            const html = decodeURIComponent(htmlData?.dataset.html || '');
-            const frame = document.getElementById('template-preview-frame');
-            const shell = document.getElementById('preview-shell');
-            const hint = document.getElementById('preview-size-hint');
-            const sizeButtons = document.querySelectorAll('[data-preview-size]');
+@push('scripts')
+    @vite('modules/Communications/resources/js/email-template-preview.js')
+@endpush
 
-            const doc = frame.contentDocument || frame.contentWindow.document;
-            doc.open();
-            doc.write(html || '<p style="padding:20px">Template content is empty.</p>');
-            doc.close();
-
-            const applySize = (button) => {
-                const previewSize = button.dataset.previewSize;
-                const previewWidth = Number(button.dataset.previewWidth || 1200);
-                const previewHeight = Number(button.dataset.previewHeight || 760);
-
-                shell.classList.remove('preview-desktop', 'preview-tablet', 'preview-mobile');
-                shell.classList.add(`preview-${previewSize}`);
-                shell.style.maxWidth = `${previewWidth}px`;
-
-                frame.classList.remove('frame-desktop', 'frame-tablet', 'frame-mobile');
-                frame.classList.add(`frame-${previewSize}`);
-                frame.style.minHeight = `${previewHeight}px`;
-
-                if (hint) {
-                    hint.textContent = `Frame: ${previewWidth}px x ${previewHeight}px`;
-                }
-            };
-
-            sizeButtons.forEach((button) => {
-                button.addEventListener('click', function() {
-                    sizeButtons.forEach((btn) => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    applySize(this);
-                });
-            });
-
-            const firstActive = document.querySelector('[data-preview-size].active');
-            if (firstActive) {
-                applySize(firstActive);
-            }
-        });
-    </script>
+@push('styles')
+    @vite('modules/Communications/resources/scss/email-template-preview.scss')
 @endpush

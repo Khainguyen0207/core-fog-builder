@@ -1,0 +1,41 @@
+.menu .app-brand.demo {
+  height: 100%;
+  max-height: 150px;
+  margin-top: 12px;
+}
+
+.app-brand-logo.demo svg {
+  width: 22px;
+  height: 38px;
+}
+
+.app-brand-text.demo {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: calc(100% - 3rem);
+  font-size: 1.15rem;
+  letter-spacing: -0.5px;
+}
+
+.app-brand-logo.demo {
+  width: 100%;
+  height: 100%;
+}
+
+.app-brand-logo.demo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.layout-navbar-fixed .layout-wrapper:not(.layout-horizontal):not(.layout-without-menu) .layout-page {
+  padding-top: 74px !important;
+}
+
+.layout-navbar-fixed .layout-wrapper:not(.layout-without-menu) .layout-page {
+  padding-top: 64px !important;
+}
+
+.content-wrapper .navbar {
+  z-index: auto;
+}

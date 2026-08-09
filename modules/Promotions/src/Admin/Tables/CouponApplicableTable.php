@@ -3,19 +3,17 @@
 namespace Modules\Promotions\Admin\Tables;
 
 use App\Enums\CouponApplicableTypeEnum;
-use App\Forms\Fields\SelectField;
 use App\Models\Coupon;
 use App\Models\CouponApplicable;
-use App\Table\Columns\FormatColumn;
-use App\Table\Columns\IDColumn;
-use App\Table\Operations\DeleteOperation;
-use App\Table\Operations\EditOperation;
-use Modules\AdminUi\Tables\ModuleTable;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Tables\Columns\FormatColumn;
+use Modules\Shared\Tables\Columns\IDColumn;
+use Modules\Shared\Tables\Operations\DeleteOperation;
+use Modules\Shared\Tables\Operations\EditOperation;
+use Modules\Shared\Tables\Table;
 
-class CouponApplicableTable extends ModuleTable
+class CouponApplicableTable extends Table
 {
-    protected string $moduleView = 'promotions::tables.index';
-
     public function setup(): static
     {
         parent::setup();

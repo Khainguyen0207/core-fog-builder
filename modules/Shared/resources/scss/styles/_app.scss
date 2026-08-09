@@ -1,0 +1,174 @@
+@use 'toggle' as *;
+
+.menu-search-modal .btn-close {
+    transition: transform 160ms ease;
+}
+
+.menu-search-modal .btn-close:hover {
+    transform: translateY(-5px);
+}
+
+.menu-search-modal .menu-search-item {
+    transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.menu-search-modal .menu-search-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+[data-shared-editor] .ql-container {
+    height: auto;
+    min-height: 8rem;
+}
+
+[data-shared-editor] .ql-editor {
+    min-height: 8rem;
+}
+
+[data-shared-editor] .ql-toolbar,
+[data-shared-editor] .ql-container {
+    border-color: var(--bs-border-color);
+}
+
+.bootstrap-select > .dropdown-toggle.btn-default {
+    min-height: calc(1.53em + 0.875rem + 2px);
+    color: var(--bs-body-color);
+    background-color: #fff;
+    border: var(--bs-border-width) solid rgb(206, 209, 213);
+    box-shadow: none;
+}
+
+.bootstrap-select > .dropdown-toggle.btn-default:focus,
+.bootstrap-select > .dropdown-toggle.btn-default:hover,
+.bootstrap-select.show > .dropdown-toggle.btn-default {
+    color: var(--bs-body-color);
+    background-color: #fff;
+    border-color: var(--bs-primary);
+}
+
+.bootstrap-select > .dropdown-toggle .filter-option-inner-inner {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+[data-shared-table] {
+    min-width: 0;
+    overflow: hidden;
+}
+
+[data-shared-table] .dt-container,
+[data-shared-table] .dt-layout-table,
+[data-shared-table] .dt-layout-cell {
+    min-width: 0;
+    max-width: 100%;
+}
+
+[data-shared-table] .dt-scroll-body {
+    overscroll-behavior-x: contain;
+}
+
+[data-shared-table] .dt-scroll-head {
+    border-top: var(--bs-border-width) solid var(--bs-border-color);
+    border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+    background-color: rgba(var(--bs-secondary-rgb), 0.08);
+}
+
+[data-shared-table] table.dataTable thead th {
+    padding-block: 0.875rem;
+    border-bottom: 0;
+    background-color: rgba(var(--bs-secondary-rgb), 0.08);
+    color: var(--bs-heading-color);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    vertical-align: middle;
+}
+
+[data-shared-table] table.dataTable thead th:first-child {
+    padding-inline-start: 1.25rem;
+}
+
+[data-shared-table] table.dataTable thead th:last-child {
+    padding-inline-end: 1.25rem;
+}
+
+[data-shared-table] table.dataTable thead .dt-column-order {
+    width: 1.375rem !important;
+    color: var(--bs-secondary-color);
+}
+
+[data-shared-table] table.dataTable thead .dt-column-order::before,
+[data-shared-table] table.dataTable thead .dt-column-order::after {
+    content: '➜' !important;
+    width: 0.875rem !important;
+    height: 0.875rem !important;
+    font-size: 0.875rem !important;
+    line-height: 0.875rem !important;
+    opacity: 0.25;
+    transition: color 150ms ease, opacity 150ms ease;
+}
+
+[data-shared-table] table.dataTable thead .dt-column-order::before {
+    top: calc(50% - 0.6875rem) !important;
+    right: 0.5rem !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: rotate(-90deg);
+}
+
+[data-shared-table] table.dataTable thead .dt-column-order::after {
+    display: block !important;
+    top: calc(50% - 0.1875rem) !important;
+    right: 0 !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: rotate(90deg);
+}
+
+[data-shared-table] table.dataTable thead .dt-ordering-asc .dt-column-order::before {
+    color: var(--bs-primary);
+    opacity: 1;
+}
+
+[data-shared-table] table.dataTable thead .dt-ordering-desc .dt-column-order::after {
+    color: var(--bs-primary);
+    opacity: 1;
+}
+
+[data-shared-table] table.dataTable thead th.dt-orderable-asc:hover,
+[data-shared-table] table.dataTable thead th.dt-orderable-desc:hover {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+[data-shared-table] .dt-length {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+[data-shared-table] .dt-length label {
+    margin: 0;
+}
+
+@media (max-width: 575.98px) {
+    [data-shared-table] {
+        padding-inline: 1rem !important;
+    }
+
+    [data-shared-table] .header-action .btn {
+        margin-right: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    [data-shared-table] .dt-bottom {
+        text-align: center;
+    }
+
+    [data-shared-table] .dt-length {
+        margin-left: 0;
+    }
+}

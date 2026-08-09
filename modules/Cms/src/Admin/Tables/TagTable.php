@@ -2,18 +2,16 @@
 
 namespace Modules\Cms\Admin\Tables;
 
-use App\Forms\Fields\InputField;
 use App\Models\Tag;
-use App\Table\Columns\Column;
-use App\Table\Columns\IDColumn;
-use App\Table\Operations\DeleteOperation;
-use App\Table\Operations\EditOperation;
-use Modules\AdminUi\Tables\ModuleTable;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Tables\Columns\Column;
+use Modules\Shared\Tables\Columns\IDColumn;
+use Modules\Shared\Tables\Operations\DeleteOperation;
+use Modules\Shared\Tables\Operations\EditOperation;
+use Modules\Shared\Tables\Table;
 
-class TagTable extends ModuleTable
+class TagTable extends Table
 {
-    protected string $moduleView = 'cms::tables.index';
-
     public function setup(): static
     {
         parent::setup();

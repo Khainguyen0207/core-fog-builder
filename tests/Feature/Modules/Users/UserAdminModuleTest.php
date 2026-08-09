@@ -5,12 +5,12 @@ namespace Tests\Feature\Modules\Users;
 use App\Enums\UserGroupRoleEnum;
 use App\Http\Middleware\IpManagerMiddleware;
 use App\Models\User;
-use App\Table\Configs\TableConfig;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
-use Modules\AdminUi\Http\Controllers\DataTableController;
 use Modules\Customers\Admin\Tables\CustomerTable;
+use Modules\Shared\Http\Controllers\DataTableController;
+use Modules\Shared\Tables\Registry\TableRegistry;
 use Modules\Users\Admin\Tables\UserTable;
 use Modules\Users\Http\Admin\Controllers\UserController;
 use Tests\TestCase;
@@ -30,10 +30,10 @@ class UserAdminModuleTest extends TestCase
     {
         $this->assertSame(UserController::class.'@index', Route::getRoutes()->getByName('admin.users.index')->getActionName());
         $this->assertSame(DataTableController::class, Route::getRoutes()->getByName('admin.get-data')->getActionName());
-        $this->assertSame(UserTable::class, app(TableConfig::class)->resolve('users'));
-        $this->assertSame(CustomerTable::class, app(TableConfig::class)->resolve('customers'));
+        $this->assertSame(UserTable::class, app(TableRegistry::class)->resolve('users'));
+        $this->assertSame(CustomerTable::class, app(TableRegistry::class)->resolve('customers'));
         $this->assertTrue(View::exists('users::forms.base'));
-        $this->assertTrue(View::exists('users::tables.index'));
+        $this->assertTrue(View::exists('shared::tables.page'));
     }
 
     public function test_user_index_and_create_form_render_from_module_views(): void
@@ -43,7 +43,7 @@ class UserAdminModuleTest extends TestCase
         $this->actingAs($admin)
             ->get(route('admin.users.index'))
             ->assertOk()
-            ->assertViewIs('users::tables.index')
+            ->assertViewIs('shared::tables.page')
             ->assertSee('Users');
 
         $this->actingAs($admin)
@@ -73,6 +73,10 @@ class UserAdminModuleTest extends TestCase
             ->assertJsonFragment([
                 'id' => $listedUser->getKey(),
                 'email' => $listedUser->email,
+            ])
+            ->assertJsonMissing([
+                'id' => $admin->getKey(),
+                'email' => $admin->email,
             ]);
     }
 

@@ -3,19 +3,18 @@
 namespace Modules\Users\Admin\Tables;
 
 use App\Enums\UserGroupRoleEnum;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\User;
-use App\Table\Columns\Column;
-use App\Table\Columns\FormatColumn;
-use App\Table\Operations\DeleteOperation;
-use App\Table\Operations\EditOperation;
-use Modules\AdminUi\Tables\ModuleTable;
+use Illuminate\Support\Facades\Auth;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Tables\Columns\Column;
+use Modules\Shared\Tables\Columns\FormatColumn;
+use Modules\Shared\Tables\Operations\DeleteOperation;
+use Modules\Shared\Tables\Operations\EditOperation;
+use Modules\Shared\Tables\Table;
 
-class UserTable extends ModuleTable
+class UserTable extends Table
 {
-    protected string $moduleView = 'users::tables.index';
-
     public function setup(): static
     {
         parent::setup();
@@ -26,7 +25,7 @@ class UserTable extends ModuleTable
             ->setNameTable('Users')
             ->setRoute('admin.users.index')
             ->hasFilter()
-            ->usingQuery(User::query()->with('customer'))
+            ->usingQuery(User::query()->with('customer')->whereNot('users.id', Auth::id()))
             ->addColumns([
                 Column::make('id')->setLabel('#'),
                 Column::make('email')->setLabel('Email'),

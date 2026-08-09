@@ -2,12 +2,12 @@
 
 namespace Modules\Communications\Admin\Forms;
 
-use App\Forms\BaseForm;
-use App\Forms\Fields\EditorField;
-use App\Forms\Fields\InputField;
 use App\Models\EmailTemplate;
+use Modules\Shared\Forms\Fields\EditorField;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Form;
 
-class EmailTemplateForm extends BaseForm
+class EmailTemplateForm extends Form
 {
     public function setup(): static
     {

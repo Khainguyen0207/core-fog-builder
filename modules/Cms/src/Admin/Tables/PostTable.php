@@ -5,20 +5,18 @@ namespace Modules\Cms\Admin\Tables;
 use App\Enums\BasicStatusEnum;
 use App\Enums\PostTypeEnum;
 use App\Enums\UserGroupRoleEnum;
-use App\Forms\Fields\InputField;
-use App\Forms\Fields\SelectField;
 use App\Models\Post;
-use App\Table\Columns\Column;
-use App\Table\Columns\FormatColumn;
-use App\Table\Columns\IDColumn;
-use App\Table\Operations\DeleteOperation;
-use App\Table\Operations\EditOperation;
-use Modules\AdminUi\Tables\ModuleTable;
+use Modules\Shared\Forms\Fields\InputField;
+use Modules\Shared\Forms\Fields\SelectField;
+use Modules\Shared\Tables\Columns\Column;
+use Modules\Shared\Tables\Columns\FormatColumn;
+use Modules\Shared\Tables\Columns\IDColumn;
+use Modules\Shared\Tables\Operations\DeleteOperation;
+use Modules\Shared\Tables\Operations\EditOperation;
+use Modules\Shared\Tables\Table;
 
-class PostTable extends ModuleTable
+class PostTable extends Table
 {
-    protected string $moduleView = 'cms::tables.index';
-
     public function setup(): static
     {
         parent::setup();
