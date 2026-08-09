@@ -16,7 +16,8 @@
                 "symlink": true,
                 "reference": "config",
                 "versions": {
-                    "figure-admin/admin-ui": "dev-main"
+                    "figure-admin/admin-ui": "dev-main",
+                    "figure-admin/users": "dev-main"
                 }
             }
         }
@@ -26,6 +27,7 @@
         "barryvdh/laravel-dompdf": "^3.1",
         "fakerphp/faker": "^1.23",
         "figure-admin/admin-ui": "dev-main",
+        "figure-admin/users": "dev-main",
         "google/apiclient": "^2.19",
         "irazasyed/telegram-bot-sdk": "^3.15",
         "laravel/framework": "^12.0",
@@ -63,7 +65,6 @@
             "Modules\\Payments\\": "modules/Payments/src/",
             "Modules\\Promotions\\": "modules/Promotions/src/",
             "Modules\\Settings\\": "modules/Settings/src/",
-            "Modules\\Users\\": "modules/Users/src/",
             "Modules\\Workforce\\": "modules/Workforce/src/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"

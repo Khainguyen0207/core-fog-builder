@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31da8d67ca2816b6c5d660de70a73834",
+    "content-hash": "152109ccccfa31d225401118ecf97835",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -809,7 +809,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/AdminUi",
-                "reference": "3c3a8e8c339e180a7960789b57ddb8cf21afdfd6"
+                "reference": "01b437cc4b3305867808cd35ea9a0c7f18df607b"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -833,6 +833,42 @@
                 "MIT"
             ],
             "description": "Shared admin UI integration for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "figure-admin/users",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Users",
+                "reference": "0b8d039b0b6a6bc54110decdd17c94d8cee84b2a"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Users\\Providers\\UsersServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Users\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "User administration package for the Figure admin application.",
             "transport-options": {
                 "symlink": true,
                 "relative": true
@@ -10540,7 +10576,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "figure-admin/admin-ui": 20
+        "figure-admin/admin-ui": 20,
+        "figure-admin/users": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

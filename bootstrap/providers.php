@@ -13,7 +13,6 @@ use Modules\Dashboard\Providers\DashboardServiceProvider;
 use Modules\Payments\Providers\PaymentsServiceProvider;
 use Modules\Promotions\Providers\PromotionsServiceProvider;
 use Modules\Settings\Providers\SettingsServiceProvider;
-use Modules\Users\Providers\UsersServiceProvider;
 use Modules\Workforce\Providers\WorkforceServiceProvider;
 use Telegram\Bot\Laravel\TelegramServiceProvider;
 use Yajra\DataTables\DataTablesServiceProvider;
@@ -33,7 +32,6 @@ return [
     PaymentsServiceProvider::class,
     PromotionsServiceProvider::class,
     SettingsServiceProvider::class,
-    UsersServiceProvider::class,
     WorkforceServiceProvider::class,
     TelegramServiceProvider::class,
 ];
