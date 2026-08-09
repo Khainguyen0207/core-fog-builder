@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Auth\Http\Admin\Controllers;
 
 use App\Enums\UserGroupRoleEnum;
-use App\Http\Requests\Admin\LoginRequest;
 use Illuminate\Support\Facades\Auth;
+use Modules\Auth\Http\Requests\LoginRequest;
 
 class AuthenticationController
 {
     public function login()
     {
-        return view('admin.pages.auth.login');
+        return view('auth::admin.pages.auth.login');
     }
 
     public function authenticate(LoginRequest $request)
