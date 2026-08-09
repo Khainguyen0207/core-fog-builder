@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "df15db1ab583e086f2e18b31eb99e529",
+    "content-hash": "8dff08148bf3a565c2acd040c20a2ebf",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -809,7 +809,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/AdminUi",
-                "reference": "fb0689d77df2a171be43c2f22a7d21ef4d25231a"
+                "reference": "7aaa388412824ca909a206001da67e3d980af1ff"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -844,7 +844,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Catalog",
-                "reference": "a60c1b83d2452dc35d41b81c93d788e2201a8740"
+                "reference": "a1e5dc67ee74f1637a306312035712d8b9330b14"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -880,7 +880,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Customers",
-                "reference": "fd2b5371d101faa3eab4aa8df8d6e402ea0804d3"
+                "reference": "19d8f7a8a6ce57545907643822f253958ba79151"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -911,12 +911,48 @@
             }
         },
         {
+            "name": "figure-admin/promotions",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "modules/Promotions",
+                "reference": "5e29d5f488dc2a28b872af64c75544cf57285182"
+            },
+            "require": {
+                "figure-admin/admin-ui": "dev-main",
+                "figure-admin/host": "^1.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Promotions\\Providers\\PromotionsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Promotions\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Promotions administration package for the Figure admin application.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "figure-admin/users",
             "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "modules/Users",
-                "reference": "863aaeabb0841b8446008e36dd4d953bf5acac37"
+                "reference": "501e694d0e27eeaec658b80786e9fc6fd4cdd3c0"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -952,7 +988,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Workforce",
-                "reference": "13c48266a7d4a5d4c6db59e6955550b9bbd86d34"
+                "reference": "5f7bb061497458a920587fda257c3794fa4d5679"
             },
             "require": {
                 "figure-admin/admin-ui": "dev-main",
@@ -10687,6 +10723,7 @@
         "figure-admin/admin-ui": 20,
         "figure-admin/catalog": 20,
         "figure-admin/customers": 20,
+        "figure-admin/promotions": 20,
         "figure-admin/users": 20,
         "figure-admin/workforce": 20
     },

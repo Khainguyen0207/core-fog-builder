@@ -19,6 +19,7 @@
                     "figure-admin/admin-ui": "dev-main",
                     "figure-admin/catalog": "dev-main",
                     "figure-admin/customers": "dev-main",
+                    "figure-admin/promotions": "dev-main",
                     "figure-admin/users": "dev-main",
                     "figure-admin/workforce": "dev-main"
                 }
@@ -32,6 +33,7 @@
         "figure-admin/admin-ui": "dev-main",
         "figure-admin/catalog": "dev-main",
         "figure-admin/customers": "dev-main",
+        "figure-admin/promotions": "dev-main",
         "figure-admin/users": "dev-main",
         "figure-admin/workforce": "dev-main",
         "google/apiclient": "^2.19",
@@ -67,7 +69,6 @@
             "Modules\\Communications\\": "modules/Communications/src/",
             "Modules\\Dashboard\\": "modules/Dashboard/src/",
             "Modules\\Payments\\": "modules/Payments/src/",
-            "Modules\\Promotions\\": "modules/Promotions/src/",
             "Modules\\Settings\\": "modules/Settings/src/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
