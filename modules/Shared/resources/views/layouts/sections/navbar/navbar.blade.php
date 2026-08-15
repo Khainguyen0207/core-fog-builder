@@ -32,8 +32,11 @@
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center navbar-search-wrapper">
-                <i class="bx bx-search bx-md"></i>
-                <input type="text" class="form-control border-0 shadow-none ps-1 ps-sm-2" placeholder="Search [CTRL + K]" aria-label="Search" autocomplete="off" data-shared-menu-search-trigger>
+                <button type="button" class="menu-search-trigger" aria-label="Search menu" data-shared-menu-search-trigger>
+                    <i class="bx bx-search bx-sm" aria-hidden="true"></i>
+                    <span class="menu-search-trigger-label">Search</span>
+                    <kbd class="menu-search-shortcut">Ctrl K</kbd>
+                </button>
             </div>
         </div>
         <ul class="navbar-nav flex-row align-items-center ms-auto">
@@ -57,14 +60,27 @@
     @if (!$navbarDetached)</div>@endif
 </nav>
     <div class="modal fade menu-search-modal" tabindex="-1" aria-hidden="true" data-shared-menu-search-modal>
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 700px; width: calc(100% - 2rem);">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <p class="h3 pb-5 position-absolute">Search</p>
-                    <input type="text" class="form-control mt-10" placeholder="Search menu" aria-label="Search menu" autocomplete="off" data-shared-menu-search-input>
-                    <button type="button" class="border btn-close rounded-5 shadow border-gray border-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="menu-search-input-wrap">
+                        <i class="bx bx-search bx-sm" aria-hidden="true"></i>
+                        <input type="text" class="form-control" placeholder="Search pages and tools..." aria-label="Search pages and tools" aria-autocomplete="list" autocomplete="off" data-shared-menu-search-input>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body"><div class="row g-3" data-shared-menu-search-results></div><div class="text-muted mt-3 d-none" data-shared-menu-search-empty>No results</div></div>
+                <div class="modal-body">
+                    <div class="menu-search-heading">
+                        <span>Quick navigation</span>
+                        <span>Use arrow keys to navigate</span>
+                    </div>
+                    <div class="menu-search-results" role="listbox" data-shared-menu-search-results></div>
+                    <div class="menu-search-empty d-none" data-shared-menu-search-empty>
+                        <i class="bx bx-search-alt-2 bx-md" aria-hidden="true"></i>
+                        <p class="mb-1">No matching pages</p>
+                        <span>Try a different keyword.</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
