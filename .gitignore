@@ -24,6 +24,13 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 /.junie
-/docs
+/docs/*
+!/docs/README.md
+!/docs/ARCHITECTURE.md
+!/docs/MODULES.md
+!/docs/SHARED-CORE.md
+!/docs/DEVELOPMENT.md
+!/docs/TESTING.md
+!/docs/KNOWN-LIMITATIONS.md
+!/docs/AGENT-HANDOFF.md
 .agent
-/AGENTS.md

@@ -52,6 +52,11 @@ test('shared controls and tables remain usable on mobile', async ({ page }) => {
 
     await page.goto('http://localhost:8000/admin/users');
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
+    const sortedUsersResponse = page.waitForResponse(response =>
+        response.url().includes('/admin/get-data/users') && response.request().method() === 'POST'
+    );
+    await page.locator('.dt-scroll-head thead th').filter({ hasText: 'Name' }).click();
+    expect((await sortedUsersResponse).status()).toBe(200);
     const filterSelect = page.locator('.bootstrap-select .dropdown-toggle').first();
     await expect(filterSelect).toBeVisible();
     await filterSelect.click();

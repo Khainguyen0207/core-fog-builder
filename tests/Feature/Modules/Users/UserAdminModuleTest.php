@@ -4,6 +4,7 @@ namespace Tests\Feature\Modules\Users;
 
 use App\Enums\UserGroupRoleEnum;
 use App\Http\Middleware\IpManagerMiddleware;
+use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
@@ -77,6 +78,46 @@ class UserAdminModuleTest extends TestCase
             ->assertJsonMissing([
                 'id' => $admin->getKey(),
                 'email' => $admin->email,
+            ]);
+    }
+
+    public function test_user_table_can_sort_by_customer_name_without_an_ambiguous_id(): void
+    {
+        $admin = $this->createUser('admin@example.com', UserGroupRoleEnum::ADMIN);
+        $listedUser = $this->createUser('customer@example.com', UserGroupRoleEnum::CUSTOMER);
+
+        Customer::query()->create([
+            'name' => 'Sorted Customer',
+            'phone' => '0900000001',
+            'user_id' => $listedUser->getKey(),
+        ]);
+
+        $this->actingAs($admin)
+            ->postJson(route('admin.get-data', 'users'), [
+                'draw' => 1,
+                'start' => 0,
+                'length' => 10,
+                'columns' => [
+                    ['data' => 'id', 'name' => 'id', 'searchable' => false, 'orderable' => false],
+                    ['data' => 'id', 'name' => 'id', 'searchable' => true, 'orderable' => true],
+                    ['data' => 'email', 'name' => 'email', 'searchable' => true, 'orderable' => true],
+                    ['data' => 'customer.name', 'name' => 'customer.name', 'searchable' => true, 'orderable' => true],
+                    ['data' => 'is_active', 'name' => 'is_active', 'searchable' => true, 'orderable' => true],
+                    ['data' => 'group_role', 'name' => 'group_role', 'searchable' => true, 'orderable' => true],
+                    ['data' => 'operations', 'name' => 'operations', 'searchable' => false, 'orderable' => false],
+                ],
+                'order' => [
+                    ['column' => 3, 'dir' => 'desc'],
+                ],
+                'search' => [
+                    'value' => json_encode(['dataSearch' => []]),
+                    'regex' => false,
+                ],
+            ])
+            ->assertOk()
+            ->assertJsonFragment([
+                'id' => $listedUser->getKey(),
+                'email' => $listedUser->email,
             ]);
     }
 
