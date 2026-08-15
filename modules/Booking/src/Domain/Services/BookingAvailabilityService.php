@@ -131,8 +131,7 @@ class BookingAvailabilityService
 
         usort(
             $events,
-            fn($a, $b) =>
-            $a['time']->timestamp <=> $b['time']->timestamp
+            fn ($a, $b) => $a['time']->timestamp <=> $b['time']->timestamp
                 ?: $a['delta'] <=> $b['delta']
         );
 
@@ -173,6 +172,7 @@ class BookingAvailabilityService
         }
 
         ksort($candidates);
+
         return array_values($candidates);
     }
 
@@ -205,7 +205,7 @@ class BookingAvailabilityService
                 'color' => $isAvailable ? (ceil($capacity / 2) >= $remainingSlots ? 'warning' : 'success') : 'secondary',
             ];
 
-            if (!$isAvailable) {
+            if (! $isAvailable) {
                 $jumpTo = $this->findNextAvailableBoundary($segments, $slotEnd, $windowEnd);
                 if ($jumpTo !== null) {
                     $slot['jumpTo'] = $jumpTo->format('H:i');

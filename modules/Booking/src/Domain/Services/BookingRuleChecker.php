@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Enums\BaseStatusEnum;
 use App\Enums\BookingStatusEnum;
 use App\Facades\SettingHelper;
 use App\Models\Booking;

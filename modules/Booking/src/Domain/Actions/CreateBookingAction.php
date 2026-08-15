@@ -22,7 +22,6 @@ class CreateBookingAction
     public function __construct(
         private CreateBookingService $bookingService,
         private BookingRuleChecker $bookingRuleChecker,
-        private CouponEligibilityService $couponEligibilityService,
         private PluginManager $plugins,
     ) {}
 
@@ -80,7 +79,7 @@ class CreateBookingAction
         $customerId = $user->customer->id;
         $price = (float) $booking->price;
 
-        $coupon = $this->couponEligibilityService->validate($couponCode, $customerId, $price);
+        $coupon = app(CouponEligibilityService::class)->validate($couponCode, $customerId, $price);
 
         $booking = app(ApplyCouponToBookingAction::class)->handle($booking, $coupon);
 

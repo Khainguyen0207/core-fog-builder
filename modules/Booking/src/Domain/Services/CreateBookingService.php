@@ -6,7 +6,6 @@ use App\Enums\BaseStatusEnum;
 use App\Enums\BookingStatusEnum;
 use App\Models\Booking;
 use App\Models\BookingService as BookingServiceModel;
-use App\Models\Customer;
 use App\Models\Service;
 use App\Models\Staff;
 use Carbon\Carbon;
@@ -90,7 +89,7 @@ class CreateBookingService
 
             $serviceId = $service->getKey();
             $mapping = $staffMapping[$serviceId] ?? [];
-            $hasTime = !empty($mapping['start_time']) && !empty($mapping['end_time']);
+            $hasTime = ! empty($mapping['start_time']) && ! empty($mapping['end_time']);
 
             $item = ['service' => $service, 'mapping' => $mapping];
 
@@ -107,7 +106,7 @@ class CreateBookingService
     private function collectOccupiedSlots(array $servicesWithTime): array
     {
         return collect($servicesWithTime)
-            ->map(fn($item) => [
+            ->map(fn ($item) => [
                 'start' => Carbon::parse($item['mapping']['start_time']),
                 'end' => Carbon::parse($item['mapping']['end_time']),
             ])
@@ -202,7 +201,7 @@ class CreateBookingService
             ->first();
 
         if (! $staff) {
-            throw new Exception("Nhân viên không tồn tại hoặc đã ngừng hoạt động.");
+            throw new Exception('Nhân viên không tồn tại hoặc đã ngừng hoạt động.');
         }
 
         $isStaffBusy = BookingServiceModel::query()
@@ -218,7 +217,7 @@ class CreateBookingService
             );
         }
 
-        if (!$this->bookingRuleChecker->canAssignStaffToBookingService($startAt, $endAt)) {
+        if (! $this->bookingRuleChecker->canAssignStaffToBookingService($startAt, $endAt)) {
             throw new Exception(
                 "Không thể đặt lịch cho dịch vụ \"{$serviceName}\" trong khoảng thời gian {$startAt->format('H:i')} - {$endAt->format('H:i')}. Thời gian nằm ngoài giờ làm việc."
             );
@@ -231,7 +230,7 @@ class CreateBookingService
     {
         $availableStaffIds = $this->getStaffAvailableAtTime($startAt, $endAt)->pluck('id');
 
-        if ($availableStaffIds->isEmpty() || !$this->bookingRuleChecker->canAssignStaffToBookingService($startAt, $endAt)) {
+        if ($availableStaffIds->isEmpty() || ! $this->bookingRuleChecker->canAssignStaffToBookingService($startAt, $endAt)) {
             throw new Exception(
                 "Không tìm thấy nhân viên trống cho dịch vụ \"{$serviceName}\" trong khoảng thời gian {$startAt->format('H:i')} - {$endAt->format('H:i')}."
             );
@@ -245,7 +244,7 @@ class CreateBookingService
         return Staff::query()
             ->whereDoesntHave(
                 'bookingServices',
-                fn($q) => $q
+                fn ($q) => $q
                     ->where('started_at', '<', $endAt)
                     ->where('finished_at', '>', $startAt)
                     ->where('status', '!=', BookingStatusEnum::CANCELLED)
@@ -258,7 +257,7 @@ class CreateBookingService
     private function generateBookingCode(): string
     {
         do {
-            $code = self::PREFIX . Str::upper(Str::random(10));
+            $code = self::PREFIX.Str::upper(Str::random(10));
         } while (Booking::query()->where('booking_code', $code)->exists());
 
         return $code;

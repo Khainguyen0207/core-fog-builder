@@ -80,7 +80,6 @@ class Booking extends Model
         return $this->belongsTo(Transaction::class, 'transaction_code', 'transaction_code');
     }
 
-
     protected static function booted()
     {
         static::updated(function (Booking $booking) {

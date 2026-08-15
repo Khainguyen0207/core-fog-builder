@@ -17,6 +17,7 @@ class SendBookingTelegramAction
 
             if (empty($chatId)) {
                 Log::error('Telegram chat ID not found');
+
                 return;
             }
 
@@ -41,8 +42,8 @@ class SendBookingTelegramAction
         $paymentLabel = $booking->payment_method?->getLabel() ?? 'N/A';
 
         $lines = [
-            "🔔 <b>ĐƠN HÀNG MỚI</b>",
-            "",
+            '🔔 <b>ĐƠN HÀNG MỚI</b>',
+            '',
             "📋 <b>Mã đặt lịch:</b> <code>{$booking->booking_code}</code>",
             "👤 <b>Khách hàng:</b> {$booking->customer_name}",
             "📞 <b>SĐT:</b> {$booking->customer_phone}",
@@ -52,16 +53,16 @@ class SendBookingTelegramAction
             $lines[] = "📧 <b>Email:</b> {$booking->notify_email}";
         }
 
-        $lines[] = "";
-        $lines[] = "📅 <b>Lịch hẹn:</b> " . $booking->scheduled_start?->format('H:i d/m/Y');
-        $lines[] = "⏱ <b>Dự kiến kết thúc:</b> " . $booking->estimated_end?->format('H:i d/m/Y');
+        $lines[] = '';
+        $lines[] = '📅 <b>Lịch hẹn:</b> '.$booking->scheduled_start?->format('H:i d/m/Y');
+        $lines[] = '⏱ <b>Dự kiến kết thúc:</b> '.$booking->estimated_end?->format('H:i d/m/Y');
         $lines[] = "⏳ <b>Thời lượng:</b> {$booking->total_duration} phút";
         $lines[] = "📌 <b>Trạng thái:</b> {$statusLabel}";
         $lines[] = "💳 <b>Thanh toán:</b> {$paymentLabel}";
 
         // Services
-        $lines[] = "";
-        $lines[] = "🔧 <b>Dịch vụ:</b>";
+        $lines[] = '';
+        $lines[] = '🔧 <b>Dịch vụ:</b>';
 
         foreach ($booking->bookingServices as $index => $bs) {
             $num = $index + 1;
@@ -71,7 +72,7 @@ class SendBookingTelegramAction
         }
 
         // Pricing
-        $lines[] = "";
+        $lines[] = '';
         $price = number_format($booking->price ?? 0, 0, ',', '.');
         $totalPrice = number_format($booking->total_price ?? 0, 0, ',', '.');
 
@@ -89,12 +90,12 @@ class SendBookingTelegramAction
         $lines[] = "✅ <b>Tổng thanh toán:</b> <b>{$totalPrice}đ</b>";
 
         if ($booking->note) {
-            $lines[] = "";
+            $lines[] = '';
             $lines[] = "📝 <b>Ghi chú:</b> {$booking->note}";
         }
 
-        $lines[] = "";
-        $lines[] = "🕐 " . now()->format('H:i d/m/Y');
+        $lines[] = '';
+        $lines[] = '🕐 '.now()->format('H:i d/m/Y');
 
         return implode("\n", $lines);
     }

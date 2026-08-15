@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "figure-admin/booking": "dev-main",
         "figure-admin/host": "^1.0",
         "figure-admin/shared": "dev-main",
         "irazasyed/telegram-bot-sdk": "^3.15",
@@ -14,7 +15,10 @@
     "autoload": {
         "psr-4": {
             "Modules\\Communications\\": "src/"
-        }
+        },
+        "classmap": [
+            "src/Domain/"
+        ]
     },
     "extra": {
         "laravel": {

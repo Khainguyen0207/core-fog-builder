@@ -21,7 +21,7 @@ class CouponEligibilityService
             ->where('code', $couponCode)
             ->first();
 
-        if (!$coupon) {
+        if (! $coupon) {
             throw new Exception('Mã giảm giá không tồn tại.');
         }
 
@@ -93,8 +93,8 @@ class CouponEligibilityService
 
         if ($price < (float) $coupon->min_order_amount) {
             throw new Exception(
-                'Giá trị đơn hàng tối thiểu để sử dụng mã giảm giá là ' .
-                    number_format($coupon->min_order_amount, 0, ',', '.') . 'đ.'
+                'Giá trị đơn hàng tối thiểu để sử dụng mã giảm giá là '.
+                    number_format($coupon->min_order_amount, 0, ',', '.').'đ.'
             );
         }
     }

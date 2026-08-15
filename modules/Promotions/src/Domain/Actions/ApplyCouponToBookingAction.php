@@ -20,7 +20,7 @@ class ApplyCouponToBookingAction
             'discount' => $discount,
             'total_price' => $totalPrice,
             'coupon_code' => $coupon->code,
-            'status' =>  $totalPrice == 0 ? BookingStatusEnum::CONFIRMED : BookingStatusEnum::PENDING,
+            'status' => $totalPrice == 0 ? BookingStatusEnum::CONFIRMED : BookingStatusEnum::PENDING,
         ]);
 
         $booking->load('transaction');

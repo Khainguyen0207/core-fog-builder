@@ -28,18 +28,19 @@ class CheckTransactionAction
 
             if (count($transactions) == 0) {
                 Log::info('No transactions found');
+
                 return;
             }
 
-            Log::info('Transactions found: ' . count($transactions));
+            Log::info('Transactions found: '.count($transactions));
 
             $start = $transactions->first()->created_at;
 
             $partnerTransactions = $provider->getTransactionAmountInByDate($start);
-            Log::info('Partner transactions found: ' . json_encode($partnerTransactions));
+            Log::info('Partner transactions found: '.json_encode($partnerTransactions));
             $partnerTransactions = Arr::get($partnerTransactions, 'transactions', []);
 
-            Log::info('Partner transactions found: ' . count($partnerTransactions));
+            Log::info('Partner transactions found: '.count($partnerTransactions));
 
             $matchedData = $this->transactionService->comparePartnerTransaction($partnerTransactions, $transactions);
 

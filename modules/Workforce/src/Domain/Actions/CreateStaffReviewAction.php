@@ -35,7 +35,7 @@ class CreateStaffReviewAction
                 'note' => $validated['note'] ?? null,
             ]);
 
-            //Action Update rate đánh giá
+            // Action Update rate đánh giá
 
             DB::commit();
 

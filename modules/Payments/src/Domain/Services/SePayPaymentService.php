@@ -21,25 +21,25 @@ class SePayPaymentService implements PaymentService
     public function getTransactionAmountInByDate(string $start = '', string $end = ''): ?array
     {
         try {
-            $endpoint = $this->baseUrl . '/list?amount_out=0';
+            $endpoint = $this->baseUrl.'/list?amount_out=0';
 
             if ($start !== '') {
                 $start = Carbon::parse($start)->setTime(0, 0, 0)->format('Y-m-d H:i:s');
-                $endpoint = $this->baseUrl . '/list?amount_out=0&transaction_date_min=' . $start;
+                $endpoint = $this->baseUrl.'/list?amount_out=0&transaction_date_min='.$start;
             }
 
             if ($end !== '') {
                 $end = Carbon::parse($end)->setTime(23, 59, 59)->format('Y-m-d H:i:s');
-                $endpoint = $this->baseUrl . '/list?amount_out=0&transaction_date_max=' . $end;
+                $endpoint = $this->baseUrl.'/list?amount_out=0&transaction_date_max='.$end;
             }
 
             if (config('payment.sepay.api_token') == '') {
-                throw new Exception("SePay API token is not set");
+                throw new Exception('SePay API token is not set');
             }
 
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . config('payment.sepay.api_token'),
+                'Authorization' => 'Bearer '.config('payment.sepay.api_token'),
             ])->get($endpoint);
 
             if (! $response->ok()) {
@@ -47,8 +47,8 @@ class SePayPaymentService implements PaymentService
             }
 
             return $response->json();
-        } catch (\Exception $e) {
-            Log::error('API SePay connection error: ' . $e->getMessage());
+        } catch (Exception $e) {
+            Log::error('API SePay connection error: '.$e->getMessage());
 
             return null;
         }

@@ -845,7 +845,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Booking",
-                "reference": "a8052fc78bd7cc8dd2caa646c97734be6fa38b96"
+                "reference": "c99d0394fa37563ead662ff0affb31e85b74c911"
             },
             "require": {
                 "barryvdh/laravel-dompdf": "^3.1",
@@ -865,7 +865,10 @@
             "autoload": {
                 "psr-4": {
                     "Modules\\Booking\\": "src/"
-                }
+                },
+                "classmap": [
+                    "src/Domain/"
+                ]
             },
             "license": [
                 "MIT"
@@ -882,7 +885,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Catalog",
-                "reference": "4e6d6c9466b2eec04f1e317eaa0802aa1361e58d"
+                "reference": "9679ae853cb224641bfd6acd2887b526c190ea33"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -901,7 +904,10 @@
             "autoload": {
                 "psr-4": {
                     "Modules\\Catalog\\": "src/"
-                }
+                },
+                "classmap": [
+                    "src/Domain/"
+                ]
             },
             "license": [
                 "MIT"
@@ -918,7 +924,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Cms",
-                "reference": "e1fe2742862851891e04c014eb68a43a84c5575c"
+                "reference": "bcf287ccc75074504907a7a6ead2fc20dfc6c8eb"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -937,7 +943,10 @@
             "autoload": {
                 "psr-4": {
                     "Modules\\Cms\\": "src/"
-                }
+                },
+                "classmap": [
+                    "src/Domain/"
+                ]
             },
             "license": [
                 "MIT"
@@ -954,9 +963,10 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Communications",
-                "reference": "10e29d7461106c60284b3ca65bb004997d6910a1"
+                "reference": "7a0868e42aa05828c5ac3b1629ac8d579e7bb70e"
             },
             "require": {
+                "figure-admin/booking": "dev-main",
                 "figure-admin/host": "^1.0",
                 "figure-admin/shared": "dev-main",
                 "irazasyed/telegram-bot-sdk": "^3.15",
@@ -974,7 +984,10 @@
             "autoload": {
                 "psr-4": {
                     "Modules\\Communications\\": "src/"
-                }
+                },
+                "classmap": [
+                    "src/Domain/"
+                ]
             },
             "license": [
                 "MIT"
@@ -1064,13 +1077,15 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Payments",
-                "reference": "6aea8c39959dfd50af2a538e546ecd0817ef1365"
+                "reference": "a2c9f0bd89b956f8a9dae917bc9043ad8b4c23a8"
             },
             "require": {
+                "figure-admin/booking": "dev-main",
                 "figure-admin/host": "^1.0",
                 "figure-admin/shared": "dev-main",
                 "laravel/framework": "^12.0",
-                "php": "^8.2"
+                "php": "^8.2",
+                "sepay/sepay-pg": "^1.0"
             },
             "type": "library",
             "extra": {
@@ -1083,7 +1098,10 @@
             "autoload": {
                 "psr-4": {
                     "Modules\\Payments\\": "src/"
-                }
+                },
+                "classmap": [
+                    "src/Domain/"
+                ]
             },
             "license": [
                 "MIT"
@@ -1100,9 +1118,10 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Promotions",
-                "reference": "4820d5dc922fc722ad41b8aa4a59273374f1cf46"
+                "reference": "935a5996096e19d912050d447c9529368d39c879"
             },
             "require": {
+                "figure-admin/booking": "dev-main",
                 "figure-admin/host": "^1.0",
                 "figure-admin/shared": "dev-main",
                 "laravel/framework": "^12.0",
@@ -1119,7 +1138,10 @@
             "autoload": {
                 "psr-4": {
                     "Modules\\Promotions\\": "src/"
-                }
+                },
+                "classmap": [
+                    "src/Domain/"
+                ]
             },
             "license": [
                 "MIT"
@@ -1244,9 +1266,10 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Workforce",
-                "reference": "812c53e8a35970381f98ca66f3dc294e0f881ebe"
+                "reference": "0f0c046f3f242a2c8f40616f914ae7523392dbaf"
             },
             "require": {
+                "figure-admin/catalog": "dev-main",
                 "figure-admin/host": "^1.0",
                 "figure-admin/shared": "dev-main",
                 "laravel/framework": "^12.0",
@@ -1263,7 +1286,10 @@
             "autoload": {
                 "psr-4": {
                     "Modules\\Workforce\\": "src/"
-                }
+                },
+                "classmap": [
+                    "src/Domain/"
+                ]
             },
             "license": [
                 "MIT"

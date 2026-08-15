@@ -7,7 +7,6 @@ use App\Enums\TransactionStatusEnum;
 use App\Models\Transaction;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 
 class TransactionService
 {
