@@ -3,6 +3,7 @@
 namespace Modules\Shared\Menu;
 
 use LogicException;
+use Modules\Shared\Registry\Contracts\RegistrationVisibility;
 
 class MenuRegistry
 {
@@ -10,17 +11,19 @@ class MenuRegistry
 
     private int $sequence = 0;
 
-    public function register(string $key, array $item, int $order = 1000): static
+    public function __construct(private readonly ?RegistrationVisibility $visibility = null) {}
+
+    public function register(string $key, array $item, int $order = 1000, ?string $owner = null): static
     {
         if (trim($key) === '') {
             throw new LogicException('Menu item key must not be empty.');
         }
 
-        $entry = ['key' => $key, 'order' => $order, 'item' => $item];
+        $entry = ['key' => $key, 'order' => $order, 'item' => $item, 'owner' => $owner];
 
         if (isset($this->registered[$key])) {
             $existing = $this->registered[$key];
-            if ($existing['order'] === $order && $existing['item'] === $item) {
+            if ($existing['order'] === $order && $existing['item'] === $item && $existing['owner'] === $owner) {
                 return $this;
             }
 
@@ -35,7 +38,11 @@ class MenuRegistry
 
     public function all(): array
     {
-        $entries = array_values($this->registered);
+        $entries = array_values(array_filter(
+            $this->registered,
+            fn (array $entry): bool => $entry['owner'] === null
+                || ($this->visibility?->allows($entry['owner']) ?? true),
+        ));
         usort($entries, fn (array $left, array $right): int => [$left['order'], $left['sequence']] <=> [$right['order'], $right['sequence']]);
 
         $items = [];

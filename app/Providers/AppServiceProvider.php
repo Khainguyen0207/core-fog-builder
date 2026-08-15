@@ -8,7 +8,9 @@ use App\Plugins\Contracts\PluginStateStore;
 use App\Plugins\DatabasePluginStateStore;
 use App\Plugins\PluginCatalog;
 use App\Plugins\PluginManager;
+use App\Plugins\PluginRegistrationVisibility;
 use Illuminate\Support\ServiceProvider;
+use Modules\Shared\Registry\Contracts\RegistrationVisibility;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(PluginPackageRepository::class, ComposerPluginPackageRepository::class);
         $this->app->singleton(PluginStateStore::class, DatabasePluginStateStore::class);
         $this->app->scoped(PluginManager::class);
+        $this->app->singleton(RegistrationVisibility::class, PluginRegistrationVisibility::class);
     }
 
     public function boot(): void {}

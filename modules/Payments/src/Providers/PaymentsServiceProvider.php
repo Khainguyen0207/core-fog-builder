@@ -14,7 +14,7 @@ class PaymentsServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'payments');
         $this->loadRoutesFrom(__DIR__.'/../../routes/admin.php');
 
-        $tables->register('transactions', TransactionTable::class);
+        $tables->register('transactions', TransactionTable::class, 'figure-admin/payments');
         $menus->register('payments', [
             'name' => 'Payment', 'icon' => 'menu-icon tf-icons bx bx-wallet lst-none',
             'route' => 'admin.transactions.index', 'active' => ['admin.transactions.*'],
@@ -22,6 +22,6 @@ class PaymentsServiceProvider extends ServiceProvider
                 'name' => 'Transactions', 'icon' => 'menu-icon tf-icons bx bx-money-withdraw me-2',
                 'route' => 'admin.transactions.index', 'active' => ['admin.transactions.*'],
             ]],
-        ], 200);
+        ], 200, 'figure-admin/payments');
     }
 }

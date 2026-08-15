@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Modules\Booking;
 
+use App\Plugins\PluginManager;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Modules\Booking\Admin\Tables\BookingServiceTable;
 use Modules\Booking\Admin\Tables\BookingTable;
@@ -13,6 +15,19 @@ use Tests\TestCase;
 
 class BookingAdminModuleTest extends TestCase
 {
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        app(PluginManager::class)->replaceEnabledPackages([
+            'figure-admin/catalog',
+            'figure-admin/workforce',
+            'figure-admin/booking',
+        ]);
+    }
+
     public function test_booking_routes_are_registered_to_module_controllers(): void
     {
         $routes = [

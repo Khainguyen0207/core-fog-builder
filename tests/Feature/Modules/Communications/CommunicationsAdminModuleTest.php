@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Modules\Communications;
 
+use App\Plugins\PluginManager;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Modules\Communications\Admin\Tables\EmailTemplateTable;
 use Modules\Communications\Admin\Tables\SendEmailUserTable;
@@ -13,6 +15,20 @@ use Tests\TestCase;
 
 class CommunicationsAdminModuleTest extends TestCase
 {
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        app(PluginManager::class)->replaceEnabledPackages([
+            'figure-admin/catalog',
+            'figure-admin/workforce',
+            'figure-admin/booking',
+            'figure-admin/communications',
+        ]);
+    }
+
     public function test_communications_admin_routes_are_registered_to_module_controllers(): void
     {
         $routes = [

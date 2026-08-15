@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Modules\Shared\BulkActions\BulkDeleteRegistry;
 use Modules\Shared\Menu\MenuRegistry;
+use Modules\Shared\Registry\AllowAllRegistrationVisibility;
+use Modules\Shared\Registry\Contracts\RegistrationVisibility;
 use Modules\Shared\Tables\Factory\TableFactory;
 use Modules\Shared\Tables\Registry\TableRegistry;
 use Modules\Shared\View\NavbarUserPresenter;
@@ -17,12 +19,22 @@ class SharedServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../../config/figure-admin-shared.php', 'figure-admin-shared');
 
-        $this->app->singleton(TableRegistry::class, fn (): TableRegistry => new TableRegistry);
+        $this->app->singletonIf(RegistrationVisibility::class, AllowAllRegistrationVisibility::class);
+        $this->app->singleton(
+            TableRegistry::class,
+            fn (Application $app): TableRegistry => new TableRegistry($app->make(RegistrationVisibility::class)),
+        );
         $this->app->singleton(
             BulkDeleteRegistry::class,
-            fn (Application $app): BulkDeleteRegistry => new BulkDeleteRegistry($app),
+            fn (Application $app): BulkDeleteRegistry => new BulkDeleteRegistry(
+                $app,
+                $app->make(RegistrationVisibility::class),
+            ),
         );
-        $this->app->singleton(MenuRegistry::class, fn (): MenuRegistry => new MenuRegistry);
+        $this->app->singleton(
+            MenuRegistry::class,
+            fn (Application $app): MenuRegistry => new MenuRegistry($app->make(RegistrationVisibility::class)),
+        );
         $this->app->singleton(NavbarUserPresenter::class, fn (): NavbarUserPresenter => new NavbarUserPresenter);
         $this->app->singleton(
             TableFactory::class,

@@ -15,8 +15,8 @@ class CatalogServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'catalog');
         $this->loadRoutesFrom(__DIR__.'/../../routes/admin.php');
 
-        $tables->register('categories', CategoryTable::class);
-        $tables->register('services', ServiceTable::class);
+        $tables->register('categories', CategoryTable::class, 'figure-admin/catalog');
+        $tables->register('services', ServiceTable::class, 'figure-admin/catalog');
         $menus->register('catalog', [
             'name' => 'Catalog', 'icon' => 'menu-icon tf-icons bx bx-package',
             'route' => 'admin.services.index', 'active' => ['admin.services.*', 'admin.categories.*'],
@@ -24,6 +24,6 @@ class CatalogServiceProvider extends ServiceProvider
                 ['name' => 'Services', 'route' => 'admin.services.index', 'active' => ['admin.services.*']],
                 ['name' => 'Categories', 'route' => 'admin.categories.index', 'active' => ['admin.categories.*']],
             ],
-        ], 600);
+        ], 600, 'figure-admin/catalog');
     }
 }

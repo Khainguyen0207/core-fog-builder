@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Modules\Promotions;
 
+use App\Plugins\PluginManager;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Modules\Promotions\Admin\Tables\CouponApplicableTable;
 use Modules\Promotions\Admin\Tables\CouponRedemptionTable;
@@ -14,6 +16,20 @@ use Tests\TestCase;
 
 class PromotionsAdminModuleTest extends TestCase
 {
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        app(PluginManager::class)->replaceEnabledPackages([
+            'figure-admin/catalog',
+            'figure-admin/workforce',
+            'figure-admin/booking',
+            'figure-admin/promotions',
+        ]);
+    }
+
     public function test_promotions_routes_views_and_tables_are_registered(): void
     {
         $this->assertSame(CouponController::class.'@index', Route::getRoutes()->getByName('admin.coupons.index')->getActionName());
