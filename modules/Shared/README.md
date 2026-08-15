@@ -19,7 +19,7 @@ Laravel package discovery registers `Modules\Shared\Providers\SharedServiceProvi
 - Panels use `Modules\Shared\Panels\Panel` and `Modules\Shared\Panels\PanelSection`.
 - Feature service providers must explicitly register each table key and class with `Modules\Shared\Tables\Registry\TableRegistry`; Shared does not scan application directories.
 - Feature service providers contribute navigation through `Modules\Shared\Menu\MenuRegistry`.
-- Bulk deletion is opt-in. Implement `Modules\Shared\BulkActions\Contracts\BulkDeleteHandler`, perform resource authorization in the handler, and explicitly register it with `Modules\Shared\BulkActions\BulkDeleteRegistry`. Unregistered resources cannot use the endpoint.
+- Bulk deletion is opt-in through `Table::hasBulkDelete()`. Every registered table implements `Modules\Shared\BulkActions\Contracts\BulkDeleteHandler` with authenticated-user authorization and model-key deletion by default; override `authorize()` or `delete()` on the table for resource-specific behavior. Unknown, disabled, and model-less tables cannot use the endpoint.
 
 ## Routes And Configuration
 

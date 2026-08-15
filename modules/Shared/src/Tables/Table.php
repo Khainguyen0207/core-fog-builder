@@ -7,16 +7,18 @@ use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use LogicException;
+use Modules\Shared\BulkActions\Contracts\BulkDeleteHandler;
 use Modules\Shared\Tables\Columns\FormatColumn;
 use Modules\Shared\Tables\Contracts\TableName;
 use Yajra\DataTables\Facades\DataTables;
 
-abstract class Table implements TableName
+abstract class Table implements BulkDeleteHandler, TableName
 {
     /** @var array<int, object> */
     private array $columns = [];
@@ -122,6 +124,18 @@ abstract class Table implements TableName
     public function isHasBulkDelete(): bool
     {
         return $this->hasBulkDelete;
+    }
+
+    public function authorize(Request $request, array $ids): bool
+    {
+        return $request->user() !== null;
+    }
+
+    public function delete(array $ids): int
+    {
+        $model = $this->model ?? throw new LogicException('A model must be configured for bulk deletion.');
+
+        return $model->newQuery()->whereKey($ids)->delete();
     }
 
     public function notHeaderAction(): static

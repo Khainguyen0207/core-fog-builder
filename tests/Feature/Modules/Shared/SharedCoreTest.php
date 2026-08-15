@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ViewErrorBag;
 use InvalidArgumentException;
 use LogicException;
-use Modules\Shared\BulkActions\BulkDeleteRegistry;
 use Modules\Shared\BulkActions\Contracts\BulkDeleteHandler;
 use Modules\Shared\Forms\Fields\InputField;
 use Modules\Shared\Http\Controllers\BulkDeleteController;
@@ -65,7 +64,6 @@ class SharedCoreTest extends TestCase
         $this->assertSame('admin', config('figure-admin-shared.routes.prefix'));
         $this->assertArrayHasKey('shared', app('view')->getFinder()->getHints());
         $this->assertSame(app(TableRegistry::class), app(TableRegistry::class));
-        $this->assertSame(app(BulkDeleteRegistry::class), app(BulkDeleteRegistry::class));
         $this->assertSame(app(MenuRegistry::class), app(MenuRegistry::class));
         $this->assertInstanceOf(TableFactory::class, app(TableFactory::class));
         $this->assertInstanceOf(NavbarUserPresenter::class, app(NavbarUserPresenter::class));
@@ -146,16 +144,12 @@ class SharedCoreTest extends TestCase
         };
         $menus = new MenuRegistry($visibility);
         $tables = new TableRegistry($visibility);
-        $bulkDeletes = new BulkDeleteRegistry($this->app, $visibility);
 
         $menus->register('example', ['name' => 'Example'], 100, 'figure-admin/example');
         $tables->register('example', SharedCoreTable::class, 'figure-admin/example');
-        $bulkDeletes->register('example', SharedCoreBulkDeleteHandler::class, 'figure-admin/example');
 
         $this->assertSame([], $menus->all());
         $this->assertSame([], $tables->all());
-        $this->assertFalse($bulkDeletes->has('example'));
-        $this->assertNull($bulkDeletes->resolve('example'));
 
         try {
             $tables->resolve('example');
@@ -168,7 +162,6 @@ class SharedCoreTest extends TestCase
 
         $this->assertSame(['example'], array_keys($menus->all()));
         $this->assertSame(SharedCoreTable::class, $tables->resolve('example'));
-        $this->assertInstanceOf(SharedCoreBulkDeleteHandler::class, $bulkDeletes->resolve('example'));
 
         $this->expectException(LogicException::class);
         $tables->register('example', SharedCoreTable::class, 'figure-admin/other');
@@ -215,26 +208,17 @@ class SharedCoreTest extends TestCase
         $registry->register('records', OtherSharedCoreTable::class);
     }
 
-    public function test_bulk_delete_registry_validates_handlers_and_rejects_conflicting_keys(): void
+    public function test_tables_own_bulk_delete_handler_and_require_an_authenticated_user_by_default(): void
     {
-        $registry = app(BulkDeleteRegistry::class);
+        $table = (new SharedCoreBulkDeleteTable)->setup();
+        $request = Request::create('/admin/bulk-delete', 'POST');
 
-        $registry->register('records', SharedCoreBulkDeleteHandler::class);
-        $registry->register('records', SharedCoreBulkDeleteHandler::class);
+        $this->assertInstanceOf(BulkDeleteHandler::class, $table);
+        $this->assertFalse($table->authorize($request, [1]));
 
-        $this->assertTrue($registry->has('records'));
-        $this->assertInstanceOf(SharedCoreBulkDeleteHandler::class, $registry->resolve('records'));
-        $this->assertSame(['records' => SharedCoreBulkDeleteHandler::class], $registry->all());
+        $request->setUserResolver(static fn (): object => (object) ['id' => 1]);
 
-        try {
-            $registry->register('invalid', SharedCoreTable::class);
-            $this->fail('An invalid bulk delete handler was registered.');
-        } catch (InvalidArgumentException) {
-            $this->assertFalse($registry->has('invalid'));
-        }
-
-        $this->expectException(LogicException::class);
-        $registry->register('records', UnauthorizedSharedCoreBulkDeleteHandler::class);
+        $this->assertTrue($table->authorize($request, [1]));
     }
 
     public function test_bulk_delete_endpoint_rejects_unknown_resources_with_consistent_envelope(): void
@@ -264,9 +248,9 @@ class SharedCoreTest extends TestCase
             ->assertJsonStructure(['data' => ['errors' => ['ids']]]);
     }
 
-    public function test_bulk_delete_endpoint_returns_forbidden_for_unauthorized_handler(): void
+    public function test_bulk_delete_endpoint_returns_forbidden_for_unauthorized_table(): void
     {
-        app(BulkDeleteRegistry::class)->register('records', UnauthorizedSharedCoreBulkDeleteHandler::class);
+        app(TableRegistry::class)->register('records', SharedCoreBulkDeleteTable::class);
 
         $response = $this->withoutMiddleware()->postJson('/admin/bulk-delete', [
             'resource' => 'records',
@@ -280,13 +264,37 @@ class SharedCoreTest extends TestCase
         ]);
     }
 
+    public function test_bulk_delete_endpoint_rejects_tables_that_do_not_enable_bulk_delete(): void
+    {
+        app(TableRegistry::class)->register('records', SharedCoreTable::class);
+
+        $response = $this->withoutMiddleware()->postJson('/admin/bulk-delete', [
+            'resource' => 'records',
+            'ids' => [1],
+        ]);
+
+        $response->assertNotFound()->assertJsonPath('error', true);
+    }
+
+    public function test_bulk_delete_endpoint_rejects_tables_without_a_model(): void
+    {
+        app(TableRegistry::class)->register('records-without-model', SharedCoreBulkDeleteTableWithoutModel::class);
+
+        $response = $this->withoutMiddleware()->postJson('/admin/bulk-delete', [
+            'resource' => 'records-without-model',
+            'ids' => [1],
+        ]);
+
+        $response->assertNotFound()->assertJsonPath('error', true);
+    }
+
     public function test_bulk_delete_endpoint_resolves_handler_and_deletes_inside_transaction(): void
     {
         $first = SharedCoreRecord::query()->create(['name' => 'First', 'status' => 1]);
         $second = SharedCoreRecord::query()->create(['name' => 'Second', 'status' => 1]);
         SharedCoreRecord::query()->create(['name' => 'Kept', 'status' => 1]);
-        SharedCoreBulkDeleteHandler::$ranInsideTransaction = false;
-        app(BulkDeleteRegistry::class)->register('records', SharedCoreBulkDeleteHandler::class);
+        AuthorizedSharedCoreBulkDeleteTable::$ranInsideTransaction = false;
+        app(TableRegistry::class)->register('records', AuthorizedSharedCoreBulkDeleteTable::class);
 
         $response = $this->withoutMiddleware()->post('/admin/bulk-delete', [
             'resource' => 'records',
@@ -301,7 +309,7 @@ class SharedCoreTest extends TestCase
             ],
             'message' => 'Selected records were deleted successfully.',
         ]);
-        $this->assertTrue(SharedCoreBulkDeleteHandler::$ranInsideTransaction);
+        $this->assertTrue(AuthorizedSharedCoreBulkDeleteTable::$ranInsideTransaction);
         $this->assertDatabaseMissing('shared_core_records', ['id' => $first->getKey()]);
         $this->assertDatabaseMissing('shared_core_records', ['id' => $second->getKey()]);
         $this->assertDatabaseHas('shared_core_records', ['name' => 'Kept']);
@@ -479,7 +487,15 @@ class SharedCoreOperationsTable extends Table
     }
 }
 
-class SharedCoreBulkDeleteHandler implements BulkDeleteHandler
+class SharedCoreBulkDeleteTable extends SharedCoreTable
+{
+    public function setup(): static
+    {
+        return parent::setup()->hasBulkDelete();
+    }
+}
+
+class AuthorizedSharedCoreBulkDeleteTable extends SharedCoreBulkDeleteTable
 {
     public static bool $ranInsideTransaction = false;
 
@@ -492,20 +508,17 @@ class SharedCoreBulkDeleteHandler implements BulkDeleteHandler
     {
         self::$ranInsideTransaction = DB::connection()->transactionLevel() > 0;
 
-        return SharedCoreRecord::query()->whereKey($ids)->delete();
+        return parent::delete($ids);
     }
 }
 
-class UnauthorizedSharedCoreBulkDeleteHandler implements BulkDeleteHandler
+class SharedCoreBulkDeleteTableWithoutModel extends Table
 {
-    public function authorize(Request $request, array $ids): bool
+    public function setup(): static
     {
-        return false;
-    }
-
-    public function delete(array $ids): int
-    {
-        throw new LogicException('Unauthorized handlers must not delete records.');
+        return parent::setup()
+            ->setName('records-without-model')
+            ->hasBulkDelete();
     }
 }
 
