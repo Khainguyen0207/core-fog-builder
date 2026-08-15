@@ -16,6 +16,7 @@ class CatalogAdminModuleTest extends TestCase
     {
         $this->assertSame(CategoryController::class.'@index', Route::getRoutes()->getByName('admin.categories.index')->getActionName());
         $this->assertSame(ServiceController::class.'@index', Route::getRoutes()->getByName('admin.services.index')->getActionName());
+        $this->assertContains('plugin:figure-admin/catalog', Route::getRoutes()->getByName('admin.services.index')->gatherMiddleware());
         $this->assertSame(CategoryTable::class, app(TableRegistry::class)->resolve('categories'));
         $this->assertSame(ServiceTable::class, app(TableRegistry::class)->resolve('services'));
         $this->assertTrue(view()->exists('shared::tables.page'));

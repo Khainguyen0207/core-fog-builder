@@ -42,7 +42,7 @@ class BookingAdminModuleTest extends TestCase
             $this->assertSame($controller, $route->getActionName());
             $this->assertSame($uri, $route->uri());
             $this->assertContains($method, $route->methods());
-            $this->assertSame(['web', 'auth', 'ip.manager'], $route->gatherMiddleware());
+            $this->assertSame(['web', 'plugin:figure-admin/booking', 'auth', 'ip.manager'], $route->gatherMiddleware());
         }
 
         $routeNames = array_map(

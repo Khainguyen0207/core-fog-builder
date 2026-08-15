@@ -19,6 +19,7 @@ class PromotionsAdminModuleTest extends TestCase
         $this->assertSame(CouponController::class.'@index', Route::getRoutes()->getByName('admin.coupons.index')->getActionName());
         $this->assertSame(CouponApplicableController::class.'@index', Route::getRoutes()->getByName('admin.coupon-applicables.index')->getActionName());
         $this->assertSame(CouponRedemptionController::class.'@index', Route::getRoutes()->getByName('admin.coupon-redemptions.index')->getActionName());
+        $this->assertContains('plugin:figure-admin/promotions', Route::getRoutes()->getByName('admin.coupons.index')->gatherMiddleware());
         $this->assertSame(CouponTable::class, app(TableRegistry::class)->resolve('coupons'));
         $this->assertSame(CouponApplicableTable::class, app(TableRegistry::class)->resolve('coupon-applicables'));
         $this->assertSame(CouponRedemptionTable::class, app(TableRegistry::class)->resolve('coupon-redemptions'));

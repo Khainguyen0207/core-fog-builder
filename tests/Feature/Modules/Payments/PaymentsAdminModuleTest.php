@@ -25,7 +25,7 @@ class PaymentsAdminModuleTest extends TestCase
             $this->assertSame($controller, $route->getActionName());
             $this->assertSame($uri, $route->uri());
             $this->assertContains($method, $route->methods());
-            $this->assertSame(['web', 'auth', 'ip.manager'], $route->gatherMiddleware());
+            $this->assertSame(['web', 'plugin:figure-admin/payments', 'auth', 'ip.manager'], $route->gatherMiddleware());
         }
     }
 

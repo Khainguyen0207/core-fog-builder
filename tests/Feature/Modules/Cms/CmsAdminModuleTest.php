@@ -42,7 +42,7 @@ class CmsAdminModuleTest extends TestCase
                 $this->assertSame($controller.'@'.$action, $route->getActionName());
                 $this->assertSame('admin/'.$resource.sprintf($suffix, $parameter), $route->uri());
                 $this->assertContains($method, $route->methods());
-                $this->assertSame(['web', 'auth', 'ip.manager'], $route->gatherMiddleware());
+                $this->assertSame(['web', 'plugin:figure-admin/cms', 'auth', 'ip.manager'], $route->gatherMiddleware());
             }
         }
     }
