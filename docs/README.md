@@ -7,12 +7,13 @@ package configuration.
 ## Reading Order
 
 1. [Architecture](ARCHITECTURE.md)
-2. [Modules](MODULES.md)
-3. [Shared Core](SHARED-CORE.md)
-4. [Development](DEVELOPMENT.md)
-5. [Testing](TESTING.md)
-6. [Known Limitations](KNOWN-LIMITATIONS.md)
-7. [Agent Handoff](AGENT-HANDOFF.md)
+2. [Plugin Operations](PLUGINS.md)
+3. [Modules](MODULES.md)
+4. [Shared Core](SHARED-CORE.md)
+5. [Development](DEVELOPMENT.md)
+6. [Testing](TESTING.md)
+7. [Known Limitations](KNOWN-LIMITATIONS.md)
+8. [Agent Handoff](AGENT-HANDOFF.md)
 
 ## Authority
 
