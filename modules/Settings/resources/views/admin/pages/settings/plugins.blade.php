@@ -9,7 +9,7 @@
                 <h3 class="mb-1">Plugins</h3>
                 <p class="text-secondary mb-0">Optional features are disabled by default. Required dependencies must be enabled together.</p>
             </div>
-            <a href="{{ route('admin.settings.index') }}" class="btn btn-label-secondary">Back to Settings</a>
+            <a href="{{ route('admin.settings.index') }}" class="btn btn-outline-secondary">Back to Settings</a>
         </div>
 
         <form method="POST" action="{{ route('admin.settings.plugins.update') }}">
