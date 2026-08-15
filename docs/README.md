@@ -30,12 +30,14 @@ documentation in the same change, and call out any unresolved mismatch.
 The application is a Laravel 12 host with local Composer packages under
 `modules/*`.
 
-- The host owns domain models, migrations, services, jobs, APIs, middleware, and
-  application composition.
-- Feature packages own their admin controllers, requests, forms, tables, routes,
-  views, and menu registration.
+- The host owns application composition, core API boundaries, middleware, and the
+  centralized plugin catalog/state resolver.
+- Core packages are always enabled. Optional packages own their domain classes,
+  migrations, seeders, schedules, listeners, admin UI, and feature assets; the
+  host retains centralized API composition and plugin integration boundaries.
 - `figure-admin/shared` owns reusable admin layouts, Form/Table/Panel builders,
-  registries, shared routes, and frontend runtime.
-- Feature providers are loaded by Laravel package discovery.
+  plugin-aware registries, shared routes, and frontend runtime.
+- Installed package providers are loaded by Laravel package discovery; optional
+  behavior is then gated by the `enabled_plugins` database setting.
 - Tables, menus, and bulk-delete handlers use explicit registration. Filesystem
   discovery is forbidden.

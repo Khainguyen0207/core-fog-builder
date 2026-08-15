@@ -21,6 +21,18 @@ This checklist is mandatory for future coding sessions and agent handoffs.
 7. Preserve route names, table keys, middleware, and API envelopes unless the task
    explicitly changes the contract.
 8. Keep feature-only assets out of Shared.
+9. Use exact Composer package names as plugin IDs; do not infer plugins by scanning
+   `modules/*`.
+10. Core packages are always enabled. Optional packages default disabled and must
+    use centralized `PluginManager` state/dependency checks.
+11. Keep installed routes static and runtime-gated so DB state remains compatible
+    with `route:cache`.
+12. Add the package owner to optional menu, table, and bulk registrations.
+13. Gate schedules, jobs, listeners, callbacks, and internal extension calls at
+    execution time; route middleware alone is insufficient.
+14. Never drop migrations or delete business data when disabling a plugin.
+15. Keep core requests free of optional-table queries and optional route
+    assumptions.
 
 ## DataTable Guardrails
 
@@ -49,9 +61,11 @@ Run the narrowest affected tests first, then as applicable:
 php artisan test tests/Feature/Modules/<Module>/<Module>AdminModuleTest.php
 php artisan test tests/Feature/Modules/Shared/SharedCoreTest.php
 php artisan test tests/Feature/SharedCoreArchitectureTest.php
+php artisan test tests/Feature/Plugins
 php artisan test
 ./vendor/bin/pint --test
 composer validate --strict
+composer install --no-dev --dry-run
 php artisan package:discover --ansi
 php artisan route:list --path=admin -vv
 php artisan view:cache

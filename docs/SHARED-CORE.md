@@ -121,6 +121,17 @@ Shared provides explicit registries for:
 
 All registries detect conflicting keys. Do not silently overwrite registrations.
 
+Registrations accept an optional Composer package owner. Unowned registrations
+are always visible; owned registrations are visible/resolvable only when the
+host-supplied `RegistrationVisibility` allows the owner. Shared provides a
+host-neutral allow-all default, while this application binds an adapter backed by
+the current scoped `PluginManager`.
+
+Visibility is evaluated on every `all()`, `items()`, `resolve()`, or `has()` call.
+Never remove registrations when state changes. Collision checks include hidden
+entries, and owner identity is part of idempotency. Disabled and unknown table or
+bulk keys return the same safe 404 behavior and must not instantiate handlers.
+
 ## Bulk Deletion
 
 Bulk deletion is disabled by default. A feature must register a class implementing

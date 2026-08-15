@@ -40,8 +40,11 @@ When adding a package:
 2. Add PSR-4 autoloading and Laravel provider discovery metadata.
 3. Require `figure-admin/shared: dev-main`.
 4. Require `figure-admin/host: ^1.0` if the package imports `App\...`.
-5. Add the root `require` and path version mapping.
-6. Update Composer metadata and run package discovery.
+5. Add core packages to root `require`; add optional development packages to
+   `require-dev` and deployment guidance to `suggest`.
+6. Add optional package metadata and dependencies to
+   `config/figure-admin-plugins.php`.
+7. Update Composer metadata and run package discovery.
 
 Typical commands:
 
@@ -88,12 +91,13 @@ Do not expose exception messages in HTTP responses.
 
 ## Frontend and Vite
 
-Active Vite entries are declared in `vite.config.js`:
+Active Vite entries are declared explicitly in `vite.config.js`:
 
 - Shared admin JavaScript and SCSS
-- Booking calendar JavaScript and SCSS
-- Communications email-preview JavaScript and SCSS
 - Dashboard JavaScript and SCSS
+- Booking calendar JavaScript and SCSS when `figure-admin/booking` is installed
+- Communications email-preview JavaScript and SCSS when
+  `figure-admin/communications` is installed
 
 Add every new page-level entry explicitly. Feature assets stay in their owner
 module. Generic UI behavior belongs in Shared.
@@ -106,8 +110,14 @@ documented jQuery/Bootstrap globals until all consumers are migrated.
 
 ## Database Changes
 
-- Put migrations in the root database directory while domain ownership remains
-  host-based.
+- Put core migrations in `database/migrations` and optional domain migrations in
+  the owning package's `database/migrations` directory.
+- Preserve migration basenames when relocating executed migrations; Laravel's
+  migration ledger keys are compatibility contracts.
+- Package providers load installed plugin migrations regardless of enabled state.
+  Enabling/disabling a plugin must not run down migrations or delete data.
+- Keep root seeding core-only by default. Plugin seeders run only when their
+  effective package and dependency chain are enabled.
 - Review foreign-key delete behavior before changing account or profile deletion.
 - Use transactions for multi-write flows.
 - Add factories or deterministic test helpers for new integration behavior.
