@@ -9,10 +9,14 @@ Route::middleware(['web', 'auth', 'ip.manager'])
     ->group(function () {
         Route::get('/', [SettingController::class, 'index'])->name('index');
         Route::post('/', [SettingController::class, 'update'])->name('store');
-        Route::get('sepay', [SettingController::class, 'sePay'])->name('sepay');
+        Route::get('sepay', [SettingController::class, 'sePay'])
+            ->middleware('plugin:figure-admin/payments')
+            ->name('sepay');
         Route::get('work-time', [SettingController::class, 'workTime'])->name('work-time');
         Route::get('information-system', [SettingController::class, 'informationSystem'])->name('information-system');
-        Route::get('telegram', [SettingController::class, 'telegram'])->name('telegram');
+        Route::get('telegram', [SettingController::class, 'telegram'])
+            ->middleware('plugin:figure-admin/communications')
+            ->name('telegram');
         Route::get('plugins', [SettingController::class, 'plugins'])->name('plugins');
         Route::post('plugins', [SettingController::class, 'updatePlugins'])->name('plugins.update');
     });

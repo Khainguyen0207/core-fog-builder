@@ -2,9 +2,12 @@
 
 namespace Modules\Booking\Providers;
 
+use App\Events\CustomerCreatedEvent;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Modules\Booking\Admin\Tables\BookingServiceTable;
 use Modules\Booking\Admin\Tables\BookingTable;
+use Modules\Booking\Listeners\AttachHistoricalBookings;
 use Modules\Shared\Menu\MenuRegistry;
 use Modules\Shared\Tables\Registry\TableRegistry;
 
@@ -14,6 +17,7 @@ class BookingServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'booking');
         $this->loadRoutesFrom(__DIR__.'/../../routes/admin.php');
+        Event::listen(CustomerCreatedEvent::class, AttachHistoricalBookings::class);
 
         $tables->register('bookings', BookingTable::class, 'figure-admin/booking');
         $tables->register('booking-services', BookingServiceTable::class, 'figure-admin/booking');

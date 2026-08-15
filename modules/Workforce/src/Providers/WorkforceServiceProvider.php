@@ -2,6 +2,8 @@
 
 namespace Modules\Workforce\Providers;
 
+use App\Models\Staff;
+use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Modules\Shared\Menu\MenuRegistry;
 use Modules\Shared\Tables\Registry\TableRegistry;
@@ -14,6 +16,8 @@ class WorkforceServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'workforce');
         $this->loadRoutesFrom(__DIR__.'/../../routes/admin.php');
+
+        User::resolveRelationUsing('staff', fn (User $user) => $user->hasOne(Staff::class));
 
         $tables->register('staffs', StaffTable::class, 'figure-admin/workforce');
         $tables->register('staff-reviews', StaffReviewTable::class, 'figure-admin/workforce');

@@ -4,6 +4,7 @@ namespace Modules\Users\Admin\Tables;
 
 use App\Enums\UserGroupRoleEnum;
 use App\Models\User;
+use App\Plugins\PluginManager;
 use Illuminate\Support\Facades\Auth;
 use Modules\Shared\Forms\Fields\InputField;
 use Modules\Shared\Forms\Fields\SelectField;
@@ -19,22 +20,29 @@ class UserTable extends Table
     {
         parent::setup();
 
+        $workforceEnabled = app(PluginManager::class)->isEnabled('figure-admin/workforce');
+        $query = User::query()
+            ->select('users.*')
+            ->with('customer')
+            ->whereNot('users.id', Auth::id());
+
+        if ($workforceEnabled) {
+            $query->with('staff');
+        }
+
         return $this
             ->setModel(User::class)
             ->setName('users')
             ->setNameTable('Users')
             ->setRoute('admin.users.index')
             ->hasFilter()
-            ->usingQuery(User::query()
-                ->select('users.*')
-                ->with('customer')
-                ->whereNot('users.id', Auth::id()))
+            ->usingQuery($query)
             ->addColumns([
                 Column::make('id')->setLabel('#'),
                 Column::make('email')->setLabel('Email'),
                 FormatColumn::make('customer.name')
                     ->setLabel('Name')
-                    ->getValueUsing(function (FormatColumn $column) {
+                    ->getValueUsing(function (FormatColumn $column) use ($workforceEnabled) {
                         $item = $column->getItem();
 
                         if ($item->customer) {
@@ -45,7 +53,7 @@ class UserTable extends Table
                             );
                         }
 
-                        if ($item->staff) {
+                        if ($workforceEnabled && $item->staff) {
                             return sprintf(
                                 '<a href="%s" class="text-info">%s</a>',
                                 route('admin.staffs.show', $item->staff->id),
