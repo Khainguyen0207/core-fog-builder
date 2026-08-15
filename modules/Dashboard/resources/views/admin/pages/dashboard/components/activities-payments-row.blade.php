@@ -3,7 +3,9 @@
         <div class="card h-100">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="card-title m-0">Recent Activities</h5>
-                <a href="{{ route('admin.bookings.index') }}" class="btn btn-sm btn-outline-primary">View All</a>
+                @if (Route::has('admin.bookings.index'))
+                    <a href="{{ route('admin.bookings.index') }}" class="btn btn-sm btn-outline-primary">View All</a>
+                @endif
             </div>
             <div class="card-body">
 

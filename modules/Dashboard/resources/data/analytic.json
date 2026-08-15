@@ -1,0 +1,132 @@
+{
+    "schema_version": 1,
+    "weekStart": "2026-08-10",
+    "weekEnd": "2026-08-16",
+    "kpis": {
+        "bookingThisWeek": {
+            "value": 42,
+            "growth": 16.67
+        },
+        "pendingBookings": {
+            "value": 8,
+            "growth": -11.11
+        },
+        "revenueThisWeek": {
+            "value": 18500000,
+            "growth": 23.33
+        },
+        "expectedRevenueThisWeek": {
+            "value": 24750000,
+            "growth": 10
+        }
+    },
+    "charts": {
+        "bookingsWeekly": {
+            "labels": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            "series": [
+                {
+                    "name": "This Week",
+                    "data": [4, 6, 5, 7, 8, 9, 3]
+                },
+                {
+                    "name": "Last Week",
+                    "data": [3, 5, 4, 6, 7, 8, 3]
+                }
+            ]
+        },
+        "revenueWeekly": {
+            "labels": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            "series": [
+                {
+                    "name": "This Week",
+                    "data": [1200000, 2100000, 1750000, 2800000, 3200000, 4500000, 2950000]
+                },
+                {
+                    "name": "Last Week",
+                    "data": [1000000, 1900000, 1500000, 2200000, 2750000, 3500000, 2150000]
+                }
+            ]
+        }
+    },
+    "topServices": [
+        {
+            "service_id": 1,
+            "service_name": "Premium Wash",
+            "count": 18,
+            "revenue": 7200000
+        },
+        {
+            "service_id": 2,
+            "service_name": "Engine Maintenance",
+            "count": 14,
+            "revenue": 8400000
+        },
+        {
+            "service_id": 3,
+            "service_name": "Oil Change",
+            "count": 10,
+            "revenue": 2900000
+        }
+    ],
+    "topCategories": [
+        {
+            "id": 1,
+            "name": "Cleaning",
+            "count": 24,
+            "revenue": 9600000
+        },
+        {
+            "id": 2,
+            "name": "Maintenance",
+            "count": 18,
+            "revenue": 8900000
+        }
+    ],
+    "recentActivities": [
+        {
+            "id": 101,
+            "booking_code": "BK000101",
+            "customer_name": "Sample Customer",
+            "status": "confirmed",
+            "status_label": "Confirmed",
+            "status_color": "info",
+            "scheduled_start": "15/08/2026 14:30",
+            "created_at": "5 minutes ago"
+        },
+        {
+            "id": 100,
+            "booking_code": "BK000100",
+            "customer_name": "Demo Customer",
+            "status": "done",
+            "status_label": "Done",
+            "status_color": "success",
+            "scheduled_start": "15/08/2026 10:00",
+            "created_at": "2 hours ago"
+        }
+    ],
+    "paymentStats": {
+        "labels": ["Pay Later", "Momo", "SePay"],
+        "series": ["8.500.000 VND", "6.000.000 VND", "4.000.000 VND"],
+        "icons": ["wallet.png", "momo.png", "sepay.webp"]
+    },
+    "topCountries": [
+        {
+            "iso_code": "vn",
+            "country": "Vietnam",
+            "count": 820,
+            "percentage": 68.33
+        },
+        {
+            "iso_code": "us",
+            "country": "United States",
+            "count": 210,
+            "percentage": 17.5
+        },
+        {
+            "iso_code": "sg",
+            "country": "Singapore",
+            "count": 170,
+            "percentage": 14.17
+        }
+    ]
+}
