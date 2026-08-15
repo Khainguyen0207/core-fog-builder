@@ -8,13 +8,14 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Modules\Shared\BulkActions\BulkDeleteRegistry;
+use InvalidArgumentException;
+use Modules\Shared\Tables\Factory\TableFactory;
 use Throwable;
 
 class BulkDeleteController extends Controller
 {
     public function __construct(
-        private readonly BulkDeleteRegistry $registry,
+        private readonly TableFactory $tables,
         private readonly ValidationFactory $validation,
     ) {}
 
@@ -38,17 +39,19 @@ class BulkDeleteController extends Controller
         $ids = array_map(static fn (mixed $id): int => (int) $id, $validated['ids']);
 
         try {
-            $handler = $this->registry->resolve($validated['resource']);
+            $table = $this->tables->make($validated['resource']);
+        } catch (InvalidArgumentException) {
+            return $this->unsupportedResource();
+        }
 
-            if ($handler === null) {
-                return response()->json([
-                    'error' => true,
-                    'data' => null,
-                    'message' => 'The requested resource does not support bulk deletion.',
-                ], 404);
+        try {
+            $table->setup();
+
+            if (! $table->isHasBulkDelete() || $table->getModel() === null) {
+                return $this->unsupportedResource();
             }
 
-            if (! $handler->authorize($request, $ids)) {
+            if (! $table->authorize($request, $ids)) {
                 return response()->json([
                     'error' => true,
                     'data' => null,
@@ -56,7 +59,7 @@ class BulkDeleteController extends Controller
                 ], 403);
             }
 
-            $deletedCount = DB::transaction(fn (): int => $handler->delete($ids));
+            $deletedCount = DB::transaction(fn (): int => $table->delete($ids));
 
             return response()->json([
                 'error' => false,
@@ -81,5 +84,14 @@ class BulkDeleteController extends Controller
                 'message' => 'The selected records could not be deleted.',
             ], 500);
         }
+    }
+
+    private function unsupportedResource(): JsonResponse
+    {
+        return response()->json([
+            'error' => true,
+            'data' => null,
+            'message' => 'The requested resource does not support bulk deletion.',
+        ], 404);
     }
 }

@@ -5,7 +5,6 @@ namespace Modules\Shared\Providers;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Modules\Shared\BulkActions\BulkDeleteRegistry;
 use Modules\Shared\Menu\MenuRegistry;
 use Modules\Shared\Registry\AllowAllRegistrationVisibility;
 use Modules\Shared\Registry\Contracts\RegistrationVisibility;
@@ -23,13 +22,6 @@ class SharedServiceProvider extends ServiceProvider
         $this->app->singleton(
             TableRegistry::class,
             fn (Application $app): TableRegistry => new TableRegistry($app->make(RegistrationVisibility::class)),
-        );
-        $this->app->singleton(
-            BulkDeleteRegistry::class,
-            fn (Application $app): BulkDeleteRegistry => new BulkDeleteRegistry(
-                $app,
-                $app->make(RegistrationVisibility::class),
-            ),
         );
         $this->app->singleton(
             MenuRegistry::class,

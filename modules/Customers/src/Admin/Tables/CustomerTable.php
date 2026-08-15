@@ -22,6 +22,7 @@ class CustomerTable extends Table
         return $this
             ->setModel(Customer::class)->setName('customers')->setNameTable('Customers')->setRoute('admin.customers.index')->hasFilter()
             ->usingQuery(Customer::query()->with('user'))
+            ->hasBulkDelete()
             ->addColumns([
                 IDColumn::make(),
                 Column::make('name')->setLabel('Name'),

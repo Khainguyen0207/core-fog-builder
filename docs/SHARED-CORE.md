@@ -117,7 +117,6 @@ Shared provides explicit registries for:
 
 - Tables
 - Menus
-- Bulk-delete handlers
 
 All registries detect conflicting keys. Do not silently overwrite registrations.
 
@@ -127,18 +126,23 @@ host-supplied `RegistrationVisibility` allows the owner. Shared provides a
 host-neutral allow-all default, while this application binds an adapter backed by
 the current scoped `PluginManager`.
 
-Visibility is evaluated on every `all()`, `items()`, `resolve()`, or `has()` call.
+Visibility is evaluated on every `all()`, `items()`, or `resolve()` call.
 Never remove registrations when state changes. Collision checks include hidden
 entries, and owner identity is part of idempotency. Disabled and unknown table or
-bulk keys return the same safe 404 behavior and must not instantiate handlers.
+bulk keys return the same safe 404 behavior and must not instantiate tables.
 
 ## Bulk Deletion
 
-Bulk deletion is disabled by default. A feature must register a class implementing
-`BulkDeleteHandler` and must authorize the requested IDs itself.
+Every `Table` implements `BulkDeleteHandler`, and bulk deletion is disabled by
+default. Calling `hasBulkDelete()` opts a registered table into the shared bulk
+endpoint; no second registration is required. The default handler requires an
+authenticated user and deletes the selected keys through the table's Eloquent
+model. Tables may override `authorize()` and `delete()` for resource-specific
+rules or deletion behavior.
 
 Shared runs approved deletion inside a transaction and returns safe JSON error
-envelopes. Do not add a generic model mass-delete fallback.
+envelopes. Unknown, hidden, disabled, and model-less tables cannot use the
+endpoint. Do not add model or class-name resolution outside `TableRegistry`.
 
 ## Shared Routes
 
