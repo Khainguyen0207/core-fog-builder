@@ -15,6 +15,7 @@ class PublicController
     public function getSystemSettings()
     {
         $excludeKeys = [
+            'enabled_plugins',
             'sepay_api_token',
             'max_active_staff',
         ];

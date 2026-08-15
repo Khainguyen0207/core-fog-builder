@@ -11,12 +11,20 @@ use App\Models\BookingService;
 use App\Models\IpLog;
 use App\Models\Transaction;
 use Carbon\Carbon;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
+use RuntimeException;
 
 class DashboardController extends Controller
 {
-    public function index()
+    private const MOCK_ANALYTIC_ENABLE = true;
+
+    public function index(): View
     {
+        if (self::MOCK_ANALYTIC_ENABLE) {
+            return view('dashboard::admin.pages.dashboard.index', $this->loadMockAnalytics());
+        }
+
         $timezone = config('app.timezone');
         $now = Carbon::now($timezone);
 
@@ -46,6 +54,40 @@ class DashboardController extends Controller
             'weekStart',
             'weekEnd'
         ));
+    }
+
+    private function loadMockAnalytics(): array
+    {
+        $path = dirname(__DIR__, 4).'/resources/data/analytic.json';
+        $contents = file_get_contents($path);
+
+        if ($contents === false) {
+            throw new RuntimeException("Unable to read mock analytics from [{$path}].");
+        }
+
+        $analytics = json_decode($contents, true, 512, JSON_THROW_ON_ERROR);
+        $requiredKeys = [
+            'kpis',
+            'charts',
+            'topServices',
+            'topCategories',
+            'recentActivities',
+            'paymentStats',
+            'topCountries',
+            'weekStart',
+            'weekEnd',
+        ];
+
+        foreach ($requiredKeys as $key) {
+            if (! array_key_exists($key, $analytics)) {
+                throw new RuntimeException("Mock analytics is missing the [{$key}] key.");
+            }
+        }
+
+        $analytics['weekStart'] = Carbon::parse($analytics['weekStart'], config('app.timezone'));
+        $analytics['weekEnd'] = Carbon::parse($analytics['weekEnd'], config('app.timezone'));
+
+        return $analytics;
     }
 
     private function getRecentActivities(): array

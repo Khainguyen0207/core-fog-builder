@@ -20,6 +20,7 @@ use Modules\Shared\Http\Controllers\DataTableController;
 use Modules\Shared\Menu\MenuRegistry;
 use Modules\Shared\Panels\Panel;
 use Modules\Shared\Panels\PanelSection;
+use Modules\Shared\Registry\Contracts\RegistrationVisibility;
 use Modules\Shared\Tables\Columns\Column;
 use Modules\Shared\Tables\Factory\TableFactory;
 use Modules\Shared\Tables\Operations\DeleteOperation;
@@ -126,11 +127,51 @@ class SharedCoreTest extends TestCase
     {
         $keys = array_keys(app(MenuRegistry::class)->all());
         $expected = [
-            'dashboard', 'payments', 'customers', 'users', 'booking', 'catalog',
-            'promotions', 'workforce', 'cms', 'communications', 'settings', 'auth.logout',
+            'dashboard', 'customers', 'users', 'settings', 'auth.logout',
         ];
 
         $this->assertSame($expected, array_values(array_intersect($keys, $expected)));
+    }
+
+    public function test_registries_hide_owned_entries_without_losing_collision_protection(): void
+    {
+        $visibility = new class implements RegistrationVisibility
+        {
+            public bool $enabled = false;
+
+            public function allows(string $owner): bool
+            {
+                return $this->enabled && $owner === 'figure-admin/example';
+            }
+        };
+        $menus = new MenuRegistry($visibility);
+        $tables = new TableRegistry($visibility);
+        $bulkDeletes = new BulkDeleteRegistry($this->app, $visibility);
+
+        $menus->register('example', ['name' => 'Example'], 100, 'figure-admin/example');
+        $tables->register('example', SharedCoreTable::class, 'figure-admin/example');
+        $bulkDeletes->register('example', SharedCoreBulkDeleteHandler::class, 'figure-admin/example');
+
+        $this->assertSame([], $menus->all());
+        $this->assertSame([], $tables->all());
+        $this->assertFalse($bulkDeletes->has('example'));
+        $this->assertNull($bulkDeletes->resolve('example'));
+
+        try {
+            $tables->resolve('example');
+            $this->fail('A hidden table was resolved.');
+        } catch (InvalidArgumentException) {
+            $this->assertTrue(true);
+        }
+
+        $visibility->enabled = true;
+
+        $this->assertSame(['example'], array_keys($menus->all()));
+        $this->assertSame(SharedCoreTable::class, $tables->resolve('example'));
+        $this->assertInstanceOf(SharedCoreBulkDeleteHandler::class, $bulkDeletes->resolve('example'));
+
+        $this->expectException(LogicException::class);
+        $tables->register('example', SharedCoreTable::class, 'figure-admin/other');
     }
 
     public function test_package_views_and_nullable_user_presenter_do_not_require_host_models(): void

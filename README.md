@@ -1,153 +1,177 @@
-# Motorbike Service Manager (Backend)
+# Figure Admin
 
-Motorbike repair appointment booking system (Backend API & Admin Panel). <br>
-View system details: [Document](https://github.com/Khainguyen0207/moto-service-manager-be/blob/main/PROJECT_OVERVIEW.md)
+Laravel 12 backend API and administration panel for service-business operations.
+The application is composed from local Composer packages under `modules/*` and
+can run as a small core admin or with optional business plugins.
+
+## Architecture
+
+Always-enabled core packages:
+
+- `figure-admin/shared`
+- `figure-admin/auth`
+- `figure-admin/dashboard`
+- `figure-admin/customers`
+- `figure-admin/users`
+- `figure-admin/settings`
+
+Optional plugins default to disabled:
+
+| Plugin | Requires |
+|---|---|
+| `figure-admin/catalog` | None |
+| `figure-admin/workforce` | Catalog |
+| `figure-admin/booking` | Catalog, Workforce |
+| `figure-admin/payments` | Booking |
+| `figure-admin/promotions` | Booking |
+| `figure-admin/communications` | Booking |
+| `figure-admin/cms` | None |
+
+Installed plugins are enabled from **Admin > Settings > Plugins**. Requested
+state is stored in `settings.enabled_plugins`; dependencies and installed-package
+availability are validated centrally. Disabling a plugin hides and gates its
+behavior without deleting its schema or data.
+
+See [Plugin Operations](docs/PLUGINS.md) and
+[Architecture](docs/ARCHITECTURE.md) for the complete contracts.
 
 ## Requirements
 
-### Docker Mode
-- Docker & Docker Compose
-
-### Manual Mode
-- PHP >= 8.2
+- PHP 8.2 or newer
 - Composer
-- Node.js >= 20
+- Node.js 20 or newer
 - MySQL 8.0
 
----
+Docker and Docker Compose can provide the application and database services.
 
-## 1. Installation & Run (Docker)
+## Local Setup
 
-### Environment Configuration
-
-```bash
-cp .env.example .env
-```
-
-Edit `.env` (important):
-
-```env
-APP_ENV=production
-APP_DEBUG=false
-
-# Database container connection
-DB_HOST=mysql
-DB_DATABASE=moto_service
-DB_USERNAME=root
-DB_PASSWORD=your_password
-```
-
-### Build & Start
+The one-command bootstrap installs dependencies, creates `.env` when missing,
+generates the application key, runs core migrations, and builds frontend assets:
 
 ```bash
-docker compose up --build -d
+composer setup
 ```
 
-### Initial Setup
+For a seeded local database, run:
 
 ```bash
-docker compose exec app php artisan key:generate
-docker compose exec app php artisan migrate --seed
-docker compose exec app php artisan storage:link
-```
-
-### Common Docker Commands
-
-```bash
-# View logs
-docker compose logs -f app
-
-# Access container
-docker compose exec app bash
-
-# Restart services
-docker compose restart
-```
-
----
-
-## 2. Installation & Run (Manual)
-
-### Install dependencies
-
-```bash
-composer install
-npm install
-```
-
-### Environment Configuration
-
-```bash
-cp .env.example .env
-php artisan key:generate
-```
-
-Edit `.env`:
-```env
-DB_HOST=127.0.0.1
-DB_DATABASE=moto_service
-DB_USERNAME=root
-DB_PASSWORD=your_local_password
-```
-
-### Database & Storage Setup
-
-```bash
-# Ensure MySQL is running and the database has been created
-php artisan migrate --seed
+php artisan db:seed
 php artisan storage:link
 ```
 
-### Build Frontend
+Manual setup:
 
 ```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+php artisan storage:link
+npm install
 npm run build
 ```
 
-### Run Server
+Configure the MySQL connection in `.env` before running migrations:
 
-```bash
-# Terminal 1: Web Server
-php artisan serve
-
-# Terminal 2: Background Jobs (required)
-php artisan queue:work
-
-# Terminal 3: Scheduler (optional)
-php artisan schedule:work
+```env
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=figure_admin
+DB_USERNAME=root
+DB_PASSWORD=
 ```
 
----
+## Development
 
-## 3. Setup Telegram Notifications
+Start Laravel, the queue listener, logs, and Vite together:
 
-The system supports sending notifications via Telegram when a customer books an appointment. There are 2 ways to set this up:
+```bash
+composer dev
+```
 
-### Method 1: Quick Setup (Recommended)
-You just need to join the system's default Telegram group:
-- Click the link: [Join group telegram notification here](https://t.me/+UkakVQvNAaI4YzM1) to join the group.
-- The default Group ID and Bot Token are already configured in the source code.
+Or run services separately:
 
-### Method 2: Custom Setup (Custom Bot & Group)
-If you want to use your own Telegram Bot and Group:
-1. Refer to the guide on creating a Bot and getting the Chat ID at: [Guide to create Bot Token and Telegram Group ID](https://wiki.shost.vn/thu-thuat-wordpress/huong-dan-tao-bot-token-group-id-telegram-2025.html).
-2. Once you have the information, access the **Admin Panel** -> **Settings** menu -> **Telegram** tab.
-3. Update your `Bot Token` and `Chat ID` in the form and save.
+```bash
+php artisan serve
+php artisan queue:work
+php artisan schedule:work
+npm run dev
+```
 
----
+The admin login is available at `http://127.0.0.1:8000/login`. API routes use
+the `/api/v1` prefix.
 
-## General Information
+## Docker
 
-### Access
+Development stack:
 
-| URL                          | Description  |
-|------------------------------|--------------|
-| http://localhost:8080/admin  | Admin Panel  |
-| http://localhost:8080/api/v1 | API          |
-| http://localhost:8000        | Manual       |
+```bash
+cp .env.example .env
+docker compose -f docker-compose.dev.yaml up --build -d
+docker compose -f docker-compose.dev.yaml exec moto-service-manager-be php artisan key:generate
+docker compose -f docker-compose.dev.yaml exec moto-service-manager-be php artisan migrate --seed
+docker compose -f docker-compose.dev.yaml exec moto-service-manager-be php artisan storage:link
+```
 
-### Default Accounts
+Open the development application at `http://localhost:8080`.
 
-| Email                  | Password |
-|------------------------|----------|
-| admin@admin.vn         | 123456   |
+Production-oriented stack:
+
+```bash
+docker compose -f docker-compose.yaml up --build -d
+```
+
+Open the production-oriented stack at `http://localhost:8000`.
+
+## Production Composition
+
+Optional packages are development dependencies in this monorepo. A core-only
+production install excludes them:
+
+```bash
+composer install --no-dev --optimize-autoloader
+npm ci
+npm run build
+```
+
+To deploy an optional plugin, add that package and its dependency chain to the
+root Composer `require` section before installing with `--no-dev`. Install the
+code before selecting the plugin in Settings. Composer package installation and
+database enablement are separate operations.
+
+## Plugin Configuration
+
+Plugin-specific settings are shown only when their owner is effectively enabled:
+
+- Workforce: active-staff limits
+- Payments: SePay configuration
+- Communications: Telegram configuration
+
+Never commit API tokens, bot tokens, chat IDs, or other credentials. Configure
+them through environment variables or the protected Settings UI as appropriate.
+
+## Verification
+
+```bash
+composer test
+./vendor/bin/pint --test
+composer validate --strict
+php artisan package:discover --ansi
+php artisan route:cache
+php artisan view:cache
+npm run build
+```
+
+Plugin-focused tests are under `tests/Feature/Plugins`.
+
+## Documentation
+
+- [Documentation Index](docs/README.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Plugin Operations](docs/PLUGINS.md)
+- [Module Inventory](docs/MODULES.md)
+- [Shared Core](docs/SHARED-CORE.md)
+- [Development](docs/DEVELOPMENT.md)
+- [Testing](docs/TESTING.md)
+- [Known Limitations](docs/KNOWN-LIMITATIONS.md)

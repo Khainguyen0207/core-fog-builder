@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Modules\Cms;
 
+use App\Plugins\PluginManager;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Modules\Cms\Admin\Tables\BlogCategoryTable;
 use Modules\Cms\Admin\Tables\CommentTable;
@@ -16,6 +18,15 @@ use Tests\TestCase;
 
 class CmsAdminModuleTest extends TestCase
 {
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        app(PluginManager::class)->replaceEnabledPackages(['figure-admin/cms']);
+    }
+
     public function test_cms_resources_are_registered_to_module_controllers(): void
     {
         $resources = [
@@ -42,7 +53,7 @@ class CmsAdminModuleTest extends TestCase
                 $this->assertSame($controller.'@'.$action, $route->getActionName());
                 $this->assertSame('admin/'.$resource.sprintf($suffix, $parameter), $route->uri());
                 $this->assertContains($method, $route->methods());
-                $this->assertSame(['web', 'auth', 'ip.manager'], $route->gatherMiddleware());
+                $this->assertSame(['web', 'plugin:figure-admin/cms', 'auth', 'ip.manager'], $route->gatherMiddleware());
             }
         }
     }

@@ -5,8 +5,12 @@ part of unrelated work.
 
 ## Package Boundaries
 
-- Feature packages are admin-layer packages, not standalone domain packages.
-- Domain models, migrations, enums, services, and APIs remain host-owned.
+- Optional packages own domain code and migrations but retain legacy `App\...`
+  class identities through Composer classmaps. They remain application-integrated
+  packages rather than independently reusable domain libraries.
+- Optional packages are root `require-dev` dependencies for monorepo development.
+  Production installations must explicitly require desired plugins before they
+  can be enabled in the database.
 - Cross-module links currently use stable route names instead of formal contracts.
 - The Shared package is reusable, but the assembled admin application still
   expects host configuration, authentication, and domain packages.
@@ -39,6 +43,8 @@ part of unrelated work.
 
 - Changing a User role does not enforce Customer/Staff profile consistency.
 - Deleting a User has cross-domain foreign-key and cascade effects.
+- Disabling a plugin preserves its schema, so database-level foreign-key cascades
+  can still affect disabled plugin data during core record deletion.
 - Current-user protection historically differs between single and bulk deletion;
   Shared bulk deletion is now opt-in to avoid generic destructive behavior.
 - Some model casts/schema types are legacy strings rather than booleans or
@@ -50,6 +56,8 @@ part of unrelated work.
 - The main admin CSS and some JavaScript bundles exceed Vite's 500 kB advisory
   threshold.
 - The inherited theme produces Sass deprecation warnings.
+- Vite reads installed packages from Composer's generated `installed.json`; run
+  Composer before building frontend assets after changing package composition.
 - Laravel Debugbar can overlay screenshots in local development; distinguish it
   from application regressions.
 - Playwright currently uses a fixed local URL and database credentials from the

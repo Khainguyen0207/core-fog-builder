@@ -13,7 +13,12 @@
     "autoload": {
         "psr-4": {
             "Modules\\Cms\\": "src/"
-        }
+        },
+        "classmap": [
+            "src/Domain/",
+            "database/factories/",
+            "database/seeders/"
+        ]
     },
     "extra": {
         "laravel": {

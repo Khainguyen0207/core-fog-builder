@@ -2,10 +2,9 @@
 
 namespace App\Services;
 
-use App\Enums\BookingStatusEnum;
 use App\Enums\CustomerMemberShipEnum;
 use App\Enums\UserGroupRoleEnum;
-use App\Models\Booking;
+use App\Events\CustomerCreatedEvent;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -33,17 +32,7 @@ class CustomerService
                 'note' => $data['note'] ?? null,
             ]);
 
-            Booking::query()
-                ->where('customer_phone', $customer->phone)
-                ->whereNull('customer_id')
-                ->update(['customer_id' => $customer->id]);
-
-            $totalSpent = Booking::query()
-                ->where('customer_phone', $customer->phone)
-                ->where('status', BookingStatusEnum::DONE)
-                ->sum('total_price');
-
-            $customer->update(['total_spent' => $totalSpent]);
+            CustomerCreatedEvent::dispatch($customer);
 
             return $customer->fresh();
         });

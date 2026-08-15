@@ -14,11 +14,12 @@ class PromotionsServiceProvider extends ServiceProvider
     public function boot(TableRegistry $tables, MenuRegistry $menus): void
     {
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'promotions');
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/../../routes/admin.php');
 
-        $tables->register('coupons', CouponTable::class);
-        $tables->register('coupon-applicables', CouponApplicableTable::class);
-        $tables->register('coupon-redemptions', CouponRedemptionTable::class);
+        $tables->register('coupons', CouponTable::class, 'figure-admin/promotions');
+        $tables->register('coupon-applicables', CouponApplicableTable::class, 'figure-admin/promotions');
+        $tables->register('coupon-redemptions', CouponRedemptionTable::class, 'figure-admin/promotions');
         $menus->register('promotions', [
             'name' => 'Coupons', 'icon' => 'menu-icon tf-icons bx bx-collection',
             'route' => 'admin.coupons.index', 'active' => ['admin.coupons.*', 'admin.coupon-redemptions.*'],
@@ -26,6 +27,6 @@ class PromotionsServiceProvider extends ServiceProvider
                 ['name' => 'Coupons', 'route' => 'admin.coupons.index', 'active' => ['admin.coupons.*']],
                 ['name' => 'Coupon Redemptions', 'route' => 'admin.coupon-redemptions.index', 'active' => ['admin.coupon-redemptions.*']],
             ],
-        ], 700);
+        ], 700, 'figure-admin/promotions');
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Modules\Payments;
 
+use App\Plugins\PluginManager;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Modules\Payments\Admin\Tables\TransactionTable;
 use Modules\Payments\Http\Admin\Controllers\TransactionController;
@@ -10,6 +12,20 @@ use Tests\TestCase;
 
 class PaymentsAdminModuleTest extends TestCase
 {
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        app(PluginManager::class)->replaceEnabledPackages([
+            'figure-admin/catalog',
+            'figure-admin/workforce',
+            'figure-admin/booking',
+            'figure-admin/payments',
+        ]);
+    }
+
     public function test_payments_routes_are_registered_to_module_controller(): void
     {
         $routes = [
@@ -25,7 +41,7 @@ class PaymentsAdminModuleTest extends TestCase
             $this->assertSame($controller, $route->getActionName());
             $this->assertSame($uri, $route->uri());
             $this->assertContains($method, $route->methods());
-            $this->assertSame(['web', 'auth', 'ip.manager'], $route->gatherMiddleware());
+            $this->assertSame(['web', 'plugin:figure-admin/payments', 'auth', 'ip.manager'], $route->gatherMiddleware());
         }
     }
 

@@ -7,14 +7,15 @@ Composer path packages.
 
 ```text
 Host application
-├── app/                  Domain/application code and APIs
-├── database/             Shared schema, factories, and seeders
-├── routes/api.php        Customer, staff, and public APIs
+├── app/                  Core application code and plugin orchestration
+├── database/             Core schema, factories, and seeders
+├── routes/api.php        Core and runtime-gated plugin APIs
 ├── routes/web.php        Root/admin redirects and host integrations
-├── config/               Host configuration and Shared overrides
+├── config/               Host, Shared, and explicit plugin catalog config
 └── modules/
-    ├── Shared/           Reusable admin core
-    └── <Feature>/        Admin vertical slices
+    ├── Shared/           Reusable admin infrastructure
+    ├── <Core>/           Always-enabled core verticals
+    └── <Plugin>/         Optional business verticals
 ```
 
 ## Composer Packages
@@ -30,9 +31,10 @@ The host provides a virtual compatibility dependency:
 }
 ```
 
-Feature packages require `figure-admin/host` because they still import domain
-classes from `App\...`. They are application-integrated packages, not standalone
-domain libraries.
+Application-integrated packages may require `figure-admin/host`. Optional
+packages own domain code under `src/Domain` while retaining established `App\...`
+class identities through package classmaps. This preserves serialized jobs,
+events, model references, and other persisted compatibility contracts.
 
 `figure-admin/shared` is different. It must remain host-independent and may only
 depend on PHP, Laravel, Yajra DataTables, and other explicitly declared generic
@@ -43,9 +45,10 @@ libraries.
 Allowed:
 
 ```text
-Host -> Shared + feature packages
+Host -> core packages + installed optional packages
 Feature package -> Shared
 Feature package -> host domain through figure-admin/host
+Optional package -> declared optional dependency
 ```
 
 Forbidden:
@@ -61,18 +64,61 @@ For example, the host adds `ip.manager` to Shared routes through
 `config/figure-admin-shared.php`; the Shared package default does not know that
 middleware alias.
 
+## Plugin Composition
+
+The explicit catalog in `config/figure-admin-plugins.php` is the source of truth
+for package identity, core/optional classification, and dependencies. Composer
+package names are immutable plugin IDs.
+
+Core packages are always effective:
+
+- `figure-admin/shared`
+- `figure-admin/auth`
+- `figure-admin/dashboard`
+- `figure-admin/customers`
+- `figure-admin/users`
+- `figure-admin/settings`
+
+Optional packages default to disabled:
+
+- `figure-admin/catalog`
+- `figure-admin/workforce`
+- `figure-admin/booking`
+- `figure-admin/payments`
+- `figure-admin/promotions`
+- `figure-admin/communications`
+- `figure-admin/cms`
+
+Requested optional state is stored as a JSON array in
+`settings.enabled_plugins`. `PluginManager` computes effective state from the
+catalog, installed Composer packages, requested state, and transitive dependency
+availability. Unknown, missing, disabled, and dependency-blocked packages fail
+closed. State changes are validated and canonicalized centrally; packages must
+not implement their own dependency or fallback logic.
+
+Installed optional routes remain statically registered so route caching is safe.
+The `plugin:<composer-name>` middleware gates requests dynamically: explicitly
+disabled features return 404, while requested but unavailable features return
+503. API failures preserve the standard `error`, `data`, `message` envelope.
+Disabling a plugin never drops its schema or data.
+
 ## Ownership Rules
 
 The host owns:
 
-- Eloquent models and domain enums under `app/Models` and `app/Enums`.
-- Actions, services, jobs, events, listeners, API controllers, and resources.
+- Core domain/application code and cross-plugin integration contracts.
 - Middleware and middleware aliases.
-- Database migrations, factories, and seeders.
-- Final package composition, environment configuration, and branding overrides.
+- Core database migrations, factories, and seeders.
+- The plugin catalog, state persistence, effective-state resolver, and runtime
+  middleware fallback.
+- Final Composer composition, environment configuration, and branding overrides.
 
 Feature packages own:
 
+- Their domain models, enums, actions, services, jobs, events, and listeners.
+- Their migrations, factories, and seeders.
+- Their console behavior and package integration registrations, including
+  execution-time plugin gates.
 - Admin controllers and Form Requests.
 - Concrete Forms, Tables, Panels, and feature policies/actions.
 - Admin routes and namespaced feature views.
@@ -86,12 +132,16 @@ Shared owns:
 - DataTable and safe bulk-action endpoints.
 - Generic browser runtime and component initialization.
 - Host-neutral configuration defaults.
+- Generic registration visibility contracts; the host supplies the
+  `PluginManager` adapter.
 
 ## Provider Loading
 
-All module providers are declared in each module's `composer.json` under
-`extra.laravel.providers`. Do not manually register module providers in
-`bootstrap/providers.php`.
+All installed module providers are declared in each module's `composer.json`
+under `extra.laravel.providers`. Do not manually register module providers in
+`bootstrap/providers.php`. Optional providers may load routes, views, migrations,
+schedules, and listeners, but business execution must still check effective
+plugin state where work can outlive an HTTP request.
 
 `bootstrap/providers.php` is reserved for host providers and deliberately manual
 third-party providers.

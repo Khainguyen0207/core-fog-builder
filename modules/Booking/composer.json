@@ -14,7 +14,12 @@
     "autoload": {
         "psr-4": {
             "Modules\\Booking\\": "src/"
-        }
+        },
+        "classmap": [
+            "src/Domain/",
+            "database/factories/",
+            "database/seeders/"
+        ]
     },
     "extra": {
         "laravel": {

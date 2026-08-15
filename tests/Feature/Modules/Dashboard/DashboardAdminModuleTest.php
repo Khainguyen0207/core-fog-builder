@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Modules\Dashboard;
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Modules\Dashboard\Http\Admin\Controllers\DashboardController;
 use Tests\TestCase;
@@ -37,5 +39,46 @@ class DashboardAdminModuleTest extends TestCase
         $this->assertTrue(view()->exists('dashboard::admin.pages.dashboard.components.kpi-row'));
         $this->assertTrue(view()->exists('dashboard::admin.pages.dashboard.components.revenue-services-row'));
         $this->assertTrue(view()->exists('dashboard::admin.pages.dashboard.components.activities-payments-row'));
+    }
+
+    public function test_mock_analytics_fixture_matches_dashboard_contract(): void
+    {
+        $path = base_path('modules/Dashboard/resources/data/analytic.json');
+        $analytics = json_decode(file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(1, $analytics['schema_version']);
+        $this->assertLessThanOrEqual(
+            Carbon::parse($analytics['weekEnd']),
+            Carbon::parse($analytics['weekStart'])
+        );
+
+        foreach (['bookingThisWeek', 'pendingBookings', 'revenueThisWeek', 'expectedRevenueThisWeek'] as $key) {
+            $this->assertIsNumeric($analytics['kpis'][$key]['value']);
+            $this->assertIsNumeric($analytics['kpis'][$key]['growth']);
+        }
+
+        foreach ($analytics['charts'] as $chart) {
+            $this->assertCount(7, $chart['labels']);
+
+            foreach ($chart['series'] as $series) {
+                $this->assertCount(count($chart['labels']), $series['data']);
+                $this->assertContainsOnly('numeric', $series['data']);
+            }
+        }
+
+        $this->assertCount(count($analytics['paymentStats']['labels']), $analytics['paymentStats']['series']);
+        $this->assertCount(count($analytics['paymentStats']['labels']), $analytics['paymentStats']['icons']);
+    }
+
+    public function test_dashboard_controller_uses_mock_analytics_without_database_queries(): void
+    {
+        DB::enableQueryLog();
+
+        $view = app(DashboardController::class)->index();
+
+        $this->assertSame('dashboard::admin.pages.dashboard.index', $view->name());
+        $this->assertSame(42, $view->getData()['kpis']['bookingThisWeek']['value']);
+        $this->assertInstanceOf(Carbon::class, $view->getData()['weekStart']);
+        $this->assertSame([], DB::getQueryLog());
     }
 }

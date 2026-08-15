@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Modules\Communications;
 
+use App\Plugins\PluginManager;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Modules\Communications\Admin\Tables\EmailTemplateTable;
 use Modules\Communications\Admin\Tables\SendEmailUserTable;
@@ -13,6 +15,20 @@ use Tests\TestCase;
 
 class CommunicationsAdminModuleTest extends TestCase
 {
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        app(PluginManager::class)->replaceEnabledPackages([
+            'figure-admin/catalog',
+            'figure-admin/workforce',
+            'figure-admin/booking',
+            'figure-admin/communications',
+        ]);
+    }
+
     public function test_communications_admin_routes_are_registered_to_module_controllers(): void
     {
         $routes = [
@@ -34,7 +50,7 @@ class CommunicationsAdminModuleTest extends TestCase
             $this->assertSame($controller, $route->getActionName());
             $this->assertSame($uri, $route->uri());
             $this->assertContains($method, $route->methods());
-            $this->assertSame(['web', 'auth', 'ip.manager'], $route->gatherMiddleware());
+            $this->assertSame(['web', 'plugin:figure-admin/communications', 'auth', 'ip.manager'], $route->gatherMiddleware());
         }
 
         $routeNames = array_map(
@@ -70,6 +86,6 @@ class CommunicationsAdminModuleTest extends TestCase
         $this->assertNotNull($route);
         $this->assertNull($route->getName());
         $this->assertSame(TelegramBotController::class.'@updatedActivity', $route->getActionName());
-        $this->assertSame(['web', 'guest'], $route->gatherMiddleware());
+        $this->assertSame(['web', 'plugin:figure-admin/communications', 'guest'], $route->gatherMiddleware());
     }
 }

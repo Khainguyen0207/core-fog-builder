@@ -35,29 +35,19 @@
     ],
     "require": {
         "php": "^8.2",
-        "barryvdh/laravel-dompdf": "^3.1",
         "fakerphp/faker": "^1.23",
         "figure-admin/auth": "dev-main",
-        "figure-admin/booking": "dev-main",
-        "figure-admin/catalog": "dev-main",
-        "figure-admin/cms": "dev-main",
-        "figure-admin/communications": "dev-main",
         "figure-admin/customers": "dev-main",
         "figure-admin/dashboard": "dev-main",
-        "figure-admin/payments": "dev-main",
-        "figure-admin/promotions": "dev-main",
         "figure-admin/settings": "dev-main",
         "figure-admin/shared": "dev-main",
         "figure-admin/users": "dev-main",
-        "figure-admin/workforce": "dev-main",
         "google/apiclient": "^2.19",
-        "irazasyed/telegram-bot-sdk": "^3.15",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.24",
         "laravel/tinker": "^2.10.1",
         "opcodesio/log-viewer": "^3.21",
-        "sepay/sepay-pg": "^1.0",
         "torann/geoip": "^3.0",
         "yajra/laravel-datatables-oracle": "^12.0"
     },
@@ -65,6 +55,13 @@
         "figure-admin/host": "1.0.0"
     },
     "require-dev": {
+        "figure-admin/booking": "dev-main",
+        "figure-admin/catalog": "dev-main",
+        "figure-admin/cms": "dev-main",
+        "figure-admin/communications": "dev-main",
+        "figure-admin/payments": "dev-main",
+        "figure-admin/promotions": "dev-main",
+        "figure-admin/workforce": "dev-main",
         "fruitcake/laravel-debugbar": "^3.16",
         "laravel/boost": "^1.8",
         "laravel/pail": "^1.2.2",
@@ -73,6 +70,15 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
         "phpunit/phpunit": "^11.5.3"
+    },
+    "suggest": {
+        "figure-admin/booking": "Booking workflows and administration.",
+        "figure-admin/catalog": "Service and category management.",
+        "figure-admin/cms": "Blog and content management.",
+        "figure-admin/communications": "Email and Telegram integrations.",
+        "figure-admin/payments": "Transactions and payment integrations.",
+        "figure-admin/promotions": "Coupons and redemption management.",
+        "figure-admin/workforce": "Staff and workforce management."
     },
     "autoload": {
         "psr-4": {

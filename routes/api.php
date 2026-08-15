@@ -16,7 +16,7 @@ Route::group([
 ], function () {
     Route::group([
         'prefix' => 'auth',
-        'middleware' => ['throttle:api-auth']
+        'middleware' => ['throttle:api-auth'],
     ], function () {
         Route::post('login', 'AuthenticateController@login');
         Route::post('login', 'AuthenticateController@login');
@@ -35,7 +35,7 @@ Route::group([
 
     Route::group([
         'prefix' => 'staff',
-        'middleware' => ['throttle:api-auth']
+        'middleware' => ['plugin:figure-admin/workforce', 'throttle:api-auth'],
     ], function () {
         Route::post('login', [AuthenticateController::class, 'staffLogin']);
 
@@ -49,12 +49,14 @@ Route::group([
     Route::group([
         'prefix' => 'staff',
         'namespace' => 'Staff',
-        'middleware' => ['auth:sanctum', StaffAreaMiddleware::class],
+        'middleware' => ['plugin:figure-admin/workforce', 'auth:sanctum', StaffAreaMiddleware::class],
     ], function () {
         Route::get('dashboard', 'DashboardController@index');
         Route::get('schedules', 'ScheduleController@index');
-        Route::get('reviews', 'ReviewController@index');
-        Route::patch('booking-services/{bookingService}/status', 'BookingServiceController@updateStatus');
+        Route::get('reviews', 'ReviewController@index')
+            ->middleware('plugin:figure-admin/booking');
+        Route::patch('booking-services/{bookingService}/status', 'BookingServiceController@updateStatus')
+            ->middleware('plugin:figure-admin/booking');
 
         Route::patch('profile', [ProfileController::class, 'updateProfile']);
         Route::patch('change-password', [ProfileController::class, 'changePassword']);
@@ -70,7 +72,7 @@ Route::group([
 
         Route::group([
             'prefix' => 'customers',
-            'middleware' => ['throttle:api-auth']
+            'middleware' => ['throttle:api-auth'],
         ], function () {
             Route::post('/update-profile', 'CustomerController@updateProfile');
             Route::post('/change-password', 'CustomerController@changePassword');
@@ -78,12 +80,14 @@ Route::group([
 
         Route::group([
             'prefix' => 'posts',
+            'middleware' => ['plugin:figure-admin/cms'],
         ], function () {
             Route::post('/{slug}/comments', 'PostController@comment');
         });
 
         Route::group([
             'prefix' => 'bookings',
+            'middleware' => ['plugin:figure-admin/booking'],
         ], function () {
             Route::get('/', 'BookingController@getBookings');
             Route::get('/{booking_code}', 'BookingController@getBooking');
@@ -92,6 +96,7 @@ Route::group([
 
         Route::group([
             'prefix' => 'staff-reviews',
+            'middleware' => ['plugin:figure-admin/workforce', 'plugin:figure-admin/booking'],
         ], function () {
             Route::get('/', 'StaffReviewController@index');
             Route::post('/', 'StaffReviewController@store');
@@ -104,6 +109,7 @@ Route::group([
 
     Route::group([
         'prefix' => 'posts',
+        'middleware' => ['plugin:figure-admin/cms'],
     ], function () {
         Route::get('/{slug}', 'PostController@getPost');
         Route::get('/', 'PostController@getPosts');
@@ -111,6 +117,7 @@ Route::group([
 
     Route::group([
         'prefix' => 'payment',
+        'middleware' => ['plugin:figure-admin/payments'],
     ], function () {
         Route::get('payment-methods', 'PaymentController@getPaymentMethods');
         Route::post('create-transaction', 'PaymentController@createTransaction');
@@ -121,24 +128,32 @@ Route::group([
         Route::post('check-token', 'PaymentController@checkTransactionByToken');
     });
 
-    Route::post('get-calendar-available', 'BookingController@getCalendar');
-    Route::post('collect', 'BookingController@collect');
+    Route::post('get-calendar-available', 'BookingController@getCalendar')
+        ->middleware('plugin:figure-admin/booking');
+    Route::post('collect', 'BookingController@collect')
+        ->middleware('plugin:figure-admin/booking');
     Route::get('get-calendar-work', 'PublicController@getCalendarWork');
     Route::get('system-settings', 'PublicController@getSystemSettings');
 
-    Route::get('services', 'ServiceController@getServices');
-    Route::post('booking', 'BookingController@create');
+    Route::get('services', 'ServiceController@getServices')
+        ->middleware('plugin:figure-admin/catalog');
+    Route::post('booking', 'BookingController@create')
+        ->middleware('plugin:figure-admin/booking');
 
-    Route::get('staffs', 'StaffController@getStaffs');
-    Route::get('staffs/staff', 'StaffController@getStaffByID');
+    Route::get('staffs', 'StaffController@getStaffs')
+        ->middleware('plugin:figure-admin/workforce');
+    Route::get('staffs/staff', 'StaffController@getStaffByID')
+        ->middleware('plugin:figure-admin/workforce');
 
-    Route::get('staffs/available-at', 'StaffController@getAvailableStaffs');
+    Route::get('staffs/available-at', 'StaffController@getAvailableStaffs')
+        ->middleware(['plugin:figure-admin/workforce', 'plugin:figure-admin/booking']);
 
-    Route::post('coupons/validate', 'CouponController@validateCoupon');
+    Route::post('coupons/validate', 'CouponController@validateCoupon')
+        ->middleware('plugin:figure-admin/promotions');
 
-    Route::get('get-booking-by-booking-code', 'PublicController@getBookingByBookingCode');
+    Route::get('get-booking-by-booking-code', 'PublicController@getBookingByBookingCode')
+        ->middleware('plugin:figure-admin/booking');
 });
-
 
 Route::get('get-port', function () {
     $command = 'ss -tulpn | grep 127.0.0.1';
@@ -148,12 +163,12 @@ Route::get('get-port', function () {
     if ($result->successful()) {
         return response()->json([
             'status' => 'success',
-            'data' => $result->output()
+            'data' => $result->output(),
         ]);
     }
 
     return response()->json([
         'status' => 'error',
-        'message' => 'Không thể kết nối tới WSL'
+        'message' => 'Không thể kết nối tới WSL',
     ], 500);
 });

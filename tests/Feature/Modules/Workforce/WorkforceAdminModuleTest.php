@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Modules\Workforce;
 
+use App\Plugins\PluginManager;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Modules\Shared\Tables\Registry\TableRegistry;
 use Modules\Workforce\Admin\Tables\StaffReviewTable;
@@ -13,6 +15,18 @@ use Tests\TestCase;
 
 class WorkforceAdminModuleTest extends TestCase
 {
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        app(PluginManager::class)->replaceEnabledPackages([
+            'figure-admin/catalog',
+            'figure-admin/workforce',
+        ]);
+    }
+
     public function test_workforce_routes_are_registered_to_module_controllers(): void
     {
         $routes = [
@@ -36,7 +50,7 @@ class WorkforceAdminModuleTest extends TestCase
             $this->assertSame($controller, $route->getActionName());
             $this->assertSame($uri, $route->uri());
             $this->assertContains($method, $route->methods());
-            $this->assertSame(['web', 'auth', 'ip.manager'], $route->gatherMiddleware());
+            $this->assertSame(['web', 'plugin:figure-admin/workforce', 'auth', 'ip.manager'], $route->gatherMiddleware());
         }
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\API;
 
 use App\Enums\PaymentMethodEnum;
+use App\Plugins\PluginManager;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -11,6 +12,14 @@ class BookingRequest extends FormRequest
 {
     public function rules(): array
     {
+        $plugins = app(PluginManager::class);
+        $paymentMethods = $plugins->isEnabled('figure-admin/payments')
+            ? PaymentMethodEnum::cases()
+            : [PaymentMethodEnum::PAY_LATER];
+        $couponRules = $plugins->isEnabled('figure-admin/promotions')
+            ? ['nullable', 'string', 'exists:coupons,code']
+            : ['nullable', Rule::prohibitedIf(true)];
+
         return [
             'customer_name' => 'required|string|min:5',
             'customer_phone' => 'required|string|min:9',
@@ -24,8 +33,8 @@ class BookingRequest extends FormRequest
             'services.*.start_time' => 'nullable|date_format:Y-m-d H:i',
             'services.*.end_time' => 'nullable|date_format:Y-m-d H:i|after:services.*.start_time',
             'note' => 'nullable|string',
-            'payment_method' => ['required', Rule::in(PaymentMethodEnum::cases())],
-            'coupon_code' => 'nullable|string|exists:coupons,code',
+            'payment_method' => ['required', Rule::in($paymentMethods)],
+            'coupon_code' => $couponRules,
         ];
     }
 
@@ -64,9 +73,12 @@ class BookingRequest extends FormRequest
             'plate_number.required' => 'Vui lòng nhập biển số xe.',
             'plate_number.string' => 'Biển số xe phải là chuỗi ký tự.',
             'payment_method.required' => 'Vui lòng chọn phương thức thanh toán.',
-            'payment_method.in' => 'Phương thức thanh toán không hợp lệ.',
+            'payment_method.in' => app(PluginManager::class)->isEnabled('figure-admin/payments')
+                ? 'Phương thức thanh toán không hợp lệ.'
+                : 'Phương thức chuyển khoản hiện không khả dụng.',
             'coupon_code.string' => 'Mã khuyến mãi phải là chuỗi ký tự.',
             'coupon_code.exists' => 'Mã khuyến mãi không tồn tại.',
+            'coupon_code.prohibited' => 'Tính năng mã khuyến mãi hiện không khả dụng.',
             'services.required' => 'Vui lòng chọn ít nhất một dịch vụ.',
             'services.min' => 'Vui lòng chọn ít nhất một dịch vụ.',
             'services.*.service_id.required' => 'Mỗi dịch vụ phải có service_id.',

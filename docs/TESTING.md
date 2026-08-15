@@ -4,7 +4,8 @@
 
 PHPUnit uses in-memory SQLite with array-backed cache, session, and mail plus a
 synchronous queue. Tests are integration-oriented and assemble the host with all
-local packages.
+local development packages. Optional packages are installed in development but
+default to disabled because `enabled_plugins` is `[]`.
 
 ## Narrow-to-Broad Order
 
@@ -14,6 +15,7 @@ Start with the smallest affected suite:
 php artisan test tests/Feature/Modules/<Module>/<Module>AdminModuleTest.php
 php artisan test tests/Feature/Modules/Shared/SharedCoreTest.php
 php artisan test tests/Feature/SharedCoreArchitectureTest.php
+php artisan test tests/Feature/Plugins
 ```
 
 Then run broader verification:
@@ -46,6 +48,16 @@ composer validate --strict modules/<Module>/composer.json
 Confirm each package is installed as a symlink under `vendor/figure-admin` and
 that its provider appears once in package discovery.
 
+For optional composition changes, also verify the production dependency shape:
+
+```bash
+composer install --no-dev --dry-run
+```
+
+The result must remove all optional Figure packages without removing the six core
+packages. Vite must still build from the installed-package manifest without
+referencing absent optional source paths.
+
 ## Route and Cache Verification
 
 For route changes:
@@ -71,6 +83,24 @@ php artisan optimize:clear
 ```
 
 Restart long-running PHP workers after package/class changes.
+
+Plugin route tests must verify that cached routes respond to DB state changes
+without regenerating the route cache. Business execution tests must cover stale
+queued jobs and schedules after a plugin is disabled.
+
+## Plugin Verification
+
+At minimum, cover:
+
+- Core login, Dashboard, Customers, Users, Settings, and Shared DataTables with
+  every optional plugin disabled.
+- No optional table queries from core-only requests.
+- Disabled admin/API routes and generic table/bulk endpoints.
+- Missing-package and dependency-unavailable diagnostics.
+- Dynamic menu/table visibility after state changes without application reboot.
+- Booking with pay-later and no coupon/notification extensions.
+- Execution-time gates for schedules, jobs, listeners, and model callbacks.
+- Fresh migration/seed behavior for core-only and enabled dependency chains.
 
 ## DataTable Regression Tests
 
