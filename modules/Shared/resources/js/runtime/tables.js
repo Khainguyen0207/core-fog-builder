@@ -21,7 +21,9 @@ function escapeAttribute(value) {
         .replaceAll('>', '&gt;');
 }
 
-function initializeOperationModal(root) {
+function initializeOperationModal(root, dataTable) {
+    let operationToDelete = null;
+
     root.addEventListener('click', event => {
         const operation = event.target.closest('[data-shared-operation]');
         if (!operation || !root.contains(operation) || !operation.dataset.bsToggle) return;
@@ -36,6 +38,45 @@ function initializeOperationModal(root) {
         if (method) method.value = operation.dataset.bsMethod || 'DELETE';
         const content = modal.querySelector('[data-shared-operation-content]');
         if (content) content.textContent = operation.dataset.bsContent || 'Are you sure?';
+
+        operationToDelete = operation;
+    });
+
+    document.addEventListener('submit', async event => {
+        const form = event.target.closest('[data-shared-operation-form]');
+        if (!form || !operationToDelete) return;
+
+        event.preventDefault();
+
+        const submit = form.querySelector('button[type="submit"]');
+        if (submit?.disabled) return;
+        if (submit) submit.disabled = true;
+
+        try {
+            const response = await fetch(form.action, {
+                method: form.querySelector('input[name="_method"]')?.value || 'DELETE',
+                headers: {
+                    Accept: 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                credentials: 'same-origin',
+            });
+            const payload = await response.json();
+
+            if (!response.ok || payload.error !== false) {
+                throw new Error(payload.message || 'Unable to delete this record.');
+            }
+
+            window.bootstrap.Modal.getOrCreateInstance(form.closest('.modal')).hide();
+            dataTable.row(operationToDelete.closest('tr')).remove().draw(false);
+            window.toastManager?.show({ type: 'success', message: payload.message });
+            operationToDelete = null;
+        } catch (error) {
+            window.toastManager?.show({ type: 'error', message: error.message || 'Unable to delete this record.' });
+        } finally {
+            if (submit) submit.disabled = false;
+        }
     });
 }
 
@@ -121,7 +162,7 @@ function initializeTable(root) {
         }));
     });
 
-    initializeOperationModal(root);
+    initializeOperationModal(root, dataTable);
     root.sharedSelectedIds = selectedIds;
     root.sharedDataTable = dataTable;
     root.dataset.sharedInitialized = 'true';

@@ -5,6 +5,7 @@ namespace Tests\Feature\Modules\Customers;
 use App\Enums\BasicStatusEnum;
 use App\Enums\UserGroupRoleEnum;
 use App\Http\Middleware\IpManagerMiddleware;
+use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
@@ -70,5 +71,30 @@ class CustomersAdminModuleTest extends TestCase
             'membership_code' => 'platinum',
             'name' => 'Platinum',
         ]);
+    }
+
+    public function test_customer_can_be_deleted_with_the_json_envelope_used_by_the_admin_table(): void
+    {
+        $admin = User::query()->create([
+            'email' => 'admin@example.com',
+            'password' => 'secret12',
+            'group_role' => UserGroupRoleEnum::ADMIN,
+            'is_active' => 1,
+        ]);
+        $customer = Customer::query()->create([
+            'name' => 'Customer To Delete',
+            'phone' => '0900000001',
+        ]);
+
+        $this->actingAs($admin)
+            ->deleteJson(route('admin.customers.destroy', $customer))
+            ->assertOk()
+            ->assertExactJson([
+                'error' => false,
+                'data' => null,
+                'message' => 'Customer deleted successfully',
+            ]);
+
+        $this->assertDatabaseMissing('customers', ['id' => $customer->getKey()]);
     }
 }
