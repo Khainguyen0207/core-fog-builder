@@ -61,6 +61,10 @@
   .page-link {
     border-color: transparent;
   }
+
+  .page-item .page-link {
+    border-radius: $border-radius;
+  }
 }
 
 .page-link.btn-primary {
