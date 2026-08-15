@@ -845,7 +845,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Booking",
-                "reference": "c99d0394fa37563ead662ff0affb31e85b74c911"
+                "reference": "f869280475a3782aa339c40e70f16554c1918d79"
             },
             "require": {
                 "barryvdh/laravel-dompdf": "^3.1",
@@ -867,7 +867,9 @@
                     "Modules\\Booking\\": "src/"
                 },
                 "classmap": [
-                    "src/Domain/"
+                    "src/Domain/",
+                    "database/factories/",
+                    "database/seeders/"
                 ]
             },
             "license": [
@@ -885,7 +887,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Catalog",
-                "reference": "9679ae853cb224641bfd6acd2887b526c190ea33"
+                "reference": "7eab1466a6b47c1127af8816ee6422fd5b585e82"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -906,7 +908,8 @@
                     "Modules\\Catalog\\": "src/"
                 },
                 "classmap": [
-                    "src/Domain/"
+                    "src/Domain/",
+                    "database/seeders/"
                 ]
             },
             "license": [
@@ -924,7 +927,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Cms",
-                "reference": "bcf287ccc75074504907a7a6ead2fc20dfc6c8eb"
+                "reference": "0945dd719d8cc5c71222aabb1b1b6a60caac2bec"
             },
             "require": {
                 "figure-admin/host": "^1.0",
@@ -945,7 +948,9 @@
                     "Modules\\Cms\\": "src/"
                 },
                 "classmap": [
-                    "src/Domain/"
+                    "src/Domain/",
+                    "database/factories/",
+                    "database/seeders/"
                 ]
             },
             "license": [
@@ -963,7 +968,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Communications",
-                "reference": "7a0868e42aa05828c5ac3b1629ac8d579e7bb70e"
+                "reference": "5623d06e806ada4943a65b42571115bb60e6f253"
             },
             "require": {
                 "figure-admin/booking": "dev-main",
@@ -986,7 +991,8 @@
                     "Modules\\Communications\\": "src/"
                 },
                 "classmap": [
-                    "src/Domain/"
+                    "src/Domain/",
+                    "database/seeders/"
                 ]
             },
             "license": [
@@ -1077,7 +1083,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Payments",
-                "reference": "a2c9f0bd89b956f8a9dae917bc9043ad8b4c23a8"
+                "reference": "8ab6125fc95ba4afca93007ed5cf311aa989f09d"
             },
             "require": {
                 "figure-admin/booking": "dev-main",
@@ -1100,7 +1106,8 @@
                     "Modules\\Payments\\": "src/"
                 },
                 "classmap": [
-                    "src/Domain/"
+                    "src/Domain/",
+                    "database/seeders/"
                 ]
             },
             "license": [
@@ -1118,7 +1125,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Promotions",
-                "reference": "935a5996096e19d912050d447c9529368d39c879"
+                "reference": "b77923ad6047ae5e6689619d4ce82d3db6bc30f4"
             },
             "require": {
                 "figure-admin/booking": "dev-main",
@@ -1140,7 +1147,8 @@
                     "Modules\\Promotions\\": "src/"
                 },
                 "classmap": [
-                    "src/Domain/"
+                    "src/Domain/",
+                    "database/seeders/"
                 ]
             },
             "license": [
@@ -1266,7 +1274,7 @@
             "dist": {
                 "type": "path",
                 "url": "modules/Workforce",
-                "reference": "0f0c046f3f242a2c8f40616f914ae7523392dbaf"
+                "reference": "6f3fc729b088ae53b38e18ae0509ba58acb7290c"
             },
             "require": {
                 "figure-admin/catalog": "dev-main",
@@ -1288,7 +1296,9 @@
                     "Modules\\Workforce\\": "src/"
                 },
                 "classmap": [
-                    "src/Domain/"
+                    "src/Domain/",
+                    "database/factories/",
+                    "database/seeders/"
                 ]
             },
             "license": [

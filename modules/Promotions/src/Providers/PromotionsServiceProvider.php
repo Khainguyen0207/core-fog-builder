@@ -14,6 +14,7 @@ class PromotionsServiceProvider extends ServiceProvider
     public function boot(TableRegistry $tables, MenuRegistry $menus): void
     {
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'promotions');
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/../../routes/admin.php');
 
         $tables->register('coupons', CouponTable::class, 'figure-admin/promotions');

@@ -15,7 +15,8 @@
             "Modules\\Catalog\\": "src/"
         },
         "classmap": [
-            "src/Domain/"
+            "src/Domain/",
+            "database/seeders/"
         ]
     },
     "extra": {

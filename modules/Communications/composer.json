@@ -17,7 +17,8 @@
             "Modules\\Communications\\": "src/"
         },
         "classmap": [
-            "src/Domain/"
+            "src/Domain/",
+            "database/seeders/"
         ]
     },
     "extra": {

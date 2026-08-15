@@ -16,7 +16,9 @@
             "Modules\\Workforce\\": "src/"
         },
         "classmap": [
-            "src/Domain/"
+            "src/Domain/",
+            "database/factories/",
+            "database/seeders/"
         ]
     },
     "extra": {
