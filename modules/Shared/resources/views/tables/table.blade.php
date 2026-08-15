@@ -1,6 +1,7 @@
 @php
     $tableId = 'data-table-'.\Illuminate\Support\Str::slug($name);
     $filterId = 'filter-'.\Illuminate\Support\Str::slug($name);
+    $filterCollapseId = 'filter-collapse-'.\Illuminate\Support\Str::slug($name);
     $routeNamePrefix = config('figure-admin-shared.routes.name_prefix', 'admin.');
     $dataRoute = $routeNamePrefix.'get-data';
     $bulkDeleteRoute = $routeNamePrefix.'bulk-delete';
@@ -16,16 +17,21 @@
             @if ($table->hasHeaderAction() && empty($table->getHeaderActions()) && \Illuminate\Support\Facades\Route::has($table->route.'create'))
                 <a href="{{ route($table->route.'create') }}" class="btn btn-outline-info me-3 mb-3"><span class="bx bx-plus me-2"></span>Create</a>
             @endif
+            @if ($table->isHasFilter())
+                <button type="button" class="btn btn-outline-primary me-3 mb-3" data-bs-toggle="collapse" data-bs-target="#{{ $filterCollapseId }}" aria-expanded="false" aria-controls="{{ $filterCollapseId }}"><span class="bx bx-filter-alt me-2"></span>Filter</button>
+            @endif
             @if (\Illuminate\Support\Facades\Route::has($table->route.'index'))<a href="{{ route($table->route.'index') }}" class="btn btn-outline-secondary me-3 mb-3"><span class="bx bx-refresh me-2"></span>Reload</a>@endif
         </div>
     </div>
     @if ($table->isHasFilter())
-        <form id="{{ $filterId }}" method="GET" data-shared-table-filter>
-            <div class="row row-cols-md-4 row-cols-1 row-cols-sm-2 px-2">
-                @foreach ($table->getFilters() as $field) @include($field->getViewPath(), ['fieldIdPrefix' => $filterId, 'data' => request($field->getName())]) @endforeach
-            </div>
-            <button type="submit" class="btn btn-outline-primary m-2">Filter</button><button type="reset" class="btn btn-outline-info m-2">Clear</button>
-        </form>
+        <div id="{{ $filterCollapseId }}" class="collapse">
+            <form id="{{ $filterId }}" method="GET" data-shared-table-filter>
+                <div class="row row-cols-md-4 row-cols-1 row-cols-sm-2 px-2">
+                    @foreach ($table->getFilters() as $field) @include($field->getViewPath(), ['fieldIdPrefix' => $filterId, 'data' => request($field->getName())]) @endforeach
+                </div>
+                <button type="submit" class="btn btn-outline-primary m-2"><span class="bx bx-filter-alt me-2"></span>Filter</button><button type="reset" class="btn btn-outline-info m-2"><span class="bx bx-reset me-2"></span>Clear</button>
+            </form>
+        </div>
     @endif
     <table class="table" id="{{ $tableId }}" data-shared-table-element>
         <thead><tr>

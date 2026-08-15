@@ -14,6 +14,7 @@ use InvalidArgumentException;
 use LogicException;
 use Modules\Shared\BulkActions\BulkDeleteRegistry;
 use Modules\Shared\BulkActions\Contracts\BulkDeleteHandler;
+use Modules\Shared\Forms\Fields\InputField;
 use Modules\Shared\Http\Controllers\BulkDeleteController;
 use Modules\Shared\Http\Controllers\DataTableController;
 use Modules\Shared\Menu\MenuRegistry;
@@ -346,6 +347,10 @@ class SharedCoreTest extends TestCase
 
         $this->assertStringContainsString('data-shared-table', $html);
         $this->assertStringContainsString('data-shared-table-config', $html);
+        $this->assertStringContainsString('data-bs-target="#filter-collapse-records"', $html);
+        $this->assertStringContainsString('id="filter-collapse-records" class="collapse"', $html);
+        $this->assertStringContainsString('bx-filter-alt', $html);
+        $this->assertStringContainsString('bx-reset', $html);
 
         $viewPath = dirname(__DIR__, 4).'/modules/Shared/resources/views';
         $this->assertStringContainsString('data-shared-form', File::get($viewPath.'/forms/form.blade.php'));
@@ -387,11 +392,15 @@ class SharedCoreTable extends Table
             ->setNameTable('Records')
             ->hasCheckbox(false)
             ->operationsColumn(false)
+            ->hasFilter()
             ->usingQuery($this->configuredQuery)
             ->addColumns([
                 Column::make('id'),
                 Column::make('name'),
                 Column::make('status'),
+            ])
+            ->addFilters([
+                InputField::make('name')->setLabel('Name')->hasFilter(),
             ]);
     }
 
