@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Plugins\PluginManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -39,6 +40,10 @@ class StaffReview extends Model
     protected static function booted()
     {
         static::created(function ($review) {
+            if (! app(PluginManager::class)->isEnabled('figure-admin/workforce')) {
+                return;
+            }
+
             $review->updateStaffRating();
         });
     }

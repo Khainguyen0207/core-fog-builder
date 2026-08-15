@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Actions\SendBookingTelegramAction;
 use App\Models\Booking;
+use App\Plugins\PluginManager;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
@@ -22,8 +23,12 @@ class SendBookingToTelegramJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(SendBookingTelegramAction $action, PluginManager $plugins): void
     {
-        app(SendBookingTelegramAction::class)->handle($this->booking);
+        if (! $plugins->isEnabled('figure-admin/communications')) {
+            return;
+        }
+
+        $action->handle($this->booking);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Plugins\PluginManager;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -20,8 +21,12 @@ class SendBookingNotificationJob implements ShouldQueue
         public string $htmlContent
     ) {}
 
-    public function handle(): void
+    public function handle(PluginManager $plugins): void
     {
+        if (! $plugins->isEnabled('figure-admin/communications')) {
+            return;
+        }
+
         if (str_contains($this->email, '@example.com')) {
             return;
         }
@@ -34,7 +39,7 @@ class SendBookingNotificationJob implements ShouldQueue
 
             Log::info("Sent booking notification email to: {$this->email}");
         } catch (\Exception $e) {
-            Log::error("Failed to send booking notification email to {$this->email}: " . $e->getMessage());
+            Log::error("Failed to send booking notification email to {$this->email}: ".$e->getMessage());
             throw $e;
         }
     }

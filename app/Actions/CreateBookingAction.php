@@ -4,9 +4,9 @@ namespace App\Actions;
 
 use App\Enums\PaymentMethodEnum;
 use App\Facades\SettingHelper;
-use App\Jobs\SendBookingNotificationJob;
 use App\Jobs\SendBookingToTelegramJob;
 use App\Models\Booking;
+use App\Plugins\PluginManager;
 use App\Services\BookingRuleChecker;
 use App\Services\CouponEligibilityService;
 use App\Services\CreateBookingService;
@@ -22,7 +22,8 @@ class CreateBookingAction
     public function __construct(
         private CreateBookingService $bookingService,
         private BookingRuleChecker $bookingRuleChecker,
-        private CouponEligibilityService $couponEligibilityService
+        private CouponEligibilityService $couponEligibilityService,
+        private PluginManager $plugins,
     ) {}
 
     public function handle(array $bookingValidated): Booking
@@ -47,7 +48,7 @@ class CreateBookingAction
 
             $isActiveTelegram = (bool) SettingHelper::get('is_active_telegram', false);
 
-            if ($isActiveTelegram) {
+            if ($this->plugins->isEnabled('figure-admin/communications') && $isActiveTelegram) {
                 SendBookingToTelegramJob::dispatch($booking);
             }
 
@@ -66,9 +67,13 @@ class CreateBookingAction
             return;
         }
 
+        if (! $this->plugins->isEnabled('figure-admin/promotions')) {
+            throw new Exception('Tính năng mã khuyến mãi hiện không khả dụng.', 422);
+        }
+
         $user = Auth::guard('sanctum')->user();
 
-        if (!$user || !$user->customer) {
+        if (! $user || ! $user->customer) {
             throw new Exception('Giảm giá chỉ áp dụng cho người dùng đã đăng nhập trên hệ thống.', 401);
         }
 
@@ -91,12 +96,12 @@ class CreateBookingAction
         $serviceData = Arr::get($bookingValidated, 'services', []);
         $serviceIds = collect($serviceData)->pluck('service_id')->toArray();
 
-        $staffMapping = collect($serviceData)->mapWithKeys(fn($item) => [
+        $staffMapping = collect($serviceData)->mapWithKeys(fn ($item) => [
             $item['service_id'] => [
                 'staff_id' => $item['staff_id'] ?? null,
                 'start_time' => $item['start_time'] ?? null,
                 'end_time' => $item['end_time'] ?? null,
-            ]
+            ],
         ])->toArray();
 
         $services = $this->bookingService->getUsedServices($serviceIds);
@@ -116,11 +121,11 @@ class CreateBookingAction
         [$scheduledStart, $estimatedEnd] = $this->bookingService
             ->calculateBookingDuration(Arr::get($bookingValidated, 'scheduled_start'), $services);
 
-        if (!$this->bookingRuleChecker->isWorkingTime($scheduledStart, $estimatedEnd, $scheduledStart)) {
+        if (! $this->bookingRuleChecker->isWorkingTime($scheduledStart, $estimatedEnd, $scheduledStart)) {
             throw new Exception('Đã hết thời gian làm việc');
         }
 
-        if (!$this->bookingRuleChecker->canAcceptBooking($scheduledStart, $estimatedEnd)) {
+        if (! $this->bookingRuleChecker->canAcceptBooking($scheduledStart, $estimatedEnd)) {
             throw new Exception('Không có nhân viên trống trong thời gian đã chọn');
         }
     }
@@ -129,6 +134,10 @@ class CreateBookingAction
     {
         if ($bookingValidated['payment_method'] !== PaymentMethodEnum::BANK_TRANSFER) {
             return;
+        }
+
+        if (! $this->plugins->isEnabled('figure-admin/payments')) {
+            throw new Exception('Phương thức chuyển khoản hiện không khả dụng.', 422);
         }
 
         $transaction = (new CreateTransactionAction(

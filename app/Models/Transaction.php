@@ -6,6 +6,7 @@ use App\Enums\BookingStatusEnum;
 use App\Enums\PaymentMethodEnum;
 use App\Enums\PaymentProviderEnum;
 use App\Enums\TransactionStatusEnum;
+use App\Plugins\PluginManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -51,6 +52,10 @@ class Transaction extends Model
     protected static function booted()
     {
         static::updated(function ($model) {
+            if (! app(PluginManager::class)->isEnabled('figure-admin/payments')) {
+                return;
+            }
+
             $orginal = $model->getPrevious();
             $changes = $model->getChanges();
 
@@ -64,6 +69,6 @@ class Transaction extends Model
                     'status' => BookingStatusEnum::CONFIRMED,
                 ]);
             }
-        }); 
+        });
     }
 }

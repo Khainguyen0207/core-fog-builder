@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Enums\TransactionStatusEnum;
 use App\Events\TransactionFailedEvent;
 use App\Models\Transaction;
+use App\Plugins\PluginManager;
 use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
@@ -20,8 +21,12 @@ class HandleExpiredTransactionsJob implements ShouldQueue
 
     public function __construct() {}
 
-    public function handle(): void
+    public function handle(PluginManager $plugins): void
     {
+        if (! $plugins->isEnabled('figure-admin/payments')) {
+            return;
+        }
+
         $now = Carbon::now();
 
         Transaction::query()

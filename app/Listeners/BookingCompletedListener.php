@@ -5,11 +5,18 @@ namespace App\Listeners;
 use App\Actions\UpdateMembershipLevelAction;
 use App\Enums\BookingStatusEnum;
 use App\Events\BookingStatusChangedEvent;
+use App\Plugins\PluginManager;
 
 class BookingCompletedListener
 {
+    public function __construct(private readonly PluginManager $plugins) {}
+
     public function handle(BookingStatusChangedEvent $event): void
     {
+        if (! $this->plugins->isEnabled('figure-admin/booking')) {
+            return;
+        }
+
         $booking = $event->booking;
         $previousStatus = $booking->getOriginal('status')->getValue();
         $bookingStatus = $booking->status->getValue();

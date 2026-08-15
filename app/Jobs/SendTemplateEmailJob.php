@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\EmailTemplate;
 use App\Models\User;
+use App\Plugins\PluginManager;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -26,8 +27,12 @@ class SendTemplateEmailJob implements ShouldQueue
         public int $templateId
     ) {}
 
-    public function handle(): void
+    public function handle(PluginManager $plugins): void
     {
+        if (! $plugins->isEnabled('figure-admin/communications')) {
+            return;
+        }
+
         $template = EmailTemplate::find($this->templateId);
 
         if (! $template) {
@@ -95,7 +100,7 @@ class SendTemplateEmailJob implements ShouldQueue
     {
         foreach ($variables as $key => $value) {
             $content = preg_replace(
-                '/\{\{\s*' . preg_quote($key, '/') . '\s*\}\}/',
+                '/\{\{\s*'.preg_quote($key, '/').'\s*\}\}/',
                 (string) $value,
                 $content
             ) ?? $content;

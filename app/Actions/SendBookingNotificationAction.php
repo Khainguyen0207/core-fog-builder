@@ -5,6 +5,7 @@ namespace App\Actions;
 use App\Enums\BookingStatusEnum;
 use App\Jobs\SendBookingNotificationJob;
 use App\Models\Booking;
+use App\Plugins\PluginManager;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
@@ -12,8 +13,14 @@ class SendBookingNotificationAction
 {
     private const SUPPORT_HOTLINE = '1900-0000';
 
+    public function __construct(private readonly PluginManager $plugins) {}
+
     public function handle(): void
     {
+        if (! $this->plugins->isEnabled('figure-admin/communications')) {
+            return;
+        }
+
         $timezone = config('app.timezone');
 
         $now = Carbon::now();

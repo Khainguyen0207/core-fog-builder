@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\StaffLevelEnum;
 use App\Facades\SettingHelper;
+use App\Plugins\PluginManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -40,7 +41,7 @@ class Staff extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function bookingServices(): hasMany
+    public function bookingServices(): HasMany
     {
         return $this->hasMany(BookingService::class, 'assigned_staff_id');
     }
@@ -58,6 +59,10 @@ class Staff extends Model
     protected static function booted()
     {
         static::updated(function ($staff) {
+            if (! app(PluginManager::class)->isEnabled('figure-admin/workforce')) {
+                return;
+            }
+
             if ($staff->wasChanged('is_active')) {
                 $countActiveStaff = Staff::query()
                     ->where('is_active', true)
