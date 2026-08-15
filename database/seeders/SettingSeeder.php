@@ -3,15 +3,19 @@
 namespace Database\Seeders;
 
 use App\Models\Setting;
+use App\Plugins\DatabasePluginStateStore;
 use Illuminate\Database\Seeder;
 
 class SettingSeeder extends Seeder
 {
     public function run(): void
     {
-        $now = now();
-
         $settings = [
+            [
+                'key' => DatabasePluginStateStore::SETTING_KEY,
+                'value' => '[]',
+                'description' => 'Enabled optional plugins',
+            ],
             [
                 'key' => 'work_time_monday',
                 'value' => '08:00 - 22:00',
@@ -131,11 +135,9 @@ class SettingSeeder extends Seeder
                 'key' => 'is_active_payment',
                 'value' => false,
                 'description' => 'Payment is active',
-            ]
+            ],
         ];
 
-        Setting::query()->truncate();
-
-        Setting::query()->insert($settings);
+        Setting::query()->upsert($settings, ['key'], ['description']);
     }
 }
