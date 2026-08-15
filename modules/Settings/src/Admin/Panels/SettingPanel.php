@@ -40,6 +40,12 @@ class SettingPanel extends PanelSection
                     ->setName('Telegram Bot')
                     ->setDescription('Configure Telegram Bot to receive order notifications.')
                     ->setUrl(route('admin.settings.telegram')),
+
+                Panel::make('plugins')
+                    ->setName('Plugins')
+                    ->setDescription('Enable optional features and review their dependencies.')
+                    ->setUrl(route('admin.settings.plugins'))
+                    ->setIcon('bx bx-extension'),
             ]);
     }
 }

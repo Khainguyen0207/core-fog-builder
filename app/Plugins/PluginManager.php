@@ -88,6 +88,55 @@ final class PluginManager
         return $this->status($packageName)->enabled;
     }
 
+    /** @param list<string> $packageNames */
+    public function replaceEnabledPackages(array $packageNames): void
+    {
+        $requested = array_values(array_unique($packageNames));
+
+        foreach ($requested as $packageName) {
+            if (! is_string($packageName) || ! $this->catalog->has($packageName)) {
+                throw new PluginStateException('The requested plugin list contains an unknown package.');
+            }
+
+            $definition = $this->catalog->get($packageName);
+
+            if ($definition->core) {
+                throw new PluginStateException("Core plugin [{$packageName}] cannot be changed.");
+            }
+
+            if (! $this->packages->isInstalled($packageName)) {
+                throw new PluginStateException("Plugin [{$packageName}] is not installed.");
+            }
+
+            foreach ($definition->dependencies as $dependency) {
+                $dependencyDefinition = $this->catalog->get($dependency);
+
+                if (! $this->packages->isInstalled($dependency)) {
+                    throw new PluginStateException(
+                        "Plugin [{$packageName}] requires missing package [{$dependency}].",
+                    );
+                }
+
+                if (! $dependencyDefinition->core && ! in_array($dependency, $requested, true)) {
+                    throw new PluginStateException(
+                        "Plugin [{$packageName}] requires [{$dependency}] to be enabled.",
+                    );
+                }
+            }
+        }
+
+        $ordered = array_values(array_filter(
+            array_map(
+                fn (PluginDefinition $definition): string => $definition->packageName,
+                $this->catalog->optional(),
+            ),
+            fn (string $packageName): bool => in_array($packageName, $requested, true),
+        ));
+
+        $this->state->replaceEnabledPackages($ordered);
+        $this->forgetCachedState();
+    }
+
     public function forgetCachedState(): void
     {
         $this->requestedPackages = null;

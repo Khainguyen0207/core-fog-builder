@@ -4,6 +4,7 @@ namespace App\Plugins;
 
 use App\Models\Setting;
 use App\Plugins\Contracts\PluginStateStore;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
 use JsonException;
 use Throwable;
@@ -42,5 +43,20 @@ class DatabasePluginStateStore implements PluginStateStore
         } catch (Throwable) {
             return [];
         }
+    }
+
+    public function replaceEnabledPackages(array $packageNames): void
+    {
+        $value = json_encode(array_values($packageNames), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
+
+        Setting::query()->updateOrCreate(
+            ['key' => self::SETTING_KEY],
+            [
+                'value' => $value,
+                'description' => 'Enabled optional plugins',
+            ],
+        );
+
+        Cache::put('config_'.self::SETTING_KEY, $value, now()->addDay());
     }
 }

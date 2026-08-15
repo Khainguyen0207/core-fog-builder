@@ -105,6 +105,8 @@ class PluginManagerTest extends TestCase
             {
                 return $this->enabledPackages;
             }
+
+            public function replaceEnabledPackages(array $packageNames): void {}
         };
 
         return new PluginManager($catalog, $packages, $state);

@@ -10,4 +10,6 @@ class NullPluginStateStore implements PluginStateStore
     {
         return [];
     }
+
+    public function replaceEnabledPackages(array $packageNames): void {}
 }
