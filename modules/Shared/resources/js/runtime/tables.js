@@ -105,6 +105,13 @@ function initializeTable(root) {
             element.textContent = String(selectedIds.length);
         });
         root.querySelector('[data-shared-bulk-trigger]')?.classList.toggle('d-none', selectedIds.length === 0);
+
+        const rowCheckboxes = root.querySelectorAll('[data-shared-row-checkbox]');
+        const checkedCount = selectedIds.length;
+        root.querySelectorAll('[data-shared-select-all]').forEach(checkbox => {
+            checkbox.checked = rowCheckboxes.length > 0 && checkedCount === rowCheckboxes.length;
+            checkbox.indeterminate = checkedCount > 0 && checkedCount < rowCheckboxes.length;
+        });
     };
 
     const dataTable = $(table).DataTable({
@@ -161,6 +168,48 @@ function initializeTable(root) {
             return input;
         }));
     });
+    bulkModal?.addEventListener('submit', async event => {
+        const form = event.target.closest('form');
+        if (!form) return;
+
+        event.preventDefault();
+
+        const submit = form.querySelector('button[type="submit"]');
+        if (submit?.disabled) return;
+        if (submit) submit.disabled = true;
+
+        try {
+            const response = await fetch(form.action, {
+                method: form.method || 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                body: new FormData(form),
+                credentials: 'same-origin',
+            });
+            const payload = await response.json().catch(() => ({}));
+
+            if (!response.ok || payload.error !== false) {
+                throw new Error(payload.message || 'Unable to delete the selected records.');
+            }
+
+            root.querySelectorAll('[data-shared-row-checkbox]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            updateBulk();
+            window.bootstrap.Modal.getOrCreateInstance(bulkModal).hide();
+            dataTable.ajax.reload(null, false);
+            window.toastManager?.show({ type: 'success', message: payload.message });
+        } catch (error) {
+            window.toastManager?.show({ type: 'error', message: error.message || 'Unable to delete the selected records.' });
+        } finally {
+            if (submit) submit.disabled = false;
+        }
+    });
+
+    dataTable.on('draw', updateBulk);
 
     initializeOperationModal(root, dataTable);
     root.sharedSelectedIds = selectedIds;
